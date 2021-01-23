@@ -1,10 +1,8 @@
 <?php
     $titulo = 'Inicio';
-   include($_SERVER['DOCUMENT_ROOT'].'/Vista/Compartido/encabezado.php');
-    //include("Vista/Compartido/menu.php")
+    include($_SERVER['DOCUMENT_ROOT'].'/Vista/Compartido/encabezado.php');
 ?>
 <h1>Acumuladores Garza</h1>
-
 <!--TODO buscar diferencia de include y require-->
 <article>
     <section>
@@ -29,3 +27,25 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT'].'/Vista/Compartido/piePagina.php');
 ?>
+
+<script>
+swal("Aviso","Esto es una notificacion","success");
+$(document).ready(function(){
+});
+
+
+var doc = new jsPDF('landscape');
+doc.text(20, 20, 'Hello landscape world!');
+
+doc.save("application/pdf",'Test.pdf');
+//https://www.desarrollolibre.net/blog/css/generando-reportes-pdfs-con-javascript
+
+/*
+var doc = new jsPDF();
+console.log(doc);
+var imgData = 'data:image/jpeg;base64,/ …;
+
+doc.setFontSize(40);
+doc.text(40, 20, "Octocat loves jsPDF");
+doc.addImage(imgData, 'JPEG', 10, 40, 180, 180);*/
+</script>
