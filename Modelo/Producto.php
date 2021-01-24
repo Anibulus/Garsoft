@@ -1,22 +1,16 @@
 <?php
+require("Categoria.php");
 class Producto{
-    private $db;
-    private $id;
+    private $idProducto;
     private $nombre;
-    private $stock;//Disponilidad    
- 
-    //TODO incuirlas en un DAO
-    public function __construct(){
-        $this->db=Conectar::conexion();
-        $this->personas=array();
-    }
+    private $categoria;
+    private $stock;//Disponilidad
 
-    public function get_personas(){
-        $consulta=$this->db->query("select * from personas;");
-        while($filas=$consulta->fetch_assoc()){
-            $this->personas[]=$filas;
-        }
-        return $this->personas;
-    }
+    public function __construct(){
+        $idProducto=0;
+        $nombre="";
+        $categoria=new Categoria();
+        $stock=0;
+    }//Fin del constructor
 }//Fin de la clase
 ?>
