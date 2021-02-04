@@ -1,7 +1,8 @@
 <?php
     $titulo = 'Inicio';
-    include($_SERVER['DOCUMENT_ROOT'].'/Vista/Compartido/encabezado.php');
+    include('../Compartido/encabezado.php');
 ?>
+
 <h1>Acumuladores Garza</h1>
 <!--TODO buscar diferencia de include y require-->
 <article>
@@ -25,7 +26,7 @@
     </section>
 </article>
 <?php
-    include($_SERVER['DOCUMENT_ROOT'].'/Vista/Compartido/piePagina.php');
+    include('../Compartido/piePagina.php');
 ?>
 
 <script>

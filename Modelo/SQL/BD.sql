@@ -264,16 +264,14 @@ SELECT hello('world');
 
 
 DELIMITER ||
-CREATE FUNCTION InicioSesion (username VARCHAR(8), password_p VARCHAR(20))
-    RETURNS int
-    NOT DETERMINISTIC
-    READS SQL DATA
+CREATE Procedure InicioSesion (username VARCHAR(8), password_p VARCHAR(20))
 BEGIN
-    RETURN (SELECT idPersona FROM `usuario` WHERE usuario = username AND contrasena = password_p);
-    /*Return exists (query)*/
+    SELECT u.idPersona, u.idPerfil, p.nombre, p.apellido1 FROM usuario u
+    join persona p on u.idPersona = p.idPersona
+    WHERE usuario = username AND contrasena = password_p;  
 END
 ||
 DELIMITER ;
-SELECT InicioSesion('gaby','123');
+call iniciosesion('gaby','123');
 
 

@@ -3,6 +3,11 @@
         <li>Incio</i>
         <li>Catálogo</i>
         <li>Contacto</i>
+        <?php
+            if(isset($_SESSION["nombre"])){
+                echo "<a href='../../Controlador/CerrarSesion'><li>Cerrar Sesión</i></a>";
+            }
+        ?>
     </ul>
 </nav>
 
