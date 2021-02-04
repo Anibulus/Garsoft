@@ -42,7 +42,7 @@ $("input[type='button']").on("click",function(){
         cache:false,
         method:"Post",
         data: $("#datosPrueba").serialize(),//Utiliza la etiqueta "name"
-        url:"prueba.php"
+        url:"prueba"//´prueba.php
     }).done(function(data){
         if(data){
             swal("Ya termine alaverga");

@@ -1,4 +1,4 @@
 <?php
-header("location:Vista/Inicio/inicio.php");
+header("location:Vista/Inicio/inicio");
 exit();
 ?>
