@@ -1,17 +1,46 @@
-<nav>
+<?php
+if(isset($_SESSION["nombre"])){
+    require("../../Modelo/Conexion/conexion.php");
+    $conn=Conectar::conexion();
+    if($conn){
+        $instruccion="select p.idPerfil, m.idMenu, m.nombre, m.direccion from perfil p  
+        join intermediaPerfilMenu ipm on p.idPerfil=ipm.idPerfil
+        join menu m on ipm.idMenu=m.idMenu where p.idPerfil=".$_SESSION["idPerfil"].";";
+
+        $result=$conn->query($instruccion);
+
+        $menu="<nav><ul>
+        <li> <a href='../Inicio/Inicio'>Incio</a></i>";
+        for($i=0;$i<$result->num_rows;$i++){
+            $row=$result->fetch_assoc();
+            $menu.="<li><a href='".$row["direccion"]."'>".$row["nombre"]."</a></i>";
+        }
+        $menu.="<li><a href='../../Controlador/CerrarSesion'>Cerrar Sesión</a></i>";
+        $menu.="</ul></nav>";
+
+        echo $menu;
+        
+
+        unset($conn);
+        unset($result);
+        unset($instruccion);
+        unset($menu);
+    }
+}
+else{
+    echo "<nav>
     <ul>
-        <li>Incio</i>
-        <li>Catálogo</i>
-        <li>Contacto</i>
-        <?php
-            if(isset($_SESSION["nombre"])){
-                echo "<a href='../../Controlador/CerrarSesion'><li>Cerrar Sesión</i></a>";
-            }
-        ?>
+        <li> <a href='../Inicio/Inicio'>Incio</a></i>
+        <li> <a href='../Sesion/IniciarSesion'>Iniciar Sesión</a></i>
     </ul>
-</nav>
+</nav>";
+}
+?>
+
+
 
 <?php
+/*
 # definimos el array de valores para el menu y submenus
 if(isset($_SESSION["nombre"]))
 {               
@@ -73,6 +102,8 @@ if(isset($_SESSION["nombre"]))
 * Tiene que recibir el array de valores y la clase a asignar que puede ser:
 * menu o submenu
 */
+
+/*
 function mostrarEnlace($menu,$class)
 {
     if($menu['enlace'])
@@ -107,5 +138,5 @@ for($i = 0; $i < count($menu); $i++)
     }
 }
 echo "<ul>";
-echo "</nav>";
+echo "</nav>";*/
 ?>

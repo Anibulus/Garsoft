@@ -4,8 +4,8 @@
         <!-- Estilo Texto -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!--Los main son archivos que no pertenecen a bpptstrap. Son modificables-->
-        <link rel="stylesheet" href="../../Contenido/bootstrap/css/main.css">
-        <script type="text/javascript" src="../../Contenido/bootstrap/js/main.js"></script>
+        <link rel="stylesheet" href="../../Contenido/css/main.css">
+        <script type="text/javascript" src="../../bootstrap/js/main.js"></script>
         <!--SweetAlert-->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!--Reportes con Js-->

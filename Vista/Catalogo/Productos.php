@@ -2,53 +2,43 @@
     $titulo="Productos";
     include("../Compartido/encabezado.php");
 ?>
-<form id="datosPrueba">
-    <fieldset>
-        <legend>
-        Registrar nuevos productos (prueba de envio de datos con ajax)
-        </legend>
-        <div class="row">
-            <div class="form-group">                     
-            <label><span>Nombre</span>
-            <input name="nombre" id="nombre" type="text">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">                     
-            <label><span>Stock</span>
-            <input name="stock" id="stock" type="text">
-            </div>
-        </div><div class="row">
-            <div class="form-group">                     
-            <label><span>cosa</span>
-            <input name="cosa" id="cosa" type="text">
-            </div>
-        </div>
-        <input type="button" value="Enviar" />
-    </fieldset>
-</form>
+<article>
+    <h2>Productos</h2>
+    <section>
+        <p>Seleccione un producto de la lista.</p>
+    </section>
+    <section id="listadoProductos">
+
+    </section>
+</article>
 <?php
 include("../Compartido/piePagina.php");
 ?>
 
 <script>
 $(document).ready(function(){
-    swal("Estoy listo");
+    prueba();
 });
 
-$("input[type='button']").on("click",function(){
-    alert($("#datosPrueba").serialize());
+
+function prueba(){
     $.ajax({
         cache:false,
-        method:"Post",
-        data: $("#datosPrueba").serialize(),//Utiliza la etiqueta "name"
-        url:"prueba"//´prueba.php
+        method:"GET",
+        url:"../../Controlador/ConsultarProductos",
+        error: function(response){}
     }).done(function(data){
-        if(data){
-            swal("Ya termine alaverga");
-        }else{
-            swal("Y No se pudo carnal");
-        }
+        tabla="<table class='tablaProducto'><tbody><tr class='tablaProducto__Encabezado'><th>Marca</th><th>Categoría</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Casco</th><th>Precio Casco</th><th></th></tr>";
+        $.each(data,function(i,item){
+            tabla+="<tr data-idProducto='"+item.idProducto+"' class='tablaProducto__item'><td>"+item.marca+"</td><td>"+item.categoria+"</td><td>"+item.cantidad+"</td><td>$"+item.precio+"</td><td>"+item.tipo+"</td><td>"+item.casco+"</td><td>$"+item.precioCasco+"</td><td><input type='button' class='btn btn-primary' value='Accion'/></td></tr>"
+        });
+        tabla+="</tbody></table>";
+        $("#listadoProductos").append(tabla);
     });
+}
+
+$('#listadoProductos').on("click", " table tbody tr td input[type='button']",function(e){
+    swal("Asombroso", "Haz hecho click en el producto con id : "+$(e.currentTarget).closest("tr").attr("data-idProducto"));
 });
+
 </script>
