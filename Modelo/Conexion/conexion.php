@@ -6,7 +6,7 @@ class Conectar{
         $db="garsoft";
         $user="root";
         $pass="";
-        $port=3308;
+        $port=3306;
 
         $conn = new mysqli($server, $user, $pass, $db, $port);
         

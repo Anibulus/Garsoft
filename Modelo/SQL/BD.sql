@@ -52,7 +52,6 @@ create table producto(
     idMarca int not null,    
     idTipo int null,
     activo TINYINT default 0,
-    /*descripcion varchar(100) null,*/
     CONSTRAINT pkProducto PRIMARY KEY (idProducto),
     CONSTRAINT fkProducto_Categoria FOREIGN KEY (idCategoria) references categoriaProducto (idCategoria),
     CONSTRAINT fkProducto_Marca FOREIGN KEY (idMarca) REFERENCES  marcaProducto (idMarca),    
