@@ -1,10 +1,12 @@
 <?php
 //Si no tiene la sesion iniciada no se le permte volver a iniciar
-if(isset($_SESSION["nombre"])){
-    header("location:../Inicio/inicio");
-}
 $titulo="Inicio de sesión";
 include("../Compartido/encabezado.php");
+
+if(isset($_SESSION["nombre"])){
+    header("location:../Inicio/inicio");
+    echo "estoy aqui";
+}
 ?>
 <form id="LogIn" name="LogIn">
 <fieldset>
