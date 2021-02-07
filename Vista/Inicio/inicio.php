@@ -38,7 +38,7 @@ $(document).ready(function(){
 var doc = new jsPDF('landscape');
 doc.text(20, 20, 'Hello landscape world!');
 
-doc.save("application/pdf",'Test.pdf');
+doc.save('Test.pdf',"application/pdf");
 //https://www.desarrollolibre.net/blog/css/generando-reportes-pdfs-con-javascript
 
 /*
