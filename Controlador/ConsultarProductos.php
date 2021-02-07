@@ -6,12 +6,12 @@ header('Content-Type: application/json;');
 
 $conn=Conectar::conexion();
 
-$instruccion="select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categoria, 
+$instruccion="select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categoria, p.cantidad, 
 (select
 r.precio from precios r
 where p.idProducto=r.idProducto and 
 r.activo=1 and 
-r.garantia=0) as precio,
+r.garantia=0 limit 1) as precio,
 t.idCasco as casco,
 (select r.precio from cascos r
 where r.idCasco=t.idCasco) as precioCasco

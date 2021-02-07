@@ -3,5 +3,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
 
-ErrorDocument 404 localhost:8080/Garsoft
-ErrorDocument 500 localhost:8080/Garsoft
+
+ErrorDocument 404 http://localhost:8080/Garsoft/Vista/Error/404
