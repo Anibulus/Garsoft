@@ -40,6 +40,18 @@ include("../Compartido/piePagina.php");
 ?>
 
 <script>
+$('#usuario').on("keydown", function(e){
+    if(e.keyCode==13){
+        $('#contrasena').focus();
+    }
+});
+
+$('#contrasena').on("keydown", function(e){
+    if(e.keyCode==13){
+        $("#btnIniciar").click();
+    }
+});
+
 $("#btnIniciar").on("click",function(){
     $.ajax({
         cache:false,

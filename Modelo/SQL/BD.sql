@@ -14,8 +14,6 @@ create table modeloAuto(
     CONSTRAINT pkModeloAuto PRIMARY KEY (idModelo),
     CONSTRAINT fkModeloAuto_MarcaAuto FOREIGN KEY (idMarca) REFERENCES marcaAuto (idMarca)
 );
-/*Fin de seccion autos*/
-
 
 create table categoriaProducto(
     idCategoria int Auto_Increment,
@@ -36,14 +34,14 @@ create table cascos(
     precio decimal(10,2),
     CONSTRAINT pkCasco PRIMARY KEY (idCasco)
 );
+
 create table tipo(
     idTipo int AUTO_INCREMENT,
     nombre varchar(35),
     idCasco int null,
     CONSTRAINT pkTipo PRIMARY KEY (idTipo),
-    CONSTRAINT fkTipo_Casco FOREIGN KEY (idCasco) REFERENCES  cascos (idCasco)
+    CONSTRAINT fkTipo_Casco FOREIGN KEY (idCasco) REFERENCES cascos (idCasco)
 );
-
 
 create table producto(
     idProducto int Auto_Increment,   
@@ -65,29 +63,19 @@ create table precios(
     garantia TINYINT default 0,
     fecha datetime, 
     activo TINYINT default 1,
-    /*descripcion varchar(50),*/
     constraint pkPrecios PRIMARY KEY (idPrecio),
     constraint fkPrecio_Producto FOREIGN KEY (idProducto) references producto(idProducto)
 );
 
-/*create table intermediaPrecioProducto(
-    idPrecio int not null,
-    idProducto int not null,
-    constraint pkintermediPrecioProducto PRIMARY KEY (idPrecio, idProducto),
-    constraint fkintermediPrecioProducto_Producto FOREIGN KEY (idProducto) references producto(idProducto) ,
-    CONSTRAINT fkintermediPrecioProducto_Precio FOREIGN KEY (idPrecio) REFERENCES  precios (idPrecio)
-);*/
 
-
-create table intermediaModeloAuto_Producto(
-    idProducto int not null,
+create table intermediaModeloAuto_Tipo(
+    idTipo int not null,
     idModelo int not null,
-    CONSTRAINT pkIntermediaModeloAutoProducto primary key (idProducto,idModelo),
-    CONSTRAINT fkIntermediaModeloAutoProducto_Producto FOREIGN KEY (idProducto) references producto (idProducto),
+    CONSTRAINT pkIntermediaModeloAutoProducto primary key (idTipo,idModelo),
+    CONSTRAINT fkIntermediaModeloAutoProducto_Tipo FOREIGN KEY (idTipo) references tipo (idTipo),
     CONSTRAINT fkIntermediaModeloAutoProducto_ModeloAuto FOREIGN KEY (idModelo) references modeloAuto (idModelo)
 );
 
-/*Seccion compra*/
 create table persona(
     idPersona int Auto_Increment,
     nombre varchar(50) not null,
@@ -141,17 +129,26 @@ create table compra(
     CONSTRAINT fkCompra_Empleado FOREIGN key (idEmpleado) REFERENCES persona (idPersona)
 );
 
-create table intermediaCompraProducto(
+create table intermediaCompraProductoEntrada(
     idCompra int not null,
     idProducto int not null,
     cantidad int not null,
     subtotal decimal(10,2) not null,
-    CONSTRAINT pkIntermediaCompraProducto PRIMARY KEY (idCompra, idProducto),
-    CONSTRAINT fkIntermediaCompraProducto_Compra FOREIGN KEY (idCompra) REFERENCES compra (idCompra),
-    CONSTRAINT fkIntermediaCompraProducto_Producto FOREIGN KEY (idProducto) REFERENCES producto (idProducto)
+    CONSTRAINT pkIntermediaCompraProductoEntrada PRIMARY KEY (idCompra, idProducto),
+    CONSTRAINT fkIntermediaCompraProductoEntrada_Compra FOREIGN KEY (idCompra) REFERENCES compra (idCompra),
+    CONSTRAINT fkIntermediaCompraProductoEntrada_Producto FOREIGN KEY (idProducto) REFERENCES producto (idProducto)
 );
 
-CREATE TABLE cliente (
+create table intermediaCompraProductoSalida(
+    idCompra int not null,
+    idProducto int not null,
+    cantidad int not null,
+    CONSTRAINT pkIntermediaCompraProductoSalida PRIMARY KEY (idCompra, idProducto),
+    CONSTRAINT fkIntermediaCompraProductoSalida_Compra FOREIGN KEY (idCompra) REFERENCES compra (idCompra),
+    CONSTRAINT fkIntermediaCompraProductoSalida_Producto FOREIGN KEY (idProducto) REFERENCES producto (idProducto)
+);
+
+CREATE TABLE cliente(
     idPersona int not null,
     CONSTRAINT pkCliente PRIMARY KEY (idPersona),
     CONSTRAINT fkCliente FOREIGN KEY (idPersona) REFERENCES persona (idPersona)
@@ -159,7 +156,7 @@ CREATE TABLE cliente (
 
 create TABLE formaPago(
     idFormaPago int auto_increment,
-    descripcion varchar(35),
+    descripcion varchar(50),
     CONSTRAINT pkFormaPago PRIMARY KEY (idFormaPago)
 );
 
@@ -179,14 +176,23 @@ create table venta (
 
 );
 
-create table intermediaVentaProducto(
+create table intermediaVentaProductoSalida(
     idVenta BIGINT not null,
     idProducto int not null,
     cantidad int not null,
     costo decimal(15,2) not null,
-    CONSTRAINT pkIntermediaVentaProducto PRIMARY KEY (idVenta, idProducto),
-    CONSTRAINT fkIntermediaVentaProducto_Venta FOREIGN KEY (idVenta) references venta (idVenta),
-    CONSTRAINT fkIntermediaVentaProducto_Producto FOREIGN KEY (idProducto) REFERENCES  producto (idProducto)
+    CONSTRAINT pkIntermediaVentaProductoSalida PRIMARY KEY (idVenta, idProducto),
+    CONSTRAINT fkIntermediaVentaProductoSalida_Venta FOREIGN KEY (idVenta) references venta (idVenta),
+    CONSTRAINT fkIntermediaVentaProductoSalida_Producto FOREIGN KEY (idProducto) REFERENCES  producto (idProducto)
+);
+
+create table intermediaVentaProductoEntrada(
+    idVenta BIGINT not null,
+    idProducto int not null,
+    cantidad int not null,
+    CONSTRAINT pkIntermediaVentaProductoEntrada PRIMARY KEY (idVenta, idProducto),
+    CONSTRAINT fkIntermediaVentaProductoEntrada_Venta FOREIGN KEY (idVenta) references venta (idVenta),
+    CONSTRAINT fkIntermediaVentaProductoEntrada_Producto FOREIGN KEY (idProducto) REFERENCES  producto (idProducto)
 );
 
 /*Seccion pendiente*/
@@ -229,7 +235,7 @@ insert into marcaProducto values
 (null, 'Especial', 18),
 (null, 'AGM', 72),
 (null, 'Optima', 0),
-(null, 'Gallito', 0); /*TODO ver marca gallito*/
+(null, 'Gallito', 0);
 
 insert into cascos values 
 (null, 1, 255.20),
@@ -443,6 +449,54 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,8,30,1),
 (null,0,2,8,36,1);
 
+/*TODO falta optima*/
+
+
+
+insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+/*Gallito*/
+(null,0,2,10,1,1),
+(null,0,2,10,2,1),
+(null,0,2,10,3,1),
+(null,0,2,10,4,1),
+(null,0,2,10,5,1),
+(null,0,2,10,6,1),
+(null,0,2,10,7,1),
+(null,0,2,10,8,1),
+(null,0,2,10,9,1),
+(null,0,2,10,10,1),
+(null,0,2,10,11,1),
+(null,0,2,10,12,1),
+(null,0,2,10,13,1),
+(null,0,2,10,14,1),
+(null,0,2,10,15,1),
+(null,0,2,10,16,1),
+(null,0,2,10,17,1),
+(null,0,2,10,18,1),
+(null,0,2,10,19,1),
+(null,0,2,10,20,1),
+(null,0,2,10,21,1),
+(null,0,2,10,22,1),
+(null,0,2,10,23,1),
+(null,0,2,10,24,1),
+(null,0,2,10,25,1),
+(null,0,2,10,26,1),
+(null,0,2,10,27,1),
+(null,0,2,10,28,1),
+(null,0,2,10,29,1),
+(null,0,2,10,30,1),
+(null,0,2,10,31,1),
+(null,0,2,10,32,1),
+(null,0,2,10,33,1),
+(null,0,2,10,34,1),
+(null,0,2,10,35,1),
+(null,0,2,10,36,1),
+(null,0,2,10,37,1),
+(null,0,2,10,38,1),
+(null,0,2,10,39,1),
+(null,0,2,10,40,1),
+(null,0,2,10,41,1);
+
 select p.idProducto, t.nombre, t.idCasco from producto p
 join tipo t on p.idTipo = t.idTipo
 where idMarca=3;
@@ -598,8 +652,8 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,133,3560.00,0,curdate(),1),
 (null,134,3880.00,0,curdate(),1);
 
+/*TODO asignar precio de 500 a todos los gallitos*/
 
-  
 
 select p.idProducto, mp.nombre as marca, t.nombre as tipo,
 (select /*TODO ver top(1)*/
@@ -628,8 +682,6 @@ insert into modeloAuto (nombre,idMarca,opcion1) values
 ('A1',3,1),
 ('A1 SportBack',3,1);
 
-
-/*Empleados*/ /*toDO MODIFICAR*/
 insert into persona values 
 (null, 'Gaby', 'Garza', null,'','3311215488'),
 (null, 'Angel Iván', 'Garza', null,'','3321164306'),
