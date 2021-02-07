@@ -28,13 +28,12 @@
 <?php
     include('../Compartido/piePagina.php');
 ?>
-
-<!--<script>
-swal("Aviso","Esto es una notificacion","success");
+<script>
 $(document).ready(function(){
+    prueba();
 });
 
-
+/*
 var doc = new jsPDF('landscape');
 doc.text(20, 20, 'Hello landscape world!');
 
@@ -49,4 +48,5 @@ var imgData = 'data:image/jpeg;base64,/ …;
 doc.setFontSize(40);
 doc.text(40, 20, "Octocat loves jsPDF");
 doc.addImage(imgData, 'JPEG', 10, 40, 180, 180);
-</script>-->
+*/
+</script>

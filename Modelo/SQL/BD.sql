@@ -660,7 +660,7 @@ select p.idProducto, mp.nombre as marca, t.nombre as tipo,
 r.precio from precios r
 where p.idProducto=r.idProducto and 
 r.activo=1 and 
-r.garantia=0) as precio,
+r.garantia=0 limit 1) as precio,
 t.idCasco as casco,
 (select r.precio from cascos r
 where r.idCasco=t.idCasco) as precioCasco
@@ -674,7 +674,7 @@ insert into marcaAuto (nombre) values
 ('Alfa Romeo'),--2
 ('Audi');--3
 --Se esta usando id bateria primera opcion 1 para pruebas
-insert into modeloAuto (nombre,idMarca,opcion1) values 
+insert into modeloAuto (nombre,idMarca,anio) values 
 ('147',2,1),--1
 ('158',2,1),
 ('Guileta',2,1),
@@ -705,6 +705,16 @@ insert into empresa values
 (null, 'CRONOS',''),
 (null, 'America',''),
 (null, 'Indeseables','');
+
+insert into menu values
+(null, 'Catálogo', '../Catalogo/Productos');
+
+insert into intermediaPerfilMenu (idPerfil, idMenu) values
+(1,1);
+
+select p.idPerfil, m.idMenu, m.nombre, m.direccion from perfil p  
+join intermediaPerfilMenu ipm on p.idPerfil=ipm.idPerfil
+join menu m on ipm.idMenu=m.idMenu where p.idPerfil=1;
 
 /*Extras trigger*/
 create table TRModificoInventario(
@@ -771,7 +781,7 @@ CREATE Procedure InicioSesion (username VARCHAR(10), password_p VARCHAR(20))
 BEGIN
     SELECT u.idPersona, u.idPerfil, p.nombre, p.apellido1 FROM usuario u
     join persona p on u.idPersona = p.idPersona
-    WHERE usuario = username AND contrasena = password_p AND u.activo=1;  
+    WHERE usuario = username AND contrasena = password_p AND u.activo=1 limit 1;  
 END
 ||
 DELIMITER ;
