@@ -13,30 +13,61 @@
 
 <?php
 # definimos el array de valores para el menu y submenus
-$menu=array(
-    array(
-        'titulo' => 'Registrarse',
-        'enlace' => 'registro.php',
-        'subcategoria' => array(
-            array(
-            'id' => 'perfil.php',
-            'titulo' => 'Perfil',
-            'enlace' => 'perfil.php',
-            ),
-            array(
-            'id' => 'cambiar_contrasena.php',
-            'titulo' => 'Cambiar contraseña',
-            'enlace' => 'cambiar_contrasena.php',
-            ),
-            array(
-            'id' => 'comprobar.php',
-            'titulo' => 'Comprobar',
-            'enlace' => 'comprobar.php',
-            ),
-        ),#Fin de array subcategoria
-    ),#Fin de array contenido
-);#Fin de array
-
+if(isset($_SESSION["nombre"]))
+{               
+    $menu=array(
+        array(
+            'titulo' => '',
+            'enlace' => '',
+            'subcategoria' => array(
+                array(
+                    'id' => 'perfil.php',
+                    'titulo' => 'Perfil',
+                    'enlace' => 'perfil.php',
+                ),
+                array(
+                    'id' => 'cambiar_contrasena.php',
+                    'titulo' => 'Cambiar contraseña',
+                    'enlace' => 'cambiar_contrasena.php',
+                ),
+                array(
+                    'id' => 'comprobar.php',
+                    'titulo' => 'Comprobar',
+                    'enlace' => 'comprobar.php',
+                ),
+            ),#Fin de array subcategoria
+        ),#Fin de array contenido
+    );#Fin de array
+} else {
+    $menu=array(
+        array(
+            'titulo' => 'Registrarse',
+            'enlace' => 'registro.php',
+            'subcategoria' => array(
+                array(
+                    'id' => 'perfil.php',
+                    'titulo' => 'Perfil',
+                    'enlace' => 'perfil.php',
+                ),
+                array(
+                    'id' => 'cambiar_contrasena.php',
+                    'titulo' => 'Cambiar contraseña',
+                    'enlace' => 'cambiar_contrasena.php',
+                ),
+                array(
+                    'id' => 'comprobar.php',
+                    'titulo' => 'Comprobar',
+                    'enlace' => 'comprobar.php',
+                ),
+                array(
+                    'id' => 'IniciarSecion.php',
+                    'titulo' => 'Iniciar Sesion',
+                    'enlace' => '/Garsoft/Vista/Sesion/IniciarSesion.php',
+                ),
+            ),#Fin de array subcategoria
+        ),#Fin de array contenido
+    );#Fin de array
+}
 /**
 * Funcion para mostrar los enlaces
 * Tiene que recibir el array de valores y la clase a asignar que puede ser:
