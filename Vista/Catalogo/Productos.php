@@ -27,17 +27,21 @@
                 </select>
             </label>
         </div>
+
+        <div class="form-group">
+            <label><span>Precio</span>
+                <select name="precio" id="precio">
+                <option value="0">Precio Al Público</option>
+                <option value="1">Con Garantía</option>
+                </select>
+            </label>
+        </div>
+
     </div>
         <input type="button" id="btnInventario" name="btnInventario" class="btn btn-secondary" value="Obtener reporte"/>
         <p>Seleccione un producto de la lista.</p>
     </section>
     <section id="listadoProductos" name="listadoProductos">
-
-    </section>
-    <section id="individual" name="individual">
-    </section>
-    <section id="reporte" name="reporte">
-
     </section>
 </article>
 <?php
@@ -94,21 +98,30 @@ $("#categoria").on("change",function(){
         cargarProductos();
 });
 
-
 function cargarProductos(){
     $.ajax({
         cache:false,
         method:"POST",
-        data:{ categoria:$("#categoria").val(), marca:$("#marcas").val() },
+        data:{ categoria:$("#categoria").val(), marca:$("#marcas").val(), garantia:$("#precio").val() },
         url:"../../Controlador/Productos/ConsultarProductos",
         error: function(response){}
     }).done(function(data){
-        if(data.length>0){
-            tabla="<table class='tablaProducto'><tbody><tr class='tablaProducto__Encabezado'><th>Marca</th><th>Categoría</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Casco</th><th>Precio Casco</th><th></th></tr>";
+        if(data.length>0)
+        {
+            tabla="<table data-categoria='"+$("#categoria").val()+"' class='tablaProducto'>"+
+            "<tbody><tr class='tablaProducto__Encabezado'>"+
+            "<th>Marca</th><th>Categoría</th><th>Tipo</th><th>Casco</th><th>Precio Casco</th><th>Cantidad</th><th>Precio</th><th>Accion</th></tr>";
             $.each(data,function(i,item){
-                tabla+="<tr data-idProducto='"+item.idProducto+"' class='tablaProducto__item'><td>"+item.marca+"</td><td>"+item.categoria+"</td><td data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td><td data-precio='"+item.precio+"'>$"+item.precio+"</td><td>"+item.tipo+"</td><td>"+item.casco+"</td><td>$"+item.precioCasco+"</td><td data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>"
+                tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='tablaProducto__item'>"+
+                //Contenido
+                "<td>"+item.marca+"</td><td>"+item.categoria+"</td><td>"+item.tipo+"</td><td>"+item.casco+"</td>"+
+                "<td>$"+item.precioCasco+"</td><td data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
+                "<td data-precio='"+item.precio+"'>$"+item.precio+"</td>"+
+                //Boton
+                "<td data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>"
             });
-            tabla+="</tbody></table>";            
+            tabla+="</tbody></table>";
+            //TODO si el producto es diferente de bateria, cargar una tabla con menos campos
         }else{
             tabla="<table class='tablaProducto'><tbody><tr class='tablaProducto__Encabezado'><th>Marca</th><th>Categoría</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Casco</th><th>Precio Casco</th><th></th></tr>"+
             "<tr class='tablaProducto__item'><td colspan='8'>No hay registros que mostrar</td></tr></tbody></table>";
@@ -117,19 +130,16 @@ function cargarProductos(){
     });
 }
 
+//Cuando se da click en el boton de acción
 $('#listadoProductos').on("click", " table tbody tr td input[type='button']",function(e){
     //Si hace click para editar
-    if(parseInt($(e.currentTarget).closest("td").attr("data-accion"))==0){
-        $(e.currentTarget).closest("td").attr("data-accion","1");
-        $(e.currentTarget).val("Guardar");
-        $(e.currentTarget).toggleClass("btn-primary btn-secondary");
-        //Se modfica la tabla para poder editarla
-        let cantidad=$(e.currentTarget).closest("td").prev().prev().prev().prev().prev().attr("data-cantidad");
-        let precio=$(e.currentTarget).closest("td").prev().prev().prev().prev().attr("data-precio");   
-        $(e.currentTarget).closest("td").prev().prev().prev().prev().prev().html("<div class='input-group'><input type='number' value='"+cantidad+"' class='form-control' aria-label='Amount' /></div>")
-        $(e.currentTarget).closest("td").prev().prev().prev().prev().html('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="text" value='+precio+' class="form-control" aria-label="Amount"></div>'); 
+    if(parseInt($(e.currentTarget).closest("td").attr("data-accion"))==0)
+    {
+        hacerEditable(e);
     }
-    else{
+    //Cuando se da click por segunda vez
+    else
+    {
         swal("¿Estás seguro de guardar los nuevos cambios?", {
         buttons: {
             cancel: "Ay no",
@@ -139,48 +149,95 @@ $('#listadoProductos').on("click", " table tbody tr td input[type='button']",fun
         .then((value) => {
         switch (value) {        
             case "simon":
-                //Se reestablece el acomodo de la tabla
+                //Se toman los valores para ser enviados
                 let idProducto=$(e.currentTarget).closest("tr").attr("data-idProducto");
-                let cantidad=$(e.currentTarget).closest("td").prev().prev().prev().prev().prev().children("div").children("input").val();
-                let precio=$(e.currentTarget).closest("td").prev().prev().prev().prev().children("div").children("input").val();
-                guardarProducto(e,cantidad, precio, idProducto);                
+                let idPrecio=$(e.currentTarget).closest("tr").attr("data-idPrecio");
+                let cantidad=$(e.currentTarget).closest("td").prev().prev().children("div").children("input").val();
+                let precio=$(e.currentTarget).closest("td").prev().children("div").children("input").val();
+                guardarProducto(e,cantidad, precio, idProducto, idPrecio);                
                 break;
 
             default:
-                swal("No he hecho NADA");
+                //Se devuelven los valores como estaban
+                regresarDiseno(e);
+                swal("Aviso", "No se ha modificado nada.", "warning");
                 break;
-        }
-        });        
+        }//Fin de switch
+        });//Fin de swal
+    }//Fin desaber que accion ejecutar
+});//Fin de listener on click
+
+function regresarDiseno(e)
+{
+    let cant=$(e.currentTarget).closest("td").prev().prev().attr("data-cantidad");
+    let pre=$(e.currentTarget).closest("td").prev().attr("data-precio");
+    $(e.currentTarget).closest("td").prev().prev().text(cant);
+    $(e.currentTarget).closest("td").prev().text("$"+pre);
+    $(e.currentTarget).closest("td").attr("data-accion","0");
+    $(e.currentTarget).val("Editar");
+    $(e.currentTarget).toggleClass("btn-secondary btn-primary ");
+}
+
+function hacerEditable(e)
+{
+    $(e.currentTarget).closest("td").attr("data-accion","1");
+    $(e.currentTarget).val("Guardar");
+    $(e.currentTarget).toggleClass("btn-primary btn-secondary");
+    //Se modfica la tabla para poder editarla
+    let cantidad=$(e.currentTarget).closest("td").prev().prev().attr("data-cantidad");
+    let precio=$(e.currentTarget).closest("td").prev().attr("data-precio");   
+    $(e.currentTarget).closest("td").prev().prev().html("<div class='input-group'><input type='number' value='"+cantidad+"' class='form-control' aria-label='Amount' /></div>")
+    $(e.currentTarget).closest("td").prev().html('<div class="input-group"><div class="input-group-prepend"><span class="input-group-text">$</span></div><input type="text" value='+precio+' class="form-control" aria-label="Amount"></div>'); 
+}
+
+//En el segundo click y con permiso va y guarda los valores
+function guardarProducto(e, cantidad, precio, idProducto, idPrecio){
+    if(parseInt(cantidad)>0)//La cantidad no puede ser menor a 0
+    {
+        $.ajax({
+            cache:false,
+            url:"../../Controlador/Productos/modificarProducto",
+            method:"POST",
+            data:{cantidad:cantidad, precio:precio, idProducto:idProducto, idPrecio:idPrecio},
+            beforeSend:function(){$(e.currentTarget).prop("disabled",true)},
+            error:function(){}
+        }).done(function(data){
+            if(data==1){
+                $(e.currentTarget).closest("td").prev().prev().attr("data-cantidad",cantidad);
+                $(e.currentTarget).closest("td").prev().attr("data-precio",precio);                
+                //Reestablece el valor del boton
+                regresarDiseno(e);
+                swal("¡Éxito!", "Se ha guardado correctamete", "success"); 
+            }
+        }).always(function(){
+            $(e.currentTarget).prop("disabled",false)
+        });
     }
-    
-    //swal("Asombroso", "Haz hecho click en el producto con id : "+$(e.currentTarget).closest("tr").attr("data-idProducto"));
-});
-
-
-function guardarProducto(e, cantidad, precio, idProducto){
-    $.ajax({
-        cache:false,
-        url:"../../Controlador/Productos/modificarProducto",
-        method:"POST",
-        data:{cantidad:cantidad, precio:precio, idProducto:idProducto},
-        error:function(){}
-    }).done(function(data){
-        if(data==1){
-            //Reacomoda los nuevos valores
-            $(e.currentTarget).closest("td").prev().prev().prev().prev().prev().attr("data-cantidad",cantidad);
-            $(e.currentTarget).closest("td").prev().prev().prev().prev().prev().text(cantidad);                
-            $(e.currentTarget).closest("td").prev().prev().prev().prev().attr("data-precio",precio);
-            $(e.currentTarget).closest("td").prev().prev().prev().prev().text("$"+precio); 
-            $(e.currentTarget).closest("tr").attr("data-idProducto");
-            //Reestablece el valor del boton
-            $(e.currentTarget).closest("td").attr("data-accion","0");
-            $(e.currentTarget).val("Editar");
-            $(e.currentTarget).toggleClass("btn-secondary btn-primary ");
-            swal("¡Éxito!", "Se ha guardado correctamete", "success"); 
-        }
-    });
+    else{
+        swal("Aviso","La cantidad no puede ser menor a 0","error");
+    }
 }//Fin de guardar producto individualmente
 
+//Valida que se esten ingresando los datos correctamente
+$("#listadoProductos").on("keypress","table tbody tr td div input[type='number']",function(e){
+    return false;
+});
+
+$("#listadoProductos").on("keypress","table tbody tr td div input[type='text']",function(e){
+    valor=$(e.currentTarget).val();
+    if(e.keyCode==46 &&!valor.includes(".")&&valor.length>0)//Si es punto y no lo contiene
+    {
+        return true;
+    }
+    else if(e.keyCode>=48 && e.keyCode<=57) //Si son numeros
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+});//Fin de listener
 
 $('#btnInventario').on("click",function(){
     /*Consiguracion y propiedades del reporte*/

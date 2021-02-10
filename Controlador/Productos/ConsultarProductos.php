@@ -7,20 +7,18 @@ if(isset($_SESSION["nombre"])){
     {
         $conn=Conectar::conexion();
 
+        //TODO si garantia no es 2, cambiar a otra consulta
         $instruccion="select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categoria, p.cantidad, 
-            (select
-            r.precio from precios r
-            where p.idProducto=r.idProducto and 
-            r.activo=1 and 
-            r.garantia=0 limit 1) as precio,
-            t.idCasco as casco,
+        r.precio, r.idPrecio, t.idCasco as casco,
             (select r.precio from cascos r
             where r.idCasco=t.idCasco) as precioCasco
         from producto p
         join categoriaProducto cp on p.idCategoria = cp.idCategoria
         join tipo t on p.idTipo = t.idTipo
         join marcaProducto mp on p.idMarca = mp.idMarca
-        where p.idCategoria=".$_POST["categoria"]." and mp.idMarca=".$_POST["marca"];
+        join precios r on p.idProducto=r.idProducto
+        where p.idCategoria=".$_POST["categoria"]." and mp.idMarca=".$_POST["marca"]."
+        and r.activo=1 and r.garantia=".$_POST["garantia"].";";//TODO agregar idPrecio
 
         $result=$conn->query($instruccion);
 

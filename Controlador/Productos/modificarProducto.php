@@ -7,10 +7,18 @@ if(isset($_SESSION["nombre"])){
     {
         $conn=Conectar::conexion();
 
+        //Modificacion de cantidad
         $instruccion="update producto p set cantidad=".$_POST["cantidad"]."
         where p.idProducto=".$_POST["idProducto"];
 
         $result=$conn->query($instruccion);
+
+        //Modificacion de precio
+        $instruccion="update precios p set precio=".$_POST["precio"]."
+        where p.idProducto=".$_POST["idProducto"]." and idPrecio=".$_POST["idPrecio"];
+
+        $result=$conn->query($instruccion);
+
 
         $conn->close();
         unset($conn);        
