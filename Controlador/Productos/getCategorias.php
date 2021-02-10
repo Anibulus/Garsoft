@@ -6,6 +6,8 @@ session_start();
 if(isset($_SESSION["nombre"])){
     $conn=Conectar::conexion();
     $result=$conn->query("select * from categoriaProducto;");
+    $conn->close();
+    unset($conn);
     if($result){
         $arreglo='[';
         for($i=0;$i<$result->num_rows;$i++){
@@ -14,10 +16,11 @@ if(isset($_SESSION["nombre"])){
         }
         echo $arreglo."]";
     }else{
-        echo array();
+        echo json_encode(array());
     }
+    unset($result);
 }
 else{
-    echo array();
+    echo json_encode(array());
 }
 ?>

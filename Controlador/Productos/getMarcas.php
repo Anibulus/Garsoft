@@ -6,6 +6,8 @@ session_start();
 if(isset($_SESSION["nombre"])){
     $conn=Conectar::conexion();
     $result=$conn->query("select * from marcaProducto;");
+    $conn->close();
+    unset($conn);
     if($result){
         $arreglo='[';
         for($i=0;$i<$result->num_rows;$i++){
@@ -13,11 +15,14 @@ if(isset($_SESSION["nombre"])){
             $arreglo.=$i==($result->num_rows-1)?"":",";
         }
         echo $arreglo."]";
-    }else{
-        echo array();
     }
+    else
+    {
+        echo json_encode(array());
+    }
+    unset($result);
 }
 else{
-    echo null;
+    echo json_encode(array());
 }
 ?>

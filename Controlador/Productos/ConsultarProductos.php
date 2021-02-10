@@ -24,6 +24,9 @@ if(isset($_SESSION["nombre"])){
 
         $result=$conn->query($instruccion);
 
+        $conn->close();
+        unset($conn);
+        unset($instruccion);       
         if($result){
             if($result->num_rows>0){
                 $arreglo='[';
@@ -44,7 +47,8 @@ if(isset($_SESSION["nombre"])){
         else
         {//Si no hay result
             echo json_encode(array());
-        }
+        }        
+        unset($result);
     }//Si no hay post
     else
     {
