@@ -10,12 +10,12 @@ if(isset($_SESSION["nombre"])){
         $result=$conn->query($instruccion);
 
         $menu="<nav><ul>
-        <li> <a href='../Inicio/Inicio'>Incio</a></i>";
+        <li> <a href='../Inicio/Inicio'>Incio</a></li>";
         for($i=0;$i<$result->num_rows;$i++){
             $row=$result->fetch_assoc();
-            $menu.="<li><a href='".$row["direccion"]."'>".$row["nombre"]."</a></i>";
+            $menu.="<li><a href='".$row["direccion"]."'>".$row["nombre"]."</a></li>";
         }
-        $menu.="<li><a href='../../Controlador/CerrarSesion'>Cerrar Sesión</a></i>";
+        $menu.="<li><a href='../../Controlador/CerrarSesion'>Cerrar Sesión</a></li>";
         $menu.="</ul></nav>";
 
         echo $menu;
@@ -30,8 +30,8 @@ if(isset($_SESSION["nombre"])){
 else{
     echo "<nav>
     <ul>
-        <li> <a href='../Inicio/Inicio'>Incio</a></i>
-        <li> <a href='../Sesion/IniciarSesion'>Iniciar Sesión</a></i>
+        <li> <a href='../Inicio/Inicio'>Incio</a></li>
+        <li> <a href='../Sesion/IniciarSesion'>Iniciar Sesión</a></li>
     </ul>
 </nav>";
 }

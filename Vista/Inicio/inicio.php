@@ -29,24 +29,5 @@
     include('../Compartido/piePagina.php');
 ?>
 <script>
-$(document).ready(function(){
-    prueba();
-});
 
-/*
-var doc = new jsPDF('landscape');
-doc.text(20, 20, 'Hello landscape world!');
-
-doc.save('Test.pdf',"application/pdf");
-//https://www.desarrollolibre.net/blog/css/generando-reportes-pdfs-con-javascript
-
-
-var doc = new jsPDF();
-console.log(doc);
-var imgData = 'data:image/jpeg;base64,/ …;
-
-doc.setFontSize(40);
-doc.text(40, 20, "Octocat loves jsPDF");
-doc.addImage(imgData, 'JPEG', 10, 40, 180, 180);
-*/
 </script>
