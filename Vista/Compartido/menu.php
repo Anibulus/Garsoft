@@ -1,3 +1,25 @@
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      margin-right: 2px;
+      padding: 0;
+      overflow: hidden;
+    
+    }
+    
+    li {
+      float: left;
+      margin-right: 10px;
+    }
+    
+    li a {
+      display: block;
+      padding: 8px;
+      background-color: #dddddd;
+    }
+    </style>
+
 <?php
 if(isset($_SESSION["nombre"])){
     require("../../Modelo/Conexion/conexion.php");
@@ -26,16 +48,24 @@ if(isset($_SESSION["nombre"])){
         unset($instruccion);
         unset($menu);
     }
+    
 }
 else{
-    echo "<nav>
+    echo "
+
+
+<nav>
+
     <ul>
         <li> <a href='../Inicio/Inicio'>Incio</a></li>
         <li> <a href='../Sesion/IniciarSesion'>Iniciar Sesión</a></li>
     </ul>
 </nav>";
+
 }
 ?>
+
+
 
 
 
