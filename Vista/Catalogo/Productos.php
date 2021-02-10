@@ -4,41 +4,51 @@
 
     if(isset($_SESSION["nombre"])){
         if($_SESSION["idPerfil"]!=1){
-            header("location:../Inicio/Inicio");
+           header("location:../Inicio/Inicio");
         }
     }else{
         header("location:../Inicio/Inicio");
     }
 ?>
+<style>
+td div input[type=number]{
+    text-align: center; 
+}
+</style>
+
 <article>
     <h2>Productos</h2>
     <section>
     <div class="row">
         <div class="form-group">
             <label><span>Marca de Producto</span>
-                <select name="marcas" id="marcas">
+            <div class="input-group">
+                <select class='form-control' name="marcas" id="marcas">
                 </select>
+            </div>
             </label>
         </div>
 
         <div class="form-group">
             <label><span>Categoría de Producto</span>
-                <select name="categoria" id="categoria">
-                </select>
+                <div class="input-group">
+                    <select class='form-control' name="categoria" id="categoria">
+                    </select>
+                </div>
             </label>
         </div>
 
         <div class="form-group">
             <label><span>Precio</span>
-                <select name="precio" id="precio">
-                <option value="0">Precio Al Público</option>
-                <option value="1">Con Garantía</option>
-                </select>
+                <div class="input-group">
+                    <select class='form-control' name="precio" id="precio">
+                    <option value="0">Precio Al Público</option>
+                    <option value="1">Con Garantía</option>
+                    </select>
+                </div>
             </label>
         </div>
-
     </div>
-        <input type="button" id="btnInventario" name="btnInventario" class="btn btn-secondary" value="Obtener reporte"/>
         <p>Seleccione un producto de la lista.</p>
     </section>
     <section id="listadoProductos" name="listadoProductos">
@@ -109,16 +119,16 @@ function cargarProductos(){
         if(data.length>0)
         {
             tabla="<table data-categoria='"+$("#categoria").val()+"' class='tablaProducto'>"+
-            "<tbody><tr class='tablaProducto__Encabezado'>"+
-            "<th>Marca</th><th>Categoría</th><th>Tipo</th><th>Casco</th><th>Precio Casco</th><th>Cantidad</th><th>Precio</th><th>Accion</th></tr>";
+            "<tbody class='container'><tr class='row tablaProducto__Encabezado'>"+
+            "<th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th><th class='col-sm'>Tipo</th><th class='col-sm'>Casco</th><th class='col-sm'>Precio Casco</th><th class='col-sm'>Cantidad</th><th class='col-sm-2'>Precio</th><th class='col-sm'>Accion</th></tr>";
             $.each(data,function(i,item){
-                tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='tablaProducto__item'>"+
+                tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='row tablaProducto__item'>"+
                 //Contenido
-                "<td>"+item.marca+"</td><td>"+item.categoria+"</td><td>"+item.tipo+"</td><td>"+item.casco+"</td>"+
-                "<td>$"+item.precioCasco+"</td><td data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
-                "<td data-precio='"+item.precio+"'>$"+item.precio+"</td>"+
+                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td><td class='col-sm'>"+item.tipo+"</td><td class='col-sm'>"+item.casco+"</td>"+
+                "<td class='col-sm'>$"+item.precioCasco+"</td><td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
+                "<td class='col-sm-2' data-precio='"+item.precio+"'>$"+item.precio+"</td>"+
                 //Boton
-                "<td data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>"
+                "<td class='col-sm' data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>"
             });
             tabla+="</tbody></table>";
             //TODO si el producto es diferente de bateria, cargar una tabla con menos campos
@@ -238,43 +248,4 @@ $("#listadoProductos").on("keypress","table tbody tr td div input[type='text']",
         return false;
     }
 });//Fin de listener
-
-$('#btnInventario').on("click",function(){
-    /*Consiguracion y propiedades del reporte*/
-    var doc = new jsPDF();
-    doc.setFontSize(12);
-    doc.setProperties({
-    title: 'Reporte de Inventario',
-    subject: 'Obtenido el dia de hoy',
-    author: 'Anjanath',
-    //keywords: 'generated, javascript, web 2.0, ajax',
-    creator: 'Anjanath'
-    });
-
-    /*Carga contenido*/
-    doc.text(20, 20, 'Reporte de inventario');
-
-    toDataURL("../../Img/Ivan.jpg",function(dataURL){
-        doc.addImage(dataURL, 'JPG', 10, 78, 12, 15);
-        doc.save('Test.pdf',"application/pdf");
-    });
-    
-    //https://www.desarrollolibre.net/blog/css/generando-reportes-pdfs-con-javascript
-});
-
-/*TODO saber como funciona (promesas)*/
-function toDataURL(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onload = function() {
-    var reader = new FileReader();
-    reader.onloadend = function() {
-      callback(reader.result);
-    }
-    reader.readAsDataURL(xhr.response);
-  };
-  xhr.open('GET', url);
-  xhr.responseType = 'blob';
-  xhr.send();
-}
-
 </script>

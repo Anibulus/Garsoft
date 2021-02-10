@@ -707,10 +707,12 @@ insert into empresa values
 (null, 'Indeseables','');
 
 insert into menu values
-(null, 'Catálogo', '../Catalogo/Productos');
+(null, 'Editar Productos', '../Catalogo/Productos'),
+(null, 'Nuevo Producto', '../Catalogo/NuevoProducto');
 
 insert into intermediaPerfilMenu (idPerfil, idMenu) values
-(1,1);
+(1,1),
+(1,2);
 
 select p.idPerfil, m.idMenu, m.nombre, m.direccion from perfil p  
 join intermediaPerfilMenu ipm on p.idPerfil=ipm.idPerfil
