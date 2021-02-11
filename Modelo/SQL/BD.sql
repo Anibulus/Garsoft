@@ -707,10 +707,12 @@ insert into empresa values
 (null, 'Indeseables','');
 
 insert into menu values
-(null, 'Catálogo', '../Catalogo/Productos');
+(null, 'Editar Productos', '../Catalogo/Productos'),
+(null, 'Nuevo Producto', '../Catalogo/NuevoProducto');
 
 insert into intermediaPerfilMenu (idPerfil, idMenu) values
-(1,1);
+(1,1),
+(1,2);
 
 select p.idPerfil, m.idMenu, m.nombre, m.direccion from perfil p  
 join intermediaPerfilMenu ipm on p.idPerfil=ipm.idPerfil
@@ -788,3 +790,16 @@ DELIMITER ;
 call iniciosesion('gaby','123');
 
 
+/*Get productos*/
+
+select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categoria, p.cantidad, 
+        r.precio, r.idPrecio, t.idCasco as casco,
+            (select r.precio from cascos r
+            where r.idCasco=t.idCasco) as precioCasco
+        from producto p
+        join categoriaProducto cp on p.idCategoria = cp.idCategoria
+        join tipo t on p.idTipo = t.idTipo
+        join marcaProducto mp on p.idMarca = mp.idMarca
+        join precios r on p.idProducto=r.idProducto
+        where p.idCategoria=2 and mp.idMarca=3 and
+        r.activo=1 and r.garantia=0;
