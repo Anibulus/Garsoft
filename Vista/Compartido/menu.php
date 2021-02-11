@@ -1,24 +1,11 @@
-<style>
-    ul {
-      list-style-type: none;
-      margin: 0;
-      margin-right: 2px;
-      padding: 0;
-      overflow: hidden;
-    
-    }
-    
-    li {
-      float: left;
-      margin-right: 10px;
-    }
-    
-    li a {
-      display: block;
-      padding: 8px;
-      background-color: #dddddd;
-    }
-    </style>
+
+
+
+<link rel="stylesheet" href="../../Contenido/css/menu.css">
+            
+             
+
+
 
 <?php
 if(isset($_SESSION["nombre"])){
@@ -31,14 +18,16 @@ if(isset($_SESSION["nombre"])){
 
         $result=$conn->query($instruccion);
 
-        $menu="<nav><ul>
-        <li> <a href='../Inicio/Inicio'>Incio</a></li>";
+        $menu="<div class='sidenav'>
+             <a href='../Inicio/Inicio'>Incio</a>";
         for($i=0;$i<$result->num_rows;$i++){
             $row=$result->fetch_assoc();
-            $menu.="<li><a href='".$row["direccion"]."'>".$row["nombre"]."</a></li>";
+            $menu.="<a href='".$row["direccion"]."'>".$row["nombre"]."</a>";
         }
-        $menu.="<li><a href='../../Controlador/CerrarSesion'>Cerrar Sesión</a></li>";
-        $menu.="</ul></nav>";
+        
+        $menu.="<a href='../../Controlador/CerrarSesion'>Cerrar Sesión</a>";
+
+        $menu.="</div>";
 
         echo $menu;
         
@@ -54,13 +43,12 @@ else{
     echo "
 
 
-<nav>
+<div class='sidenav'>
 
-    <ul>
-        <li> <a href='../Inicio/Inicio'>Incio</a></li>
-        <li> <a href='../Sesion/IniciarSesion'>Iniciar Sesión</a></li>
-    </ul>
-</nav>";
+    <a href='../Inicio/Inicio'>Incio</a>
+    <a href='../Sesion/IniciarSesion'>Iniciar Sesión</a>
+   
+</div>";
 
 }
 ?>
