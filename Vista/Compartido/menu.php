@@ -19,7 +19,7 @@ if(isset($_SESSION["nombre"])){
         $result=$conn->query($instruccion);
 
         $menu="<div class='sidenav'>
-             <a href='../Inicio/Inicio'>Incio</a>";
+             <a href='../Inicio/Inicio'>Inicio</a>";
         for($i=0;$i<$result->num_rows;$i++){
             $row=$result->fetch_assoc();
             $menu.="<a href='".$row["direccion"]."'>".$row["nombre"]."</a>";
@@ -45,7 +45,7 @@ else{
 
 <div class='sidenav'>
 
-    <a href='../Inicio/Inicio'>Incio</a>
+    <a href='../Inicio/Inicio'>Inicio</a>
     <a href='../Sesion/IniciarSesion'>Iniciar Sesión</a>
    
 </div>";

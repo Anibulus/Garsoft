@@ -4,7 +4,7 @@ create table marcaAuto(
     idMarca int AUTO_INCREMENT,
     nombre varchar(20) not null,
     CONSTRAINT pkMarcaAuto PRIMARY KEY (idMarca)
-);
+) COLLATE utf8mb4_general_ci;
 
 create table modeloAuto(
     idModelo int Auto_Increment,
@@ -13,27 +13,27 @@ create table modeloAuto(
     anio int null,    
     CONSTRAINT pkModeloAuto PRIMARY KEY (idModelo),
     CONSTRAINT fkModeloAuto_MarcaAuto FOREIGN KEY (idMarca) REFERENCES marcaAuto (idMarca)
-);
+) COLLATE utf8mb4_general_ci;
 
 create table categoriaProducto(
     idCategoria int Auto_Increment,
     nombre varchar(50) not null,
     CONSTRAINT pkCategoriaProducto PRIMARY KEY (idCategoria)
-);
+) COLLATE utf8mb4_general_ci;
 
 create table marcaProducto(
     idMarca int Auto_Increment,
     nombre varchar(50) not null,
     mesesGarantia int not null,
     CONSTRAINT pkmarcaProducto PRIMARY KEY (idMarca)
-);
+) COLLATE utf8mb4_general_ci;
 
 create table cascos(
     idCasco int Auto_Increment,
     numeroDeCasco int not null,
     precio decimal(10,2),
     CONSTRAINT pkCasco PRIMARY KEY (idCasco)
-);
+) COLLATE utf8mb4_general_ci;
 
 create table tipo(
     idTipo int AUTO_INCREMENT,
@@ -41,7 +41,7 @@ create table tipo(
     idCasco int null,
     CONSTRAINT pkTipo PRIMARY KEY (idTipo),
     CONSTRAINT fkTipo_Casco FOREIGN KEY (idCasco) REFERENCES cascos (idCasco)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table producto(
     idProducto int Auto_Increment,   
@@ -54,7 +54,7 @@ create table producto(
     CONSTRAINT fkProducto_Categoria FOREIGN KEY (idCategoria) references categoriaProducto (idCategoria),
     CONSTRAINT fkProducto_Marca FOREIGN KEY (idMarca) REFERENCES  marcaProducto (idMarca),    
     CONSTRAINT fkProducto_Tipo FOREIGN KEY (idTipo) REFERENCES  tipo (idTipo) 
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table precios(
     idPrecio int AUTO_INCREMENT,
@@ -65,7 +65,7 @@ create table precios(
     activo TINYINT default 1,
     constraint pkPrecios PRIMARY KEY (idPrecio),
     constraint fkPrecio_Producto FOREIGN KEY (idProducto) references producto(idProducto)
-);
+)   COLLATE utf8mb4_general_ci;
 
 
 create table intermediaModeloAuto_Tipo(
@@ -74,7 +74,7 @@ create table intermediaModeloAuto_Tipo(
     CONSTRAINT pkIntermediaModeloAutoProducto primary key (idTipo,idModelo),
     CONSTRAINT fkIntermediaModeloAutoProducto_Tipo FOREIGN KEY (idTipo) references tipo (idTipo),
     CONSTRAINT fkIntermediaModeloAutoProducto_ModeloAuto FOREIGN KEY (idModelo) references modeloAuto (idModelo)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table persona(
     idPersona int Auto_Increment,
@@ -84,14 +84,14 @@ create table persona(
     correo varchar(50),
     telefono varchar(14),
     CONSTRAINT pkPersona PRIMARY KEY (idPersona)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table empresa(
     idEmpresa int Auto_Increment,
     nombre varchar(50),
     telefono varchar(14),
     CONSTRAINT pkEmpresa PRIMARY KEY (idEmpresa)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table provedor(
     idPersona int not null,
@@ -99,25 +99,25 @@ create table provedor(
     CONSTRAINT fkProvedor_Persona FOREIGN KEY (idPersona) REFERENCES persona (idPersona),
     CONSTRAINT fkProvedor_Empresa FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa),
     CONSTRAINT pkProvedor PRIMARY KEY (idPersona)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table perfil(
     idPerfil int Auto_Increment,
     nombre varchar(20),
     CONSTRAINT pkPerfil PRIMARY KEY (idPerfil)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table usuario(
     idPersona int not null,
     usuario varchar(10),
-    contrasena varchar(50),/*TODO usar MD5*/
+    contrasena varchar(50),
     ultimoInicio DATETIME,
     idPerfil int not null,
     activo TINYINT DEFAULT 1,
     CONSTRAINT pkUsuario PRIMARY KEY (idPersona),
     CONSTRAINT fkUsuario_Persona FOREIGN KEY (idPersona) REFERENCES persona (idPersona),
     CONSTRAINT fkUsuario_Perfil FOREIGN KEY (idPerfil) REFERENCES perfil (idPerfil)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table compra(
     idCompra int Auto_Increment,
@@ -127,7 +127,7 @@ create table compra(
     CONSTRAINT pkCompra PRIMARY KEY (idCompra),
     CONSTRAINT fkCompra_Provedor FOREIGN KEY (idProvedor) REFERENCES provedor (idPersona),
     CONSTRAINT fkCompra_Empleado FOREIGN key (idEmpleado) REFERENCES persona (idPersona)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table intermediaCompraProductoEntrada(
     idCompra int not null,
@@ -137,7 +137,7 @@ create table intermediaCompraProductoEntrada(
     CONSTRAINT pkIntermediaCompraProductoEntrada PRIMARY KEY (idCompra, idProducto),
     CONSTRAINT fkIntermediaCompraProductoEntrada_Compra FOREIGN KEY (idCompra) REFERENCES compra (idCompra),
     CONSTRAINT fkIntermediaCompraProductoEntrada_Producto FOREIGN KEY (idProducto) REFERENCES producto (idProducto)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table intermediaCompraProductoSalida(
     idCompra int not null,
@@ -146,19 +146,19 @@ create table intermediaCompraProductoSalida(
     CONSTRAINT pkIntermediaCompraProductoSalida PRIMARY KEY (idCompra, idProducto),
     CONSTRAINT fkIntermediaCompraProductoSalida_Compra FOREIGN KEY (idCompra) REFERENCES compra (idCompra),
     CONSTRAINT fkIntermediaCompraProductoSalida_Producto FOREIGN KEY (idProducto) REFERENCES producto (idProducto)
-);
+)   COLLATE utf8mb4_general_ci;
 
 CREATE TABLE cliente(
     idPersona int not null,
     CONSTRAINT pkCliente PRIMARY KEY (idPersona),
     CONSTRAINT fkCliente FOREIGN KEY (idPersona) REFERENCES persona (idPersona)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create TABLE formaPago(
     idFormaPago int auto_increment,
     descripcion varchar(50),
     CONSTRAINT pkFormaPago PRIMARY KEY (idFormaPago)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table venta (
     idVenta bigint Auto_Increment, /*Reiniciar al empezar año*/
@@ -174,7 +174,7 @@ create table venta (
     CONSTRAINT fkVenta_Cliente FOREIGN KEY (idCliente) REFERENCES cliente (idPersona),
     constraint fkVenta_FormaPago FOREIGN KEY (idFormaPago) REFERENCES  formaPago (idFormaPago)
 
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table intermediaVentaProductoSalida(
     idVenta BIGINT not null,
@@ -184,7 +184,7 @@ create table intermediaVentaProductoSalida(
     CONSTRAINT pkIntermediaVentaProductoSalida PRIMARY KEY (idVenta, idProducto),
     CONSTRAINT fkIntermediaVentaProductoSalida_Venta FOREIGN KEY (idVenta) references venta (idVenta),
     CONSTRAINT fkIntermediaVentaProductoSalida_Producto FOREIGN KEY (idProducto) REFERENCES  producto (idProducto)
-);
+)   COLLATE utf8mb4_general_ci;
 
 create table intermediaVentaProductoEntrada(
     idVenta BIGINT not null,
@@ -193,7 +193,7 @@ create table intermediaVentaProductoEntrada(
     CONSTRAINT pkIntermediaVentaProductoEntrada PRIMARY KEY (idVenta, idProducto),
     CONSTRAINT fkIntermediaVentaProductoEntrada_Venta FOREIGN KEY (idVenta) references venta (idVenta),
     CONSTRAINT fkIntermediaVentaProductoEntrada_Producto FOREIGN KEY (idProducto) REFERENCES  producto (idProducto)
-);
+)   COLLATE utf8mb4_general_ci;
 
 /*Seccion pendiente*/
 /*Seccion menu*/
@@ -202,7 +202,7 @@ create table menu(
     nombre varchar (30),
     direccion varchar(100),
     CONSTRAINT pkMenu PRIMARY KEY (idMenu)
-);
+) COLLATE utf8mb4_general_ci;
 
 create table intermediaPerfilMenu(
     idMenu int not null,
@@ -210,20 +210,30 @@ create table intermediaPerfilMenu(
     CONSTRAINT pkIntermediaPerfilMenu PRIMARY KEY (idMenu, idPerfil),
     CONSTRAINT fkIntermediaPerfilMenu_Menu FOREIGN KEY (idMenu) REFERENCES menu (idMenu),
     CONSTRAINT fkIntermediaPerfilMenu_Perfil FOREIGN KEY (idPerfil) REFERENCES  perfil (idPerfil) 
-);
+) COLLATE utf8mb4_general_ci;
 
 create table factura (
     idVenta int not null,
     CONSTRAINT pkFactura PRIMARY KEY (idVenta),
     CONSTRAINT fkFactura_Venta FOREIGN KEY (idVenta) REFERENCES venta (idVenta)
-);
+) COLLATE utf8mb4_general_ci;
 
 /*Seccion producto*/
 insert into categoriaProducto values
-(null,'Servicio'),
-(null,'Batería Automotriz'),
-(null,'Batería AA'),
-(null,'Anticongelante');
+(null, 'Servicio'),
+(null, 'Batería de auto'),
+(null, 'Batería de moto'),
+(null, 'Batería AA'),
+(null, 'Anticongelante'),
+(null, 'Aromatizante'),
+(null, 'Sujetadores'),
+(null, 'Terminales'),
+(null, 'Limpiador'),
+(null, 'Aerosol multiusos'),
+(null, 'Aditivos para gasolina'),
+(null, 'Crema'),
+(null, 'Aceite'),
+(null, 'Insumos');
 
 insert into marcaProducto values
 (null,'LTH', 48),
@@ -235,7 +245,8 @@ insert into marcaProducto values
 (null, 'Especial', 18),
 (null, 'AGM', 72),
 (null, 'Optima', 0),
-(null, 'Gallito', 0);
+(null, 'Gallito', 0),
+(null, 'Servicio',0);
 
 insert into cascos values 
 (null, 1, 255.20),
@@ -245,7 +256,7 @@ insert into cascos values
 (null, 5, 638.00),
 (null, 6, 1276.00);
 
-insert into tipo values 
+insert into tipo (idTipo, nombre, idCasco) values 
 (null,'22F',2),
 (null, '24', 3),
 (null, '24R', 3),
@@ -282,12 +293,71 @@ insert into tipo values
 (null, '8D',6),
 (null, '99',1),
 (null, '94R',4),
-/*Se dejaron de fabricxar y parecen ser grupo 2*/
+/*Se dejaron de fabricar y parecen ser grupo 2*/
 (null, 'GC2-122-6V', 2),
 (null, 'GC8-117-8V',2),
 (null, 'NS40',1),
 (null, 'NS40Z',1),
-(null, 'U1',1);
+(null, 'U1',1),/*Fin de los tipos para baterias de auto*/
+/*Aqui comienzan las baterias de moto y sin casco*/
+/*CONVENCIONAL*/
+(null, '12N5-3B', null),
+(null, '12N7-3B', null),
+(null, '12N7B-3A', null),
+(null, '12N9-4B-1', null),
+(null, '12N10-3B', null),
+(null, '12N12A-4A-1', null),
+(null, '12N14-3A', null),
+(null, 'CB3L-B', null),
+(null, 'CB4L-B', null),
+(null, 'CB5L-B', null),
+(null, 'CB6.5L-B', null),
+(null, 'CB7-A', null),
+(null, 'CB9-B', null),
+(null, 'CB12A-A', null),
+(null, 'CB14L-A2', null),
+(null, 'CB16CL-B', null),
+/*AGM LIBRE DE MANTENIMIENTO*/ 
+(null, 'CTX4L-BS', null),
+(null, 'CTX5L-BS', null),
+(null, 'CTX7A-BS', null),
+(null, 'CTX7L-BS', null),
+(null, 'CT7B-BS', null),
+(null, 'CTX9-BS', null),
+(null, 'CT9B-BS', null),
+(null, 'CTZ10S-BS', null),
+(null, 'CTX12-BS', null),
+(null, 'CTX14L-BS', null),
+(null, 'CTX14-BS', null),
+(null, 'CT12B-BS', null),
+(null, 'CTX14AH-BS', null),
+(null, 'CTX14AHL-BS', null),
+(null, 'CT14B-BS', null),
+(null, 'CTX16CL-B-BS', null),
+(null, 'CTX20CH-BS', null),
+(null, 'CTX20HL-BS', null),
+(null, 'CTX24HL-BS', null),
+(null, 'CTX30L-BS', null),
+/*Tipos de servicio*/
+(null,'Cambio de batería',null),
+(null,'Pase de corriente',null),
+(null,'Servicio de carga',null),
+/*Optima*/
+(null, 'OR7525',2),
+(null,'OR 35',3),
+(null,'OR 3478',3),
+(null,'OR34',3),
+(null,'OR34R',3),
+(null,'OR51R',1),
+(null,'OA7525',2),
+(null,'OA3478',3),
+(null,'OA34',3),
+(null,'34M',NULL),/*TODO preguntar, no tiene casco*/
+(null,'OA35',3),
+(null,'OA31T',5),
+(null,'D34M',3),
+(null,'D37M',4),
+(null,'D31M',5);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
 /*Va LTH*/
@@ -388,7 +458,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,5,35,1),
 (null,0,2,5,39,1);
 
-
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
 /*Va America*/
 (null,0,2,6,1,1),
@@ -449,9 +518,23 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,8,30,1),
 (null,0,2,8,36,1);
 
-/*TODO falta optima*/
-
-
+/*Optima*/
+insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+(null, 0, 2, 9, 81,1),
+(null, 0, 2, 9, 82,1),
+(null, 0, 2, 9, 83,1),
+(null, 0, 2, 9, 84,1),
+(null, 0, 2, 9, 85,1),
+(null, 0, 2, 9, 86,1),
+(null, 0, 2, 9, 87,1),
+(null, 0, 2, 9, 88,1),
+(null, 0, 2, 9, 89,1),
+(null, 0, 2, 9, 90,1),
+(null, 0, 2, 9, 91,1),
+(null, 0, 2, 9, 92,1),
+(null, 0, 2, 9, 93,1),
+(null, 0, 2, 9, 94,1),
+(null, 0, 2, 9, 95,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
 /*Gallito*/
@@ -495,21 +578,93 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,10,38,1),
 (null,0,2,10,39,1),
 (null,0,2,10,40,1),
-(null,0,2,10,41,1);
+(null,0,2,10,41,1), /*Retoma las barerias de optima*/
+(null, 0, 2, 10, 81,1),
+(null, 0, 2, 10, 82,1),
+(null, 0, 2, 10, 83,1),
+(null, 0, 2, 10, 84,1),
+(null, 0, 2, 10, 85,1),
+(null, 0, 2, 10, 86,1),
+(null, 0, 2, 10, 87,1),
+(null, 0, 2, 10, 88,1),
+(null, 0, 2, 10, 89,1),
+(null, 0, 2, 10, 90,1),
+(null, 0, 2, 10, 91,1),
+(null, 0, 2, 10, 92,1),
+(null, 0, 2, 10, 93,1),
+(null, 0, 2, 10, 94,1),
+(null, 0, 2, 10, 95,1);
 
-select p.idProducto, t.nombre, t.idCasco from producto p
+/*Baterias de moto*/
+insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+(null,0,3,1,42,1),
+(null,0,3,1,43,1),
+(null,0,3,1,44,1),
+(null,0,3,1,45,1),
+(null,0,3,1,46,1),
+(null,0,3,1,47,1),
+(null,0,3,1,48,1),
+/*AGM*/
+(null,0,3,8,49,1),
+(null,0,3,8,50,1),
+(null,0,3,8,51,1),
+(null,0,3,8,52,1),
+(null,0,3,8,53,1),
+(null,0,3,8,54,1),
+(null,0,3,8,55,1),
+(null,0,3,8,56,1),
+(null,0,3,8,57,1),
+(null,0,3,8,58,1),
+(null,0,3,8,59,1),
+(null,0,3,8,60,1),
+(null,0,3,8,61,1),
+(null,0,3,8,62,1),
+(null,0,3,8,63,1),
+(null,0,3,8,64,1),
+(null,0,3,8,65,1),
+(null,0,3,8,66,1),
+(null,0,3,8,67,1),
+(null,0,3,8,68,1),
+(null,0,3,8,69,1),
+(null,0,3,8,70,1),
+(null,0,3,8,71,1),
+(null,0,3,8,72,1),
+(null,0,3,8,73,1),
+(null,0,3,8,74,1),
+(null,0,3,8,75,1),
+(null,0,3,8,76,1),
+(null,0,3,8,77,1);
+
+/*Servicios*/
+insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+(null,0, 1,11,78,1),
+(null,0, 1,11,79,1),
+(null,0, 1,11,80,1);
+
+/*De marca especifica*/
+select p.idProducto, t.nombre, t.idCasco, mp.nombre as marca 
+from producto p
 join tipo t on p.idTipo = t.idTipo
-where idMarca=3;
+join marcaProducto mp on p.idMarca = mp.idMarca
+where p.idMarca=3;
 
-
+/*De todas las marcas*/
 select p.idProducto, mp.nombre as marca, t.nombre as tipo, t.idCasco as casco
 from producto p
 join tipo t on p.idTipo = t.idTipo
 join marcaProducto mp on p.idMarca = mp.idMarca;
 
+/*Muestra solo baterias que tienen casco*/
+select p.idProducto, mp.nombre as marca, t.nombre as tipo, t.idCasco as casco
+from producto p
+join tipo t on p.idTipo = t.idTipo
+join cascos c on t.idCasco = c.idCasco
+join marcaProducto mp on p.idMarca = mp.idMarca;
+
+
 /*Listado de Precios*/ 
 insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) values 
-/*Primeor baterias sin garantía*/
+/*Primero baterias sin garantía*/
 (null,1,1600.00,0,curdate(),1),
 (null,2,1760.00,0,curdate(),1),
 (null,3,1920.00,0,curdate(),1),
@@ -650,42 +805,268 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,131,3840.00,0,curdate(),1),
 (null,132,3960.00,0,curdate(),1),
 (null,133,3560.00,0,curdate(),1),
-(null,134,3880.00,0,curdate(),1);
+(null,134,3880.00,0,curdate(),1),
+/*Precio oprima*/
+(null,135,3825.00,0,curdate(),1),
+(null,136,3655.00,0,curdate(),1),
+(null,137,4037.50,0,curdate(),1),
+(null,138,3867.50,0,curdate(),1),
+(null,139,3867.50,0,curdate(),1),
+(null,140,3315.00,0,curdate(),1),
+(null,141,4377.50,0,curdate(),1),
+(null,142,4802.50,0,curdate(),1),
+(null,143,4717.50,0,curdate(),1),
+(null,144,4080.00,0,curdate(),1),
+(null,145,4377.50,0,curdate(),1),
+(null,146,5907.50,0,curdate(),1),
+(null,147,4802.50,0,curdate(),1),
+(null,148,5737.50,0,curdate(),1),
+(null,149,6077.50,0,curdate(),1),
+/*Asigna precio de 500 a todos los gallitos*/
+(null,150,500.00,0,curdate(),1),
+(null,151,500.00,0,curdate(),1),
+(null,152,500.00,0,curdate(),1),
+(null,153,500.00,0,curdate(),1),
+(null,154,500.00,0,curdate(),1),
+(null,155,500.00,0,curdate(),1),
+(null,156,500.00,0,curdate(),1),
+(null,157,500.00,0,curdate(),1),
+(null,158,500.00,0,curdate(),1),
+(null,159,500.00,0,curdate(),1),
+(null,160,500.00,0,curdate(),1),
+(null,161,500.00,0,curdate(),1),
+(null,162,500.00,0,curdate(),1),
+(null,163,500.00,0,curdate(),1),
+(null,164,500.00,0,curdate(),1),
+(null,165,500.00,0,curdate(),1),
+(null,166,500.00,0,curdate(),1),
+(null,167,500.00,0,curdate(),1),
+(null,168,500.00,0,curdate(),1),
+(null,169,500.00,0,curdate(),1),
+(null,170,500.00,0,curdate(),1),
+(null,171,500.00,0,curdate(),1),
+(null,172,500.00,0,curdate(),1),
+(null,173,500.00,0,curdate(),1),
+(null,174,500.00,0,curdate(),1),
+(null,175,500.00,0,curdate(),1),
+(null,176,500.00,0,curdate(),1),
+(null,177,500.00,0,curdate(),1),
+(null,178,500.00,0,curdate(),1),
+(null,179,500.00,0,curdate(),1),
+(null,180,500.00,0,curdate(),1),
+(null,181,500.00,0,curdate(),1),
+(null,182,500.00,0,curdate(),1),
+(null,183,500.00,0,curdate(),1),
+(null,184,500.00,0,curdate(),1),
+(null,185,500.00,0,curdate(),1),
+(null,186,500.00,0,curdate(),1),
+(null,187,500.00,0,curdate(),1),
+(null,188,500.00,0,curdate(),1),
+(null,189,500.00,0,curdate(),1),
+(null,190,500.00,0,curdate(),1),
+(null,191,500.00,0,curdate(),1),
+(null,192,500.00,0,curdate(),1),
+(null,193,500.00,0,curdate(),1),
+(null,194,500.00,0,curdate(),1),
+(null,195,500.00,0,curdate(),1),
+(null,196,500.00,0,curdate(),1),
+(null,197,500.00,0,curdate(),1),
+(null,198,500.00,0,curdate(),1),
+(null,199,500.00,0,curdate(),1),
+(null,200,500.00,0,curdate(),1),
+(null,201,500.00,0,curdate(),1),
+(null,202,500.00,0,curdate(),1),
+(null,203,500.00,0,curdate(),1),
+(null,204,500.00,0,curdate(),1),
+(null,205,500.00,0,curdate(),1),
+/*Baterias de moto*/ /*todo preguntar por que precio se usara*/
+(null,206,,curdate(),1),
+(null,2,,0,curdate(),1),
+(null,2,,0,curdate(),1),
+(null,241,,0,curdate(),1),
+/*Servicios*/
+(null,242,50.00,0,curdate(),1),
+(null,243,50.00,0,curdate(),1),
+(null,244,50.00,0,curdate(),1),
+/*Se repiten baterias pero esta vez con garantia*/
+/*Lth*/
+/*TODO agregar precios con garantia*/
+(null,1,1600.00,1,curdate(),1),
+(null,2,1760.00,1,curdate(),1),
+(null,3,1920.00,1,curdate(),1),
+(null,4,1600.00,1,curdate(),1),
+(null,5,2320.00,1,curdate(),1),
+(null,6,2080.00,1,curdate(),1),
+(null,7,1960.00,1,curdate(),1),
+(null,8,2128.00,1,curdate(),1),
+(null,9,1960.00,1,curdate(),1),
+(null,10,2128.00,1,curdate(),1),
+(null,11,2080.00,1,curdate(),1),
+(null,12,2200.00,1,curdate(),1),
+(null,13,1920.00,1,curdate(),1),
+(null,14,1400.00,1,curdate(),1),
+(null,15,3520.00,1,curdate(),1),
+(null,16,3016.00,1,curdate(),1),
+(null,17,2080.00,1,curdate(),1),
+(null,18,1600.00,1,curdate(),1),
+(null,19,1840.00,1,curdate(),1),
+(null,20,1840.00,1,curdate(),1),
+(null,21,1680.00,1,curdate(),1),
+(null,22,2040.00,1,curdate(),1),
+(null,23,2320.00,1,curdate(),1),
+(null,24,1920.00,1,curdate(),1),
+(null,25,1920.00,1,curdate(),1),
+(null,26,1760.00,0,curdate(),1),
+(null,27,2040.00,0,curdate(),1),
+(null,28,2160.00,0,curdate(),1),
+(null,29,1880.00,0,curdate(),1),
+(null,30,2080.00,0,curdate(),1),
+(null,31,3760.00,0,curdate(),1),
+(null,32,1600.00,0,curdate(),1),
+(null,33,2400.00,0,curdate(),1),
+(null,34,1680.00,0,curdate(),1),
+(null,35,1680.00,0,curdate(),1),
+/*LTH TAXI*/
+(null,36,1760.00,0,curdate(),1),
+(null,37,2360.00,0,curdate(),1),
+(null,38,2184.00,0,curdate(),1),
+(null,39,2184.00,0,curdate(),1),
+(null,40,2440.00,0,curdate(),1),
+/*LTH HITEC*/
+(null,41,1848.00,0,curdate(),1),
+(null,42,2058.00,0,curdate(),1),
+(null,43,2226.00,0,curdate(),1),
+(null,44,1848.00,0,curdate(),1),
+(null,45,2688.00,0,curdate(),1),
+(null,46,2436.00,0,curdate(),1),
+(null,47,2394.00,0,curdate(),1),
+(null,48,2562.00,0,curdate(),1),
+(null,49,2226.00,0,curdate(),1),
+(null,50,2394.00,0,curdate(),1),
+(null,51,2142.00,0,curdate(),1),
+(null,52,2352.00,0,curdate(),1),
+(null,53,2688.00,0,curdate(),1),
+(null,54,2730.00,0,curdate(),1),
+(null,55,2016.00,0,curdate(),1),
+(null,56,2478.00,0,curdate(),1),
+(null,57,2184.00,0,curdate(),1),
+(null,58,2436.00,0,curdate(),1),
+(null,59,1974.00,0,curdate(),1),
+(null,60,1848.00,0,curdate(),1),
+/*LTH SUV*/
+(null,61,2419.00,0,curdate(),1),
+(null,62,2238.60,0,curdate(),1),
+(null,63,2238.60,0,curdate(),1),
+(null,64,2501.00,0,curdate(),1),
+/*Cronos*/
+(null,65,1189.00,0,curdate(),1),
+(null,66,1271.00,0,curdate(),1),
+(null,67,1476.00,0,curdate(),1),
+(null,68,1681.00,0,curdate(),1),
+(null,69,1681.00,0,curdate(),1),
+(null,70,1558.00,0,curdate(),1),
+(null,71,1476.00,0,curdate(),1),
+(null,72,2681.40,0,curdate(),1),
+(null,73,1599.00,0,curdate(),1),
+(null,74,1189.00,0,curdate(),1),
+(null,75,1271.00,0,curdate(),1),
+(null,76,1476.00,0,curdate(),1),
+(null,77,1353.00,0,curdate(),1),
+(null,78,1681.00,0,curdate(),1),
+(null,79,1476.00,0,curdate(),1),
+(null,80,1599.00,0,curdate(),1),
+(null,81,3280.00,0,curdate(),1),
+(null,82,1189.00,0,curdate(),1),
+(null,83,1312.00,0,curdate(),1),
+/*AMERICANA*/
+(null,84,1353.00,0,curdate(),1),
+(null,85,1360.00,0,curdate(),1),
+(null,86,1600.00,0,curdate(),1),
+(null,87,1320.00,0,curdate(),1),
+(null,88,1880.00,0,curdate(),1),
+(null,89,1760.00,0,curdate(),1),
+(null,90,1640.00,0,curdate(),1),
+(null,91,1760.00,0,curdate(),1),
+(null,92,1640.00,0,curdate(),1),
+(null,93,1760.00,0,curdate(),1),
+(null,94,1760.00,0,curdate(),1),
+(null,95,1880.00,0,curdate(),1),
+(null,96,1600.00,0,curdate(),1),
+(null,97,2616.00,0,curdate(),1),
+(null,98,1760.00,0,curdate(),1),
+(null,99,1320.00,0,curdate(),1),
+(null,100,1480.00,0,curdate(),1),
+(null,101,1480.00,0,curdate(),1),
+(null,102,1400.00,0,curdate(),1),
+(null,103,1640.00,0,curdate(),1),
+(null,104,1880.00,0,curdate(),1),
+(null,105,1560.00,0,curdate(),1),
+(null,106,1560.00,0,curdate(),1),
+(null,107,1440.00,0,curdate(),1),
+(null,108,1640.00,0,curdate(),1),
+(null,109,1760.00,0,curdate(),1),
+(null,110,1600.00,0,curdate(),1),
+(null,111,1760.00,0,curdate(),1),
+(null,112,3200.00,0,curdate(),1),
+(null,113,1320.00,0,curdate(),1),
+(null,114,1960.00,0,curdate(),1),
+(null,115,1400.00,0,curdate(),1),
+(null,116,1400.00,0,curdate(),1),
+/*Escpecial*/
+(null,117,1681.00,0,curdate(),1),
+(null,118,1886.00,0,curdate(),1),
+(null,119,2050.00,0,curdate(),1),
+(null,120,2829.00,0,curdate(),1),
+(null,121,2501.00,0,curdate(),1),
+(null,122,4141.00,0,curdate(),1),
+(null,123,2665.00,0,curdate(),1),
+(null,124,2706.00,0,curdate(),1),
+(null,125,1148.00,0,curdate(),1),
+/*AGM*/
+(null,126,3280.00,0,curdate(),1),
+(null,127,4360.00,0,curdate(),1),
+(null,128,3520.00,0,curdate(),1),
+(null,129,3240.00,0,curdate(),1),
+(null,130,3320.00,0,curdate(),1),
+(null,131,3840.00,0,curdate(),1),
+(null,132,3960.00,0,curdate(),1),
+(null,133,3560.00,0,curdate(),1),
+(null,134,3880.00,0,curdate(),1),
+/*Precio oprima*/
+(null,135,3825.00,0,curdate(),1),
+(null,136,3655.00,0,curdate(),1),
+(null,137,4037.50,0,curdate(),1),
+(null,138,3867.50,0,curdate(),1),
+(null,139,3867.50,0,curdate(),1),
+(null,140,3315.00,0,curdate(),1),
+(null,141,4377.50,0,curdate(),1),
+(null,142,4802.50,0,curdate(),1),
+(null,143,4717.50,0,curdate(),1),
+(null,144,4080.00,0,curdate(),1),
+(null,145,4377.50,0,curdate(),1),
+(null,146,5907.50,0,curdate(),1),
+(null,147,4802.50,0,curdate(),1),
+(null,148,5737.50,0,curdate(),1),
+(null,149,6077.50,0,curdate(),1);
 
-/*TODO asignar precio de 500 a todos los gallitos*/
-
-
+/*Arroja todos los resultados cascos (mayoria de baterias)*/
 select p.idProducto, mp.nombre as marca, t.nombre as tipo,
-(select /*TODO ver top(1)*/
+(select
 r.precio from precios r
 where p.idProducto=r.idProducto and 
 r.activo=1 and 
 r.garantia=0 limit 1) as precio,
-t.idCasco as casco,
-(select r.precio from cascos r
-where r.idCasco=t.idCasco) as precioCasco
+c.numeroDeCasco as casco, c.precio
 from producto p
 join tipo t on p.idTipo = t.idTipo
-join marcaProducto mp on p.idMarca = mp.idMarca;
-
-/*Seccion Autos*/
-insert into marcaAuto (nombre) values
-('Primero que no se ve'),--1
-('Alfa Romeo'),--2
-('Audi');--3
---Se esta usando id bateria primera opcion 1 para pruebas
-insert into modeloAuto (nombre,idMarca,anio) values 
-('147',2,1),--1
-('158',2,1),
-('Guileta',2,1),
-('Mito',2,1),
-('A1',3,1),
-('A1 SportBack',3,1);
+join marcaProducto mp on p.idMarca = mp.idMarca
+join cascos c on t.idCasco=t.idCasco
+order by mp.idmarca;
 
 insert into persona values 
-(null, 'Gaby', 'Garza', null,'','3311215488'),
-(null, 'Angel Iván', 'Garza', null,'','3321164306'),
-(null, 'Jonathan', 'Quien sabe', null,'',''),
+(null, 'Gabriela', 'Garza', 'Bernal','','3311215488'),
+(null, 'Angel Iván', 'Garza', 'Bernal','','3321164306'),
+(null, 'Jonathan', 'Quien sabe', 'Bernal','',''),
 (null, 'Mario', 'Quien Sabe', null,'',''),
 (null, 'Cliente', 'Anónimo', null,'','');/*Sera usado para cuando no pidan datos*/
 
@@ -714,6 +1095,21 @@ insert into intermediaPerfilMenu (idPerfil, idMenu) values
 (1,1),
 (1,2);
 
+/*Seccion Autos*/
+insert into marcaAuto (nombre) values
+('Primero que no se ve'),
+('Alfa Romeo'),
+('Audi');
+/*Se esta usando id bateria primera opcion 1 para pruebas*/
+insert into modeloAuto (nombre,idMarca,anio) values 
+('147',2,1),
+('158',2,1),
+('Guileta',2,1),
+('Mito',2,1),
+('A1',3,1),
+('A1 SportBack',3,1);
+
+/*Permite ver los menus de un perfil determinado*/
 select p.idPerfil, m.idMenu, m.nombre, m.direccion from perfil p  
 join intermediaPerfilMenu ipm on p.idPerfil=ipm.idPerfil
 join menu m on ipm.idMenu=m.idMenu where p.idPerfil=1;
@@ -729,7 +1125,7 @@ create table TRModificoInventario(
     CONSTRAINT pkModificacoInventario PRIMARY KEY (idModificacion),
     CONSTRAINT fkModificacoInventario_Persona FOREIGN KEY (idResponsable) REFERENCES persona (idPersona),
     CONSTRAINT fkModificacoInventario_Producto FOREIGN KEY  (idProducto) REFERENCES  producto (idProducto)
-);
+) COLLATE utf8mb4_general_ci;
 
 create table TRElevacionPrecio(
     idElevacion int AUTO_INCREMENT,
@@ -741,7 +1137,7 @@ create table TRElevacionPrecio(
     CONSTRAINT pkElevacionPrecio PRIMARY KEY (idElevacion),
     CONSTRAINT fkElevacionPrecio_Persona FOREIGN KEY (idResponsable) REFERENCES persona (idPersona),
     CONSTRAINT fkElevacionPrecio_Producto FOREIGN KEY  (idProducto) REFERENCES  producto (idProducto)
-);
+) COLLATE utf8mb4_general_ci;
 
 
 /*

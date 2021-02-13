@@ -23,8 +23,7 @@
     <?php
         session_start();
         if(isset($_SESSION["nombre"])){
-            echo $_SESSION["nombre"];
-            echo "Session variables are set.";
+            //TODO mostrar mensaje de bienvenida
         }
         include("menu.php");
     ?>
