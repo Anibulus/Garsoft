@@ -124,14 +124,16 @@ function cargarProductos(){
             $.each(data,function(i,item){
                 tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='row tablaProducto__item'>"+
                 //Contenido
-                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td><td class='col-sm'>"+item.tipo+"</td><td class='col-sm'>"+item.casco+"</td>"+
-                "<td class='col-sm'>$"+item.precioCasco+"</td><td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
+                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td><td class='col-sm'>"+item.tipo+"</td>"+
+                //TODO si son baterias mostrar sino no
+                "<td class='col-sm'>"+item.casco+"</td>"+
+                "<td class='col-sm'>$"+item.precioCasco+"</td>"+
+                "<td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
                 "<td class='col-sm-2' data-precio='"+item.precio+"'>$"+item.precio+"</td>"+
                 //Boton
                 "<td class='col-sm' data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>"
             });
             tabla+="</tbody></table>";
-            //TODO si el producto es diferente de bateria, cargar una tabla con menos campos
         }else{
             tabla="<table class='tablaProducto'><tbody><tr class='tablaProducto__Encabezado'><th>Marca</th><th>Categoría</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Casco</th><th>Precio Casco</th><th></th></tr>"+
             "<tr class='tablaProducto__item'><td colspan='8'>No hay registros que mostrar</td></tr></tbody></table>";

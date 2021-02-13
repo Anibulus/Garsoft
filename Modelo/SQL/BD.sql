@@ -84,7 +84,7 @@ create table persona(
     correo varchar(50),
     telefono varchar(14),
     CONSTRAINT pkPersona PRIMARY KEY (idPersona)
-)   COLLATE utf8mb4_general_ci;
+) COLLATE utf8mb4_general_ci;
 
 create table empresa(
     idEmpresa int Auto_Increment,
@@ -352,7 +352,7 @@ insert into tipo (idTipo, nombre, idCasco) values
 (null,'OA7525',2),
 (null,'OA3478',3),
 (null,'OA34',3),
-(null,'34M',NULL),/*TODO preguntar, no tiene casco*/
+(null,'34M',NULL),/*Es bateria de lancha asi que no les importa*/
 (null,'OA35',3),
 (null,'OA31T',5),
 (null,'D34M',3),
@@ -822,7 +822,7 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,147,4802.50,0,curdate(),1),
 (null,148,5737.50,0,curdate(),1),
 (null,149,6077.50,0,curdate(),1),
-/*Asigna precio de 500 a todos los gallitos*/
+/*Asigna precio de 500 a los gallitos*/
 (null,150,500.00,0,curdate(),1),
 (null,151,500.00,0,curdate(),1),
 (null,152,500.00,0,curdate(),1),
@@ -1049,7 +1049,7 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,148,5737.50,0,curdate(),1),
 (null,149,6077.50,0,curdate(),1);
 
-/*Arroja todos los resultados cascos (mayoria de baterias)*/
+/*Arroja los resultados cascos (mayoria de baterias)*/
 select p.idProducto, mp.nombre as marca, t.nombre as tipo,
 (select
 r.precio from precios r
@@ -1179,7 +1179,7 @@ CREATE Procedure InicioSesion (username VARCHAR(10), password_p VARCHAR(20))
 BEGIN
     SELECT u.idPersona, u.idPerfil, p.nombre, p.apellido1 FROM usuario u
     join persona p on u.idPersona = p.idPersona
-    WHERE usuario = username AND contrasena = password_p AND u.activo=1 limit 1;  
+    WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND u.activo=1 limit 1;  
 END
 ||
 DELIMITER ;
