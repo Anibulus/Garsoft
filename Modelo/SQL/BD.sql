@@ -1,4 +1,4 @@
-create database garsoft;
+create database garsoft  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 use garsoft;
 create table marcaAuto(
     idMarca int AUTO_INCREMENT,
@@ -1088,8 +1088,8 @@ insert into empresa values
 (null, 'Indeseables','');
 
 insert into menu values
-(null, 'Editar Productos', '../Catalogo/Productos'),
-(null, 'Nuevo Producto', '../Catalogo/NuevoProducto');
+(null, 'Editar Productos', '/Catalogo/Productos'),
+(null, 'Nuevo Producto', '/Catalogo/NuevoProducto');
 
 insert into intermediaPerfilMenu (idPerfil, idMenu) values
 (1,1),

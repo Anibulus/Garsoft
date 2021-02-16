@@ -1,7 +1,9 @@
+options -indexes
+
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
 
-
+ErrorDocument 403 http://localhost:8080/Garsoft/Vista/Error/404
 ErrorDocument 404 http://localhost:8080/Garsoft/Vista/Error/404

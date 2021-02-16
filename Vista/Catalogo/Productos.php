@@ -4,11 +4,12 @@
 
     if(isset($_SESSION["nombre"])){
         if($_SESSION["idPerfil"]!=1){
-           header("location:../Inicio/Inicio");
+           header("location:../Inicio/Inicio");           
         }
     }else{
         header("location:../Inicio/Inicio");
     }
+
 ?>
 <style>
 td div input[type=number]{
@@ -119,19 +120,26 @@ function cargarProductos(){
         if(data.length>0)
         {
             tabla="<table data-categoria='"+$("#categoria").val()+"' class='tablaProducto'>"+
-            "<tbody class='container'><tr class='row tablaProducto__Encabezado'>"+
-            "<th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th><th class='col-sm'>Tipo</th><th class='col-sm'>Casco</th><th class='col-sm'>Precio Casco</th><th class='col-sm'>Cantidad</th><th class='col-sm-2'>Precio</th><th class='col-sm'>Accion</th></tr>";
+            "<tbody class='container'><tr class='row tablaProducto__Encabezado'>";
+            if($("#categoria").val()==2 || $("#categoria").val()==3){
+                tabla+="<th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th><th class='col-sm'>Tipo</th>"+
+                "<th class='col-sm'>Casco</th><th class='col-sm'>Precio Casco</th>";
+            }            
+            tabla+="<th class='col-sm'>Cantidad</th><th class='col-sm-2'>Precio</th><th class='col-sm'>Accion</th></tr>";
+
             $.each(data,function(i,item){
                 tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='row tablaProducto__item'>"+
                 //Contenido
-                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td><td class='col-sm'>"+item.tipo+"</td>"+
-                //TODO si son baterias mostrar sino no
-                "<td class='col-sm'>"+item.casco+"</td>"+
-                "<td class='col-sm'>$"+item.precioCasco+"</td>"+
-                "<td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
+                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td><td class='col-sm'>"+item.tipo+"</td>";
+                //Si es batería se muestra
+                if($("#categoria").val()==2 || $("#categoria").val()==3){
+                    tabla+="<td class='col-sm'>"+item.casco+"</td>"+
+                    "<td class='col-sm'>$"+item.precioCasco+"</td>";
+                }
+                tabla+="<td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
                 "<td class='col-sm-2' data-precio='"+item.precio+"'>$"+item.precio+"</td>"+
                 //Boton
-                "<td class='col-sm' data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>"
+                "<td class='col-sm' data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>";
             });
             tabla+="</tbody></table>";
         }else{
@@ -210,7 +218,8 @@ function guardarProducto(e, cantidad, precio, idProducto, idPrecio){
             cache:false,
             url:"../../Controlador/Productos/modificarProducto",
             method:"POST",
-            data:{cantidad:cantidad, precio:precio, idProducto:idProducto, idPrecio:idPrecio},
+            data:{cantidad:cantidad, precio:precio, idProducto:idProducto, idPrecio:idPrecio,
+            csrf_token:"<?php echo $token; ?>"},
             beforeSend:function(){$(e.currentTarget).prop("disabled",true)},
             error:function(){}
         }).done(function(data){

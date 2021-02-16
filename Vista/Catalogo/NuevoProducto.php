@@ -72,7 +72,7 @@
     </div>
     
     <section id="listadoProductos" name="listadoProductos">
-    <table class='tablaProducto'><tbody id="tablaPrecio" name="tablaPrecio" ><tr><th>Precio $</th><th>Tipo</th><th>Acción</th></tr>
+    <table class='tablaProducto'><tbody id="tablaPrecio" name="tablaPrecio" ><tr><th></th><th>Precio $</th><th>Tipo</th><th>Acción</th></tr>
 
     </tbody></table>
     </section>
@@ -133,7 +133,7 @@ function getTipo(){
         if(data.length>0){
             opciones="<option value='0' hidden selected>Seleccione...</option>";
            $.each(data, function(i,item){
-                opciones+="<option value='"+item.idMarca+"'>"+item.nombre+"</option>"
+                opciones+="<option value='"+item.idTipo+"'>"+item.nombre+"</option>"
            });
            $("#tipo").html(opciones);
        }
@@ -158,7 +158,7 @@ $("#categoria").on("change",function(e){
 
 $("#btnAgregar").on("click",function(){
     //Generacion de tabla
-    tabla="<tr><td>$"+$("#precio").val()+"</td><td data-tipoPrecio='"+$("#tipoprecio").val()+"' >"+$("#tipoprecio option:selected").text()+"</td><td><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
+    tabla="<tr><td>$</td><td>"+$("#precio").val()+"</td><td data-tipoPrecio='"+$("#tipoprecio").val()+"' >"+$("#tipoprecio option:selected").text()+"</td><td><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
     $("#tablaPrecio").append(tabla);
 });
 
@@ -167,6 +167,7 @@ $("#btnGuardar").on("click",function(){
     //TODO ejecutar validaciones
     if(parseInt($("#categoria").val())>0)
     {//Debes seleccionar una categoria
+        guardarProducto(getPreciosDeTabla());
         if(parseInt($("#categoria").val())==1)//Si es servicio
         {
             if(parseInt($("#marcas").val())>0 && parseInt($("#tipo").val())>0 && parseInt($("#precio").val())>0){
@@ -198,28 +199,41 @@ function getPreciosDeTabla(){
         var $td =  $('td', this);
         return {
                  id: ++i,
-                 precio: $td.eq(0).text(),
-                 desc: $td.eq(1).text(),
-                 tipoprecio: $td.eq(1).attr("data-tipoprecio")             
+                 precio: $td.eq(1).text(),
+                 desc: $td.eq(2).text(),
+                 tipoprecio: $td.eq(2).attr("data-tipoprecio")             
                }
     }).get();
     return tbl;
 }
 
-function guardarProducto(producto){
-    $.ajax({
-        cache:false,
-        url:"",
-        data:{producto},
-        method:"POST",
-        beforeSend:function(){
-            $("#btnGuardar").prop("disabled",true);
-        }
-    }).done(function(){
+function guardarProducto(precios){
+    if(precios.length>0){
+        $.ajax({
+            cache:false,
+            url:"<?php echo $dominio?>Controlador/productos/nuevoProducto",
+            data:{
+                csrf_token:"<?php echo $token;?>",
+                marca:$("#marcas").val(),
+                categoria:$("#categoria").val(),
+                cantidad:$("#cantidad").val(),
+                tipo: $("#tipo").val(),
+                precios:precios
+            },
+            method:"POST",
+            beforeSend:function(){
+                $("#btnGuardar").prop("disabled",true);
+            }
+        }).done(function(){
 
-    }).always(function(){
-        $("#btnGuardar").prop("disabled",false);
-    });
+        }).always(function(){
+            $("#btnGuardar").prop("disabled",false);
+        });
+    }
+    else
+    {
+        swal("Aviso","Debe contener por lo menos un precio añadido.","warning");
+    }
 }
 
 //Funciones complementaria en validacion

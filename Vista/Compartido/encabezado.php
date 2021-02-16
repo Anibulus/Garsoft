@@ -1,5 +1,8 @@
 <!DOCTYPE HTML>
 <html>
+<?php $dominio="http://localhost:8080/garsoft/";
+include("../../Modelo/NoCSRF.php");
+?>
     <head> 
         <meta charset="UTF-8"/>
         <meta name="description" content="Acumuladores Garza es un centro de distribución de baterías automotriz, ven a visitarnos."/>
@@ -9,12 +12,12 @@
         <!-- Estilo Texto -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!--Los main son archivos que no pertenecen a bpptstrap. Son modificables-->
-        <link rel="stylesheet" href="../../Contenido/css/main.css">
-        <script type="text/javascript" src="../../Contenido/js/main.js"></script>
+        <link rel="stylesheet" href="<?php echo $dominio; ?>/Contenido/css/main.css">
+        <script type="text/javascript" src="<?php echo $dominio; ?>/Contenido/js/main.js"></script>
         <!--SweetAlert-->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <!--Reportes con Js-->
-        <script src="../../Contenido/jspdf/dist/jspdf.min.js"></script>
+        <script src="<?php echo $dominio; ?>/Contenido/jspdf/dist/jspdf.min.js"></script>
         <!--JQuery-->
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <title><?php echo $titulo; ?></title>
@@ -23,7 +26,9 @@
     <?php
         session_start();
         if(isset($_SESSION["nombre"])){
-            //TODO mostrar mensaje de bienvenida
+            //Se genera el token para mas seguridad del sitio
+            $token=NoCSRF::generate('csrf_token');
         }
         include("menu.php");
+        
     ?>

@@ -1,7 +1,7 @@
 
 
 
-<link rel="stylesheet" href="../../Contenido/css/menu.css">
+<link rel="stylesheet" href="<?php echo $dominio?>/Contenido/css/menu.css">
             
              
 
@@ -19,13 +19,13 @@ if(isset($_SESSION["nombre"])){
         $result=$conn->query($instruccion);
 
         $menu="<div class='sidenav'>
-             <a href='../Inicio/Inicio'>Inicio</a>";
+             <a href='".$dominio."/Inicio/Inicio'>Inicio</a>";
         for($i=0;$i<$result->num_rows;$i++){
             $row=$result->fetch_assoc();
-            $menu.="<a href='".$row["direccion"]."'>".$row["nombre"]."</a>";
+            $menu.="<a href='".$dominio.$row["direccion"]."'>".$row["nombre"]."</a>";
         }
         
-        $menu.="<a href='../../Controlador/CerrarSesion'>Cerrar Sesión</a>";
+        $menu.="<a href='".$dominio."/Controlador/CerrarSesion'>Cerrar Sesión</a>";
 
         $menu.="</div>";
 
