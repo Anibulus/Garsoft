@@ -18,7 +18,9 @@ if(isset($_SESSION["nombre"])){
 
         $result=$conn->query($instruccion);
 
-        $menu="<div class='sidenav'>
+        $menu="
+        <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+        <div class='container'>
              <a href='".$dominio."Vista/Inicio/Inicio'>Inicio</a>";
         for($i=0;$i<$result->num_rows;$i++){
             $row=$result->fetch_assoc();
@@ -27,7 +29,7 @@ if(isset($_SESSION["nombre"])){
         
         $menu.="<a href='".$dominio."Controlador/CerrarSesion'>Cerrar Sesión</a>";
 
-        $menu.="</div>";
+        $menu.="</div></nav>";
 
         echo $menu;
         
