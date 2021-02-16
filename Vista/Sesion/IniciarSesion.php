@@ -8,7 +8,7 @@ if(isset($_SESSION["nombre"])){
     echo "estoy aqui";
 }
 ?>
-<link rel="stylesheet" href="<?php echo $dominio; ?>/Contenido/css/login.css">
+<link rel="stylesheet" href="<?php echo $dominio; ?>Contenido/css/login.css">
 
 <form class="modal-content animate" id="LogIn" name="LogIn">
 
