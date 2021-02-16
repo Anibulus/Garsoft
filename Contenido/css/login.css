@@ -10,21 +10,6 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-/* Set a style for all buttons */
-button {
-  background-color: #588edb;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 35%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
 /* Extra styles for the cancel button */
 .cancelbtn {
   width: auto;

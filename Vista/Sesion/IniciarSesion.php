@@ -31,7 +31,7 @@ if(isset($_SESSION["nombre"])){
         <input type="button" class="btn btn-primary" id="btnIniciar" value="Iniciar Sesión"/>
     </div>
     <div class="container" style="background-color:#f1f1f1">
-      <span class="password" align="center"><a href="#">¿Olvido su contraseña?</a></span>
+      <span class="password" align="center"><a href="recuppass">¿Olvido su contraseña?</a></span>
     </div>
 </form>
 
@@ -57,7 +57,7 @@ $("#btnIniciar").on("click",function(){
         cache:false,
         method:"Post",
         data: $("#LogIn").serialize(),//Utiliza la etiqueta "name"
-        url:"../../Controlador/InicioSesion"//.php
+        url:"../../Controlador/Sesion/InicioSesion"//.php
     }).done(function(data){
         console.log(data);
         if(data==1){
