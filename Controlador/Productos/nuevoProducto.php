@@ -4,7 +4,7 @@ if(isset($_SESSION["nombre"])){
     require("../../Modelo/Conexion/conexion.php");
     require("../../Modelo/NoCSRF.php");
     header('Content-Type: application/json;');
-    var_dump($_SESSION);
+    
     if(count($_POST)>0)
     {
         if(intval($_POST["marca"])>=0 && intval($_POST["categoria"])>=0)
