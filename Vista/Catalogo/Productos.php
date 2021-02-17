@@ -101,11 +101,15 @@ function getMarcas(){
 
 /*Valida que el otro valor no sea vacio para poder realizar la búsqueda*/
 $("#marcas").on("change",function(){
-    if(parseInt($("#categoria").val())>0)
+    if(parseInt($("#categoria").val())>0&&parseInt($("#precio").val())>0)
         cargarProductos();
 });
 $("#categoria").on("change",function(){
-    if(parseInt($("#marcas").val())>0)
+    if(parseInt($("#marcas").val())>0 &&parseInt($("#precio").val())>0)
+        cargarProductos();
+});
+$("#precio").on("change",function(){
+    if(parseInt($("#marcas").val())>0&&parseInt($("#categoria").val())>0)
         cargarProductos();
 });
 
