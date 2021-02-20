@@ -101,11 +101,11 @@ function getMarcas(){
 
 /*Valida que el otro valor no sea vacio para poder realizar la búsqueda*/
 $("#marcas").on("change",function(){
-    if(parseInt($("#categoria").val())>0&&parseInt($("#precio").val())>0)
+    if(parseInt($("#categoria").val())>0)
         cargarProductos();
 });
 $("#categoria").on("change",function(){
-    if(parseInt($("#marcas").val())>0 &&parseInt($("#precio").val())>0)
+    if(parseInt($("#marcas").val())>0)
         cargarProductos();
 });
 $("#precio").on("change",function(){
@@ -124,9 +124,9 @@ function cargarProductos(){
         if(data.length>0)
         {
             tabla="<table data-categoria='"+$("#categoria").val()+"' class='tablaProducto'>"+
-            "<tbody class='container'><tr class='row tablaProducto__Encabezado'>";
+            "<tbody class='container'><tr class='row tablaProducto__Encabezado'><th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th>";
             if($("#categoria").val()==2 || $("#categoria").val()==3){
-                tabla+="<th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th><th class='col-sm'>Tipo</th>"+
+                tabla+="<th class='col-sm'>Tipo</th>"+
                 "<th class='col-sm'>Casco</th><th class='col-sm'>Precio Casco</th>";
             }            
             tabla+="<th class='col-sm'>Cantidad</th><th class='col-sm-2'>Precio</th><th class='col-sm'>Accion</th></tr>";
@@ -134,10 +134,11 @@ function cargarProductos(){
             $.each(data,function(i,item){
                 tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='row tablaProducto__item'>"+
                 //Contenido
-                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td><td class='col-sm'>"+item.tipo+"</td>";
+                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td>";
                 //Si es batería se muestra
                 if($("#categoria").val()==2 || $("#categoria").val()==3){
-                    tabla+="<td class='col-sm'>"+item.casco+"</td>"+
+                    tabla+="<td class='col-sm'>"+item.tipo+"</td>"+
+                    "<td class='col-sm'>"+item.casco+"</td>"+
                     "<td class='col-sm'>$"+item.precioCasco+"</td>";
                 }
                 tabla+="<td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+

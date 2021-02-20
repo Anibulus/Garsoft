@@ -249,8 +249,10 @@ function guardarProducto(precios){
             beforeSend:function(){
                 $("#btnGuardar").prop("disabled",true);
             }
-        }).done(function(){
-
+        }).done(function(data){
+            if(data==1){
+                swal("Éxito","Se ha guardado correctamente","success");
+            }
         }).always(function(){
             $("#btnGuardar").prop("disabled",false);
         });
