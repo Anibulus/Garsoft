@@ -41,7 +41,7 @@ if(isset($_SESSION["nombre"])){
             }catch(Exception $ex){
                 echo $ex->getMessage();
             }
-        }
+        }//Fin de POST
         else
         {
             echo json_encode(0);

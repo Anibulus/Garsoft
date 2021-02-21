@@ -235,6 +235,10 @@ function guardarProducto(e, cantidad, precio, idProducto, idPrecio){
                 regresarDiseno(e);
                 swal("¡Éxito!", "Se ha guardado correctamete", "success"); 
             }
+            else if(data==2)
+            {
+                swal("Aviso", "No se ha logrado guardar", "error"); 
+            }
         }).always(function(){
             $(e.currentTarget).prop("disabled",false)
         });
