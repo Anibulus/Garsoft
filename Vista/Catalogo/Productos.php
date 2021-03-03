@@ -108,6 +108,10 @@ $("#categoria").on("change",function(){
     if(parseInt($("#marcas").val())>0)
         cargarProductos();
 });
+$("#precio").on("change",function(){
+    if(parseInt($("#marcas").val())>0&&parseInt($("#categoria").val())>0)
+        cargarProductos();
+});
 
 function cargarProductos(){
     $.ajax({
@@ -120,9 +124,9 @@ function cargarProductos(){
         if(data.length>0)
         {
             tabla="<table data-categoria='"+$("#categoria").val()+"' class='tablaProducto'>"+
-            "<tbody class='container'><tr class='row tablaProducto__Encabezado'>";
+            "<tbody class='container'><tr class='row tablaProducto__Encabezado'><th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th>";
             if($("#categoria").val()==2 || $("#categoria").val()==3){
-                tabla+="<th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th><th class='col-sm'>Tipo</th>"+
+                tabla+="<th class='col-sm'>Tipo</th>"+
                 "<th class='col-sm'>Casco</th><th class='col-sm'>Precio Casco</th>";
             }            
             tabla+="<th class='col-sm'>Cantidad</th><th class='col-sm-2'>Precio</th><th class='col-sm'>Accion</th></tr>";
@@ -130,10 +134,11 @@ function cargarProductos(){
             $.each(data,function(i,item){
                 tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='row tablaProducto__item'>"+
                 //Contenido
-                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td><td class='col-sm'>"+item.tipo+"</td>";
+                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td>";
                 //Si es batería se muestra
                 if($("#categoria").val()==2 || $("#categoria").val()==3){
-                    tabla+="<td class='col-sm'>"+item.casco+"</td>"+
+                    tabla+="<td class='col-sm'>"+item.tipo+"</td>"+
+                    "<td class='col-sm'>"+item.casco+"</td>"+
                     "<td class='col-sm'>$"+item.precioCasco+"</td>";
                 }
                 tabla+="<td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
@@ -229,6 +234,10 @@ function guardarProducto(e, cantidad, precio, idProducto, idPrecio){
                 //Reestablece el valor del boton
                 regresarDiseno(e);
                 swal("¡Éxito!", "Se ha guardado correctamete", "success"); 
+            }
+            else if(data==2)
+            {
+                swal("Aviso", "No se ha logrado guardar", "error"); 
             }
         }).always(function(){
             $(e.currentTarget).prop("disabled",false)

@@ -58,7 +58,7 @@ $("#btnIniciar").on("click",function(){
     }).done(function(data){
         console.log(data);
         if(data==1){
-            window.location.href="../Inicio/inicio.php";
+            window.location.href="../Inicio/inicio";
         }else{
             swal("Aviso","Usuario o contraseña incorrectos", "error");
         }

@@ -50,6 +50,7 @@
                 <label><span>Tipo Precio</span>
                 <div class="input-group">
                 <select class='form-control' name="tipoprecio" id="tipoprecio">
+                    <option value="" hidden selected>Seleccione...</option>
                     <option value="0">Precio Al Público</option>
                     <option value="1">Con Garantía</option>
                 </select>
@@ -87,6 +88,7 @@ $(document).ready(function(){
     getCategorias();
     getMarcas();
     getTipo();
+    $("#cantidad").val(0);
 });
 
 function getCategorias(){
@@ -157,34 +159,57 @@ $("#categoria").on("change",function(e){
 });
 
 $("#btnAgregar").on("click",function(){
-    //Generacion de tabla
-    tabla="<tr><td>$</td><td>"+$("#precio").val()+"</td><td data-tipoPrecio='"+$("#tipoprecio").val()+"' >"+$("#tipoprecio option:selected").text()+"</td><td><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
-    $("#tablaPrecio").append(tabla);
+    //Valida que el precio tenga un valor válido
+    if($("#precio").val()!="" && parseInt($("#precio").val())>0 && $("#tipoprecio").val()!="")
+    {
+        //Generacion de tabla
+        tabla="<tr><td>$</td><td>"+$("#precio").val()+"</td><td data-tipoPrecio='"+$("#tipoprecio").val()+"' >"+$("#tipoprecio option:selected").text()+"</td><td><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
+        $("#tablaPrecio").append(tabla);
+        //Esconde el texto del select y resetea el bvalor de precio
+        $("#tipoprecio option:selected").attr("hidden",true);
+        $("#tipoprecio").val("");
+        $("#precio").val("");
+    }
+    else
+    {
+        swal("Aviso","Requiere introducir un valor válido","warning");
+    }
+    
 });
 
 $("#btnGuardar").on("click",function(){
     console.log(getPreciosDeTabla());
-    //TODO ejecutar validaciones
+    var productos=getPreciosDeTabla();
     if(parseInt($("#categoria").val())>0)
-    {//Debes seleccionar una categoria
-        guardarProducto(getPreciosDeTabla());
-        if(parseInt($("#categoria").val())==1)//Si es servicio
-        {
-            if(parseInt($("#marcas").val())>0 && parseInt($("#tipo").val())>0 && parseInt($("#precio").val())>0){
-                //TODO 
+    {//Debes seleccionar una categoria   
+        if(productos.length>0){   
+            if(parseInt($("#categoria").val())==1)//Si es servicio
+            {
+                if(parseInt($("#marcas").val())>0 && parseInt($("#tipo").val())>0)
+                    guardarProducto(productos);
+                else
+                    swal("Aviso","Llene los campos para ingresar "+$("#categoria option:selected").val(),"warning");
+                
+            }
+            else if(parseInt($("#categoria").val())==2 || parseInt($("#categoria").val())==3)//Si es bateria
+            {
+                if(parseInt($("#marcas").val())>0 && parseInt($("#cantidad").val())>0 && parseInt($("#tipo").val())>0)                    
+                    guardarProducto(productos);                
+                else
+                    swal("Aviso","Llene los campos para ingresar "+$("#categoria option:selected").text(),"warning");
+                
+            }
+            else//Si es producto X
+            {
+                if(parseInt($("#marcas").val())>0 && parseInt($("#cantidad").val())>0)
+                    guardarProducto(productos);
+                else
+                    swal("Aviso","Llene los campos para ingresar "+$("#categoria option:selected").val(),"warning");                
             }
         }
-        else if(parseInt($("#categoria").val())==2 || parseInt($("#categoria").val())==3)//Si es bateria
+        else
         {
-            if(parseInt($("#marcas").val())>0 && parseInt($("#cantidad").val())>0 && parseInt($("#tipo").val())>0 && parseInt($("#precio").val())>0){
-
-            }
-        }
-        else//Si es producto X
-        {
-            if(parseInt($("#marcas").val())>0 && parseInt($("#cantidad").val())>0 && parseInt($("#precio").val())>0){
-
-            }
+            swal("Aviso","Debe agregar un precio al menos","warning");
         }
     }
     else
@@ -224,8 +249,16 @@ function guardarProducto(precios){
             beforeSend:function(){
                 $("#btnGuardar").prop("disabled",true);
             }
-        }).done(function(){
-
+        }).done(function(data){
+            if(data==1){
+                swal("Éxito","Se ha guardado correctamente","success");
+            }
+            else if(data==2){
+                swal("Aviso","El producto que deseas ingresar, ya existe","warning");
+            }
+            else{
+                swal("Aviso","No se ha logrado guardar el registro","warning");
+            }
         }).always(function(){
             $("#btnGuardar").prop("disabled",false);
         });
@@ -258,6 +291,9 @@ $("#precio").on("keypress",function(e){
 });//Fin de listener
 
 $('#listadoProductos').on("click", "table>tbody>tr>td>input[type='button']",function(e){
-    $(e.currentTarget).closest("tr").remove();    
+    //Antes de remover, consigue el idTipo para regresarlo al select
+    idT=$(e.currentTarget).closest("td").prev().attr("data-tipoprecio");
+    $("#tipoprecio option[value='"+idT+"']").attr("hidden",false);
+    $(e.currentTarget).closest("tr").remove(); 
 });
 </script>
