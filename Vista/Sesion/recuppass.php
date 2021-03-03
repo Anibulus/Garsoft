@@ -38,8 +38,10 @@ $("#btnAceptar").on("click",function(){
         console.log(data);
         if(data==1){
             swal("Aviso","Correo Enviado, Verifique", "success");
-        }else{
-            swal("Aviso","Ingrese su correo electronico", "error");
+        } if(data== 2){
+            swal("Error","Hubo un problema al enviar el correo electronico", "error");
+        } if(data== 0){
+            swal("Aviso","Ingrese un correo electronico valido", "error");
         }
     });
 });

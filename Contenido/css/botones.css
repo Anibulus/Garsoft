@@ -1,0 +1,41 @@
+.botonA:disabled {
+  background: #e0e9eb;
+  color: #848d8e;
+}
+
+.botonA {
+  position: relative;
+  background-color: #A4D8E8;
+  font-size: 15px;
+  color: black;
+  padding: 12px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.botonA:after {
+  content: "";
+  background: #226273;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.botonA:active:after { 
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+
+}
+
