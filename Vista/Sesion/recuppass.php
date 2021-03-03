@@ -33,7 +33,8 @@ $("#btnAceptar").on("click",function(){
         cache:false,
         method:"Post",
         data: $("#recup").serialize(),//Utiliza la etiqueta "name"
-        url:"../../Controlador/Sesion/RecupPass"//.php
+        url:"../../Controlador/Sesion/RecupPass",//.php
+        beforeSend:function(){ $("#btnAceptar").prop("disabled",true);}
     }).done(function(data){
         console.log(data);
         if(data==1){
