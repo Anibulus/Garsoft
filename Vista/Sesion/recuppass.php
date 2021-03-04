@@ -6,7 +6,7 @@ include("../Compartido/encabezado.php");
 ?>
 
 
-<link rel="stylesheet" href="/Garsoft/Contenido/css/login.css">
+<link rel="stylesheet" href="<?php echo $dominio?>Contenido/css/login.css">
 
 <form class="modal-content animate" id="recup" name="recup">
 
