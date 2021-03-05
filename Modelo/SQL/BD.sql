@@ -1,4 +1,4 @@
-create database garsoft  CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+create database garsoft;
 use garsoft;
 create table marcaAuto(
     idMarca int AUTO_INCREMENT,
@@ -6,13 +6,21 @@ create table marcaAuto(
     CONSTRAINT pkMarcaAuto PRIMARY KEY (idMarca)
 ) COLLATE utf8mb4_general_ci;
 
+create table tipoAuto(
+    idTipoAuto int Auto_Increment,
+    nombre varchar(50) not null,
+    CONSTRAINT pkTipoAuto PRIMARY KEY (idTipoAuto)
+) COLLATE utf8mb4_general_ci;
+
 create table modeloAuto(
     idModelo int Auto_Increment,
     idMarca int not null,
+    idTipoAuto int not null,
     nombre varchar(50) not null,
     anio int null,    
     CONSTRAINT pkModeloAuto PRIMARY KEY (idModelo),
-    CONSTRAINT fkModeloAuto_MarcaAuto FOREIGN KEY (idMarca) REFERENCES marcaAuto (idMarca)
+    CONSTRAINT fkModeloAuto_MarcaAuto FOREIGN KEY (idMarca) REFERENCES marcaAuto (idMarca),
+    CONSTRAINT fkModeloAuto_TipoAuto FOREIGN KEY (idTipoAuto) REFERENCES tipoAuto (idTipoAuto)
 ) COLLATE utf8mb4_general_ci;
 
 create table categoriaProducto(
@@ -221,9 +229,9 @@ create table factura (
 /*Seccion producto*/
 insert into categoriaProducto values
 (null, 'Servicio'),
-(null, 'Batería de auto'),
-(null, 'Batería de moto'),
-(null, 'Batería AA'),
+(null, 'Pila de auto'),
+(null, 'Pila de moto'),
+(null, 'Pila AA'),
 (null, 'Anticongelante'),
 (null, 'Aromatizante'),
 (null, 'Sujetadores'),
@@ -246,7 +254,7 @@ insert into marcaProducto values
 (null, 'AGM', 72),
 (null, 'Optima', 0),
 (null, 'Gallito', 0),
-(null, 'Servicio',0);
+(null, 'TOHR', 0);;
 
 insert into cascos values 
 (null, 1, 255.20),
@@ -338,10 +346,6 @@ insert into tipo (idTipo, nombre, idCasco) values
 (null, 'CTX20HL-BS', null),
 (null, 'CTX24HL-BS', null),
 (null, 'CTX30L-BS', null),
-/*Tipos de servicio*/
-(null,'Cambio de batería',null),
-(null,'Pase de corriente',null),
-(null,'Servicio de carga',null),
 /*Optima*/
 (null, 'OR7525',2),
 (null,'OR 35',3),
@@ -520,6 +524,9 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 
 /*Optima*/
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+(null, 0, 2, 9, 78,1),
+(null, 0, 2, 9, 79,1),
+(null, 0, 2, 9, 80,1),
 (null, 0, 2, 9, 81,1),
 (null, 0, 2, 9, 82,1),
 (null, 0, 2, 9, 83,1),
@@ -531,10 +538,7 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null, 0, 2, 9, 89,1),
 (null, 0, 2, 9, 90,1),
 (null, 0, 2, 9, 91,1),
-(null, 0, 2, 9, 92,1),
-(null, 0, 2, 9, 93,1),
-(null, 0, 2, 9, 94,1),
-(null, 0, 2, 9, 95,1);
+(null, 0, 2, 9, 92,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
 /*Gallito*/
@@ -579,6 +583,9 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,10,39,1),
 (null,0,2,10,40,1),
 (null,0,2,10,41,1), /*Retoma las barerias de optima*/
+(null, 0, 2, 10, 78,1),
+(null, 0, 2, 10, 79,1),
+(null, 0, 2, 10, 80,1),
 (null, 0, 2, 10, 81,1),
 (null, 0, 2, 10, 82,1),
 (null, 0, 2, 10, 83,1),
@@ -590,10 +597,7 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null, 0, 2, 10, 89,1),
 (null, 0, 2, 10, 90,1),
 (null, 0, 2, 10, 91,1),
-(null, 0, 2, 10, 92,1),
-(null, 0, 2, 10, 93,1),
-(null, 0, 2, 10, 94,1),
-(null, 0, 2, 10, 95,1);
+(null, 0, 2, 10, 92,1);
 
 /*Baterias de moto*/
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
@@ -604,16 +608,16 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,3,1,46,1),
 (null,0,3,1,47,1),
 (null,0,3,1,48,1),
+(null,0,3,1,49,1),
+(null,0,3,1,50,1),
+(null,0,3,1,51,1),
+(null,0,3,1,52,1),
+(null,0,3,1,53,1),
+(null,0,3,1,54,1),
+(null,0,3,1,55,1),
+(null,0,3,1,56,1),
+(null,0,3,1,57,1),
 /*AGM*/
-(null,0,3,8,49,1),
-(null,0,3,8,50,1),
-(null,0,3,8,51,1),
-(null,0,3,8,52,1),
-(null,0,3,8,53,1),
-(null,0,3,8,54,1),
-(null,0,3,8,55,1),
-(null,0,3,8,56,1),
-(null,0,3,8,57,1),
 (null,0,3,8,58,1),
 (null,0,3,8,59,1),
 (null,0,3,8,60,1),
@@ -636,17 +640,17 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,3,8,77,1);
 
 /*Servicios*/
-insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+/*insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
 (null,0, 1,11,78,1),
 (null,0, 1,11,79,1),
-(null,0, 1,11,80,1);
+(null,0, 1,11,80,1);*/
 
 /*De marca especifica*/
-select p.idProducto, t.nombre, t.idCasco, mp.nombre as marca 
+/*select p.idProducto, t.nombre, t.idCasco, mp.nombre as marca 
 from producto p
 join tipo t on p.idTipo = t.idTipo
 join marcaProducto mp on p.idMarca = mp.idMarca
-where p.idMarca=3;
+where p.idMarca=3;*/
 
 /*De todas las marcas*/
 select p.idProducto, mp.nombre as marca, t.nombre as tipo, t.idCasco as casco
@@ -879,175 +883,248 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,203,500.00,0,curdate(),1),
 (null,204,500.00,0,curdate(),1),
 (null,205,500.00,0,curdate(),1),
-/*Baterias de moto*/ /*todo preguntar por que precio se usara*/
-(null,206,,curdate(),1),
-(null,2,,0,curdate(),1),
-(null,2,,0,curdate(),1),
-(null,241,,0,curdate(),1),
+/*Baterias de moto*/ /*Se esta utilizando el precio sin iva que se quedara como precio sin garantia*/
+(null,206,465.52,0,curdate(),1),
+(null,207,560.34,0,curdate(),1),
+(null,208,560.34,0,curdate(),1),
+(null,209,577.59,0,curdate(),1),
+(null,210,650.86,0,curdate(),1),
+(null,211,672.41,0,curdate(),1),
+(null,212,793.10,0,curdate(),1),
+(null,213,389.62,0,curdate(),1),
+(null,214,413.79,0,curdate(),1),
+(null,215,491.38,0,curdate(),1),
+(null,216,560.34,0,curdate(),1),
+(null,217,603.45,0,curdate(),1),
+(null,218,633.62,0,curdate(),1),
+(null,219,758.62,0,curdate(),1),
+(null,220,836.21,0,curdate(),1),
+(null,221,1094.83,0,curdate(),1),
+(null,222,431.03,0,curdate(),1),
+(null,223,512.93,0,curdate(),1),
+(null,224,629.31,0,curdate(),1),
+(null,225,706.90,0,curdate(),1),
+(null,226,810.34,0,curdate(),1),
+(null,227,810.34,0,curdate(),1),
+(null,228,922.41,0,curdate(),1),
+(null,229,935.34,0,curdate(),1),
+(null,230,965.52,0,curdate(),1),
+(null,231,1017.24,0,curdate(),1),
+(null,232,1025.86,0,curdate(),1),
+(null,233,1034.48,0,curdate(),1),
+(null,234,1103.45,0,curdate(),1),
+(null,235,1103.45,0,curdate(),1),
+(null,236,1112.07,0,curdate(),1),
+(null,237,1258.62,0,curdate(),1),
+(null,238,1275.86,0,curdate(),1),
+(null,239,1387.93,0,curdate(),1),
+(null,240,1472.76,0,curdate(),1),
+(null,241,1948.28,0,curdate(),1),
 /*Servicios*/
-(null,242,50.00,0,curdate(),1),
+/*(null,242,50.00,0,curdate(),1),
 (null,243,50.00,0,curdate(),1),
-(null,244,50.00,0,curdate(),1),
+(null,244,50.00,0,curdate(),1),*/
+
 /*Se repiten baterias pero esta vez con garantia*/
 /*Lth*/
 /*TODO agregar precios con garantia*/
-(null,1,1600.00,1,curdate(),1),
-(null,2,1760.00,1,curdate(),1),
-(null,3,1920.00,1,curdate(),1),
-(null,4,1600.00,1,curdate(),1),
-(null,5,2320.00,1,curdate(),1),
-(null,6,2080.00,1,curdate(),1),
-(null,7,1960.00,1,curdate(),1),
-(null,8,2128.00,1,curdate(),1),
-(null,9,1960.00,1,curdate(),1),
-(null,10,2128.00,1,curdate(),1),
-(null,11,2080.00,1,curdate(),1),
-(null,12,2200.00,1,curdate(),1),
-(null,13,1920.00,1,curdate(),1),
-(null,14,1400.00,1,curdate(),1),
-(null,15,3520.00,1,curdate(),1),
-(null,16,3016.00,1,curdate(),1),
-(null,17,2080.00,1,curdate(),1),
-(null,18,1600.00,1,curdate(),1),
-(null,19,1840.00,1,curdate(),1),
-(null,20,1840.00,1,curdate(),1),
-(null,21,1680.00,1,curdate(),1),
-(null,22,2040.00,1,curdate(),1),
-(null,23,2320.00,1,curdate(),1),
-(null,24,1920.00,1,curdate(),1),
-(null,25,1920.00,1,curdate(),1),
-(null,26,1760.00,0,curdate(),1),
-(null,27,2040.00,0,curdate(),1),
-(null,28,2160.00,0,curdate(),1),
-(null,29,1880.00,0,curdate(),1),
-(null,30,2080.00,0,curdate(),1),
-(null,31,3760.00,0,curdate(),1),
-(null,32,1600.00,0,curdate(),1),
-(null,33,2400.00,0,curdate(),1),
-(null,34,1680.00,0,curdate(),1),
-(null,35,1680.00,0,curdate(),1),
+(null,1,2000.00,1,curdate(),1),
+(null,2,2200.00,1,curdate(),1),
+(null,3,2400.00,1,curdate(),1),
+(null,4,2000.00,1,curdate(),1),
+(null,5,2900.00,1,curdate(),1),
+(null,6,2600.00,1,curdate(),1),
+(null,7,2450.00,1,curdate(),1),
+(null,8,2660.00,1,curdate(),1),
+(null,9,2450.00,1,curdate(),1),
+(null,10,2660.00,1,curdate(),1),
+(null,11,2600.00,1,curdate(),1),
+(null,12,2750.00,1,curdate(),1),
+(null,13,2400.00,1,curdate(),1),
+(null,14,1750.00,1,curdate(),1),
+(null,15,4400.00,1,curdate(),1),
+(null,16,3770.00,1,curdate(),1),
+(null,17,2600.00,1,curdate(),1),
+(null,18,2000.00,1,curdate(),1),
+(null,19,2300.00,1,curdate(),1),
+(null,20,2300.00,1,curdate(),1),
+(null,21,2100.00,1,curdate(),1),
+(null,22,2550.00,1,curdate(),1),
+(null,23,2900.00,1,curdate(),1),
+(null,24,2400.00,1,curdate(),1),
+(null,25,2400.00,1,curdate(),1),
+(null,26,2200.00,1,curdate(),1),
+(null,27,2550.00,1,curdate(),1),
+(null,28,2700.00,1,curdate(),1),
+(null,29,2350.00,1,curdate(),1),
+(null,30,2600.00,1,curdate(),1),
+(null,31,4700.00,1,curdate(),1),
+(null,32,2000.00,1,curdate(),1),
+(null,33,3000.00,1,curdate(),1),
+(null,34,2100.00,1,curdate(),1),
+(null,35,2100.00,1,curdate(),1),
 /*LTH TAXI*/
-(null,36,1760.00,0,curdate(),1),
-(null,37,2360.00,0,curdate(),1),
-(null,38,2184.00,0,curdate(),1),
-(null,39,2184.00,0,curdate(),1),
-(null,40,2440.00,0,curdate(),1),
+(null,36,2200.00,1,curdate(),1),
+(null,37,2950.00,1,curdate(),1),
+(null,38,2730.00,1,curdate(),1),
+(null,39,2730.00,1,curdate(),1),
+(null,40,3050.00,1,curdate(),1),
 /*LTH HITEC*/
-(null,41,1848.00,0,curdate(),1),
-(null,42,2058.00,0,curdate(),1),
-(null,43,2226.00,0,curdate(),1),
-(null,44,1848.00,0,curdate(),1),
-(null,45,2688.00,0,curdate(),1),
-(null,46,2436.00,0,curdate(),1),
-(null,47,2394.00,0,curdate(),1),
-(null,48,2562.00,0,curdate(),1),
-(null,49,2226.00,0,curdate(),1),
-(null,50,2394.00,0,curdate(),1),
-(null,51,2142.00,0,curdate(),1),
-(null,52,2352.00,0,curdate(),1),
-(null,53,2688.00,0,curdate(),1),
-(null,54,2730.00,0,curdate(),1),
-(null,55,2016.00,0,curdate(),1),
-(null,56,2478.00,0,curdate(),1),
-(null,57,2184.00,0,curdate(),1),
-(null,58,2436.00,0,curdate(),1),
-(null,59,1974.00,0,curdate(),1),
-(null,60,1848.00,0,curdate(),1),
+(null,41,2200.00,1,curdate(),1),
+(null,42,2450.00,1,curdate(),1),
+(null,43,2650.00,1,curdate(),1),
+(null,44,2200.00,1,curdate(),1),
+(null,45,3200.00,1,curdate(),1),
+(null,46,2900.00,1,curdate(),1),
+(null,47,2850.00,1,curdate(),1),
+(null,48,3050.00,1,curdate(),1),
+(null,49,2650.00,1,curdate(),1),
+(null,50,2850.00,1,curdate(),1),
+(null,51,2550.00,1,curdate(),1),
+(null,52,2800.00,1,curdate(),1),
+(null,53,3200.00,1,curdate(),1),
+(null,54,3250.00,1,curdate(),1),
+(null,55,2400.00,1,curdate(),1),
+(null,56,2950.00,1,curdate(),1),
+(null,57,2600.00,1,curdate(),1),
+(null,58,2900.00,1,curdate(),1),
+(null,59,2350.00,1,curdate(),1),
+(null,60,2200.00,1,curdate(),1),
 /*LTH SUV*/
-(null,61,2419.00,0,curdate(),1),
-(null,62,2238.60,0,curdate(),1),
-(null,63,2238.60,0,curdate(),1),
-(null,64,2501.00,0,curdate(),1),
+(null,61,2950.00,1,curdate(),1),
+(null,62,2730.60,1,curdate(),1),
+(null,63,2730.60,1,curdate(),1),
+(null,64,3050.00,1,curdate(),1),
 /*Cronos*/
-(null,65,1189.00,0,curdate(),1),
-(null,66,1271.00,0,curdate(),1),
-(null,67,1476.00,0,curdate(),1),
-(null,68,1681.00,0,curdate(),1),
-(null,69,1681.00,0,curdate(),1),
-(null,70,1558.00,0,curdate(),1),
-(null,71,1476.00,0,curdate(),1),
-(null,72,2681.40,0,curdate(),1),
-(null,73,1599.00,0,curdate(),1),
-(null,74,1189.00,0,curdate(),1),
-(null,75,1271.00,0,curdate(),1),
-(null,76,1476.00,0,curdate(),1),
-(null,77,1353.00,0,curdate(),1),
-(null,78,1681.00,0,curdate(),1),
-(null,79,1476.00,0,curdate(),1),
-(null,80,1599.00,0,curdate(),1),
-(null,81,3280.00,0,curdate(),1),
-(null,82,1189.00,0,curdate(),1),
-(null,83,1312.00,0,curdate(),1),
+(null,65,1450.00,1,curdate(),1),
+(null,66,1550.00,1,curdate(),1),
+(null,67,1800.00,1,curdate(),1),
+(null,68,2050.00,1,curdate(),1),
+(null,69,2050.00,1,curdate(),1),
+(null,70,1900.00,1,curdate(),1),
+(null,71,1800.00,1,curdate(),1),
+(null,72,3270.40,1,curdate(),1),
+(null,73,1950.00,1,curdate(),1),
+(null,74,1450.00,1,curdate(),1),
+(null,75,1550.00,1,curdate(),1),
+(null,76,1800.00,1,curdate(),1),
+(null,77,1650.00,1,curdate(),1),
+(null,78,2050.00,1,curdate(),1),
+(null,79,1800.00,1,curdate(),1),
+(null,80,1950.00,1,curdate(),1),
+(null,81,4000.00,1,curdate(),1),
+(null,82,1450.00,1,curdate(),1),
+(null,83,1600.00,1,curdate(),1),
 /*AMERICANA*/
-(null,84,1353.00,0,curdate(),1),
-(null,85,1360.00,0,curdate(),1),
-(null,86,1600.00,0,curdate(),1),
-(null,87,1320.00,0,curdate(),1),
-(null,88,1880.00,0,curdate(),1),
-(null,89,1760.00,0,curdate(),1),
-(null,90,1640.00,0,curdate(),1),
-(null,91,1760.00,0,curdate(),1),
-(null,92,1640.00,0,curdate(),1),
-(null,93,1760.00,0,curdate(),1),
-(null,94,1760.00,0,curdate(),1),
-(null,95,1880.00,0,curdate(),1),
-(null,96,1600.00,0,curdate(),1),
-(null,97,2616.00,0,curdate(),1),
-(null,98,1760.00,0,curdate(),1),
-(null,99,1320.00,0,curdate(),1),
-(null,100,1480.00,0,curdate(),1),
-(null,101,1480.00,0,curdate(),1),
-(null,102,1400.00,0,curdate(),1),
-(null,103,1640.00,0,curdate(),1),
-(null,104,1880.00,0,curdate(),1),
-(null,105,1560.00,0,curdate(),1),
-(null,106,1560.00,0,curdate(),1),
-(null,107,1440.00,0,curdate(),1),
-(null,108,1640.00,0,curdate(),1),
-(null,109,1760.00,0,curdate(),1),
-(null,110,1600.00,0,curdate(),1),
-(null,111,1760.00,0,curdate(),1),
-(null,112,3200.00,0,curdate(),1),
-(null,113,1320.00,0,curdate(),1),
-(null,114,1960.00,0,curdate(),1),
-(null,115,1400.00,0,curdate(),1),
-(null,116,1400.00,0,curdate(),1),
+(null,84,1650.00,1,curdate(),1),
+(null,85,1700.00,1,curdate(),1),
+(null,86,2000.00,1,curdate(),1),
+(null,87,1650.00,1,curdate(),1),
+(null,88,2350.00,1,curdate(),1),
+(null,89,2200.00,1,curdate(),1),
+(null,90,2050.00,1,curdate(),1),
+(null,91,2200.00,1,curdate(),1),
+(null,92,2050.00,1,curdate(),1),
+(null,93,2200.00,1,curdate(),1),
+(null,94,2200.00,1,curdate(),1),
+(null,95,2350.00,1,curdate(),1),
+(null,96,2000.00,1,curdate(),1),
+(null,97,3270.00,1,curdate(),1),
+(null,98,2200.00,1,curdate(),1),
+(null,99,1650.00,1,curdate(),1),
+(null,100,1850.00,1,curdate(),1),
+(null,101,1850.00,1,curdate(),1),
+(null,102,1750.00,1,curdate(),1),
+(null,103,2050.00,1,curdate(),1),
+(null,104,2350.00,1,curdate(),1),
+(null,105,1950.00,1,curdate(),1),
+(null,106,1950.00,1,curdate(),1),
+(null,107,1800.00,1,curdate(),1),
+(null,108,2050.00,1,curdate(),1),
+(null,109,2200.00,1,curdate(),1),
+(null,110,2000.00,1,curdate(),1),
+(null,111,2200.00,1,curdate(),1),
+(null,112,4000.00,1,curdate(),1),
+(null,113,1650.00,1,curdate(),1),
+(null,114,2450.00,1,curdate(),1),
+(null,115,1750.00,1,curdate(),1),
+(null,116,1750.00,1,curdate(),1),
 /*Escpecial*/
-(null,117,1681.00,0,curdate(),1),
-(null,118,1886.00,0,curdate(),1),
-(null,119,2050.00,0,curdate(),1),
-(null,120,2829.00,0,curdate(),1),
-(null,121,2501.00,0,curdate(),1),
-(null,122,4141.00,0,curdate(),1),
-(null,123,2665.00,0,curdate(),1),
-(null,124,2706.00,0,curdate(),1),
-(null,125,1148.00,0,curdate(),1),
+(null,117,2050.00,1,curdate(),1),
+(null,118,2300.00,1,curdate(),1),
+(null,119,2700.00,1,curdate(),1),
+(null,120,3450.00,1,curdate(),1),
+(null,121,3050.00,1,curdate(),1),
+(null,122,5050.00,1,curdate(),1),
+(null,123,3250.00,1,curdate(),1),
+(null,124,3300.00,1,curdate(),1),
+(null,125,1400.00,1,curdate(),1),
 /*AGM*/
-(null,126,3280.00,0,curdate(),1),
-(null,127,4360.00,0,curdate(),1),
-(null,128,3520.00,0,curdate(),1),
-(null,129,3240.00,0,curdate(),1),
-(null,130,3320.00,0,curdate(),1),
-(null,131,3840.00,0,curdate(),1),
-(null,132,3960.00,0,curdate(),1),
-(null,133,3560.00,0,curdate(),1),
-(null,134,3880.00,0,curdate(),1),
+(null,126,4100.00,1,curdate(),1),
+(null,127,5450.00,1,curdate(),1),
+(null,128,4400.00,1,curdate(),1),
+(null,129,4050.00,1,curdate(),1),
+(null,130,4150.00,1,curdate(),1),
+(null,131,4800.00,1,curdate(),1),
+(null,132,4950.00,1,curdate(),1),
+(null,133,4450.00,1,curdate(),1),
+(null,134,4850.00,1,curdate(),1),
 /*Precio oprima*/
-(null,135,3825.00,0,curdate(),1),
-(null,136,3655.00,0,curdate(),1),
-(null,137,4037.50,0,curdate(),1),
-(null,138,3867.50,0,curdate(),1),
-(null,139,3867.50,0,curdate(),1),
-(null,140,3315.00,0,curdate(),1),
-(null,141,4377.50,0,curdate(),1),
-(null,142,4802.50,0,curdate(),1),
-(null,143,4717.50,0,curdate(),1),
-(null,144,4080.00,0,curdate(),1),
-(null,145,4377.50,0,curdate(),1),
-(null,146,5907.50,0,curdate(),1),
-(null,147,4802.50,0,curdate(),1),
-(null,148,5737.50,0,curdate(),1),
-(null,149,6077.50,0,curdate(),1);
+(null,135,4500.00,1,curdate(),1),
+(null,136,4300.00,1,curdate(),1),
+(null,137,4750.50,1,curdate(),1),
+(null,138,4550.50,1,curdate(),1),
+(null,139,4550.50,1,curdate(),1),
+(null,140,3900.00,1,curdate(),1),
+(null,141,5150.50,1,curdate(),1),
+(null,142,5650.50,1,curdate(),1),
+(null,143,5650.50,1,curdate(),1),
+(null,144,5550.00,1,curdate(),1),
+(null,145,4800.50,1,curdate(),1),
+(null,146,5150.50,1,curdate(),1),
+(null,147,6950.50,1,curdate(),1),
+(null,148,5650.50,1,curdate(),1),
+(null,149,6750.50,1,curdate(),1),
+(null,150,7150.00,1,curdate(),1),
+/*Baterias de moto*/
+/*Batera LTH de moto*/
+(null,206,540.00,1,curdate(),1),
+(null,207,650.00,1,curdate(),1),
+(null,208,650.00,1,curdate(),1),
+(null,209,670.00,1,curdate(),1),
+(null,210,755.00,1,curdate(),1),
+(null,211,780.00,1,curdate(),1),
+(null,212,920.00,1,curdate(),1),
+(null,213,445.00,1,curdate(),1),
+(null,214,480.00,1,curdate(),1),
+(null,215,570.00,1,curdate(),1),
+(null,216,650.00,1,curdate(),1),
+(null,217,700.00,1,curdate(),1),
+(null,218,735.00,1,curdate(),1),
+(null,219,880.00,1,curdate(),1),
+(null,220,970.00,1,curdate(),1),
+(null,221,1270.00,1,curdate(),1),
+/*AGM*/
+(null,222,500.00,1,curdate(),1),
+(null,223,595.00,1,curdate(),1),
+(null,224,730.00,1,curdate(),1),
+(null,225,820.00,1,curdate(),1),
+(null,226,940.00,1,curdate(),1),
+(null,227,940.00,1,curdate(),1),
+(null,228,1070.00,1,curdate(),1),
+(null,229,1085.00,1,curdate(),1),
+(null,230,1120.00,1,curdate(),1),
+(null,231,1180.00,1,curdate(),1),
+(null,232,1190.00,1,curdate(),1),
+(null,233,1200.00,1,curdate(),1),
+(null,234,1280.00,1,curdate(),1),
+(null,235,1280.00,1,curdate(),1),
+(null,236,1290.00,1,curdate(),1),
+(null,237,1460.00,1,curdate(),1),
+(null,238,1480.00,1,curdate(),1),
+(null,239,1610.00,1,curdate(),1),
+(null,240,1720.00,1,curdate(),1),
+(null,241,2260.00,1,curdate(),1);
 
 /*Arroja los resultados cascos (mayoria de baterias)*/
 select p.idProducto, mp.nombre as marca, t.nombre as tipo,
@@ -1063,11 +1140,16 @@ join marcaProducto mp on p.idMarca = mp.idMarca
 join cascos c on t.idCasco=t.idCasco
 order by mp.idmarca;
 
+
+/*Se incluyen los productos que no son baterias*/
+insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+(null,0,5,11,null,1);
+insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) values 
+(null,242,75,0,curdate(),1);
+
 insert into persona values 
 (null, 'Gabriela', 'Garza', 'Bernal','','3311215488'),
 (null, 'Angel Iván', 'Garza', 'Bernal','','3321164306'),
-(null, 'Jonathan', 'Quien sabe', 'Bernal','',''),
-(null, 'Mario', 'Quien Sabe', null,'',''),
 (null, 'Cliente', 'Anónimo', null,'','');/*Sera usado para cuando no pidan datos*/
 
 insert into perfil VALUES
@@ -1089,17 +1171,45 @@ insert into empresa values
 
 insert into menu values
 (null, 'Editar Productos', 'Vista/Catalogo/Productos'),
-(null, 'Nuevo Producto', 'Vista/Catalogo/NuevoProducto');
+(null, 'Nuevo Producto', 'Vista/Catalogo/NuevoProducto'),
+(null, 'Nuevo Empleado', 'Vista/Empleado/NuevoProducto'),
+(null, 'Vender', 'Vista/Venta/venta');
 
 insert into intermediaPerfilMenu (idPerfil, idMenu) values
 (1,1),
-(1,2);
+(1,2),
+(1,3),
+(1,4),
+(2,3);
+
+
 
 /*Seccion Autos*/
+
+insert into tipoAuto (nombre) values
+("Automovil"),
+("SUV's"),
+("Pickup"),
+("Comercial");
+
 insert into marcaAuto (nombre) values
-('Primero que no se ve'),
-('Alfa Romeo'),
-('Audi');
+('Buick'),
+('Cadillac'),
+('Chevrolet'),
+('Chrysler'),
+('Dodge'),
+('Ford'),
+('GMC'),
+('Honda'),
+('Hyundai'),
+('Jeep'),
+('Kia'),
+('Mazda'),
+('Nissa'),
+('Toyota'),
+('Volkswagen');
+
+
 /*Se esta usando id bateria primera opcion 1 para pruebas*/
 insert into modeloAuto (nombre,idMarca,anio) values 
 ('147',2,1),
@@ -1179,7 +1289,8 @@ CREATE Procedure InicioSesion (username VARCHAR(10), password_p VARCHAR(20))
 BEGIN
     SELECT u.idPersona, u.idPerfil, p.nombre, p.apellido1 FROM usuario u
     join persona p on u.idPersona = p.idPersona
-    WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND u.activo=1 limit 1;  
+    WHERE usuario = username AND contrasena = password_p AND u.activo=1 limit 1;
+ 
 END
 ||
 DELIMITER ;
@@ -1198,4 +1309,18 @@ select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categori
         join marcaProducto mp on p.idMarca = mp.idMarca
         join precios r on p.idProducto=r.idProducto
         where p.idCategoria=2 and mp.idMarca=3 and
+        r.activo=1 and r.garantia=0;
+
+
+        
+select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categoria, p.cantidad, 
+        r.precio, r.idPrecio, t.idCasco as casco,
+            (select r.precio from cascos r
+            where r.idCasco=t.idCasco) as precioCasco
+        from producto p
+        join categoriaProducto cp on p.idCategoria = cp.idCategoria
+        join tipo t on p.idTipo = t.idTipo
+        join marcaProducto mp on p.idMarca = mp.idMarca
+        join precios r on p.idProducto=r.idProducto
+        where p.idCategoria=3 and mp.idMarca=6 and
         r.activo=1 and r.garantia=0;

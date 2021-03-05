@@ -8,13 +8,13 @@ if(isset($_SESSION["nombre"])){
         $conn=Conectar::conexion();
 
         //TODO si garantia no es 2, cambiar a otra consulta
-        $instruccion="select distinct p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categoria, p.cantidad, 
-        r.precio, r.idPrecio, t.idCasco as casco, c.precio as  precioCasco
-        from producto p
-        join categoriaProducto cp on p.idCategoria = cp.idCategoria
-        join tipo t on p.idTipo = t.idTipo
-        join cascos c on t.idCasco = c.idCasco
-        join marcaProducto mp on p.idMarca = mp.idMarca
+        $instruccion="select distinct p.idProducto, mp.nombre as marca, cp.nombre as categoria, p.cantidad, 
+        r.precio, r.idPrecio ".($_POST["categoria"]==2 || $_POST["categoria"]==3 ?", t.nombre as tipo, t.idCasco as casco, c.precio as  precioCasco ":"").
+        "from producto p
+        join categoriaProducto cp on p.idCategoria = cp.idCategoria ".
+        ($_POST["categoria"]==2 || $_POST["categoria"]==3 ?"join tipo t on p.idTipo = t.idTipo
+        join cascos c on t.idCasco = c.idCasco ":"").
+        "join marcaProducto mp on p.idMarca = mp.idMarca
         join precios r on p.idProducto=r.idProducto
         where p.idCategoria=".$_POST["categoria"]." and mp.idMarca=".$_POST["marca"]."
         and r.activo=1 and r.garantia=".$_POST["garantia"].";";//TODO agregar idPrecio
