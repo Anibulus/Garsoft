@@ -70,7 +70,10 @@ function getModelo(marca){
        if(data.length>0){
             opciones="<option value='0' hidden selected>Seleccione...</option>";
            $.each(data, function(i,item){
-                opciones+="<option value='"+item.idModelo+"'>"+item.nombre+" "+item.anioInicio+" - "+item.anioFin+"</option>"
+                opciones+="<option value='"+item.idModelo+"'>"+item.nombre+" "+
+                //Si el año es el mismo, asi lo imprime, sino imprime los 2 digistos de ambos
+                (item.anioInicio==item.anioFin? item.anioInicio:
+                String(item.anioInicio).substr(2,2)+" - "+String(item.anioFin).substr(2,2)  )+"</option>"
            });
            $("#modelo").html(opciones);
        }
@@ -103,7 +106,6 @@ function getTipo(idModelo){
         error: function(response){}
     }).done(function(data){
         if(data.length>0){
-            console.log(data);
             opciones="<option value='0' hidden selected>Seleccione...</option>";
            $.each(data, function(i,item){
                 opciones+="<option value='"+item.idTipo+"'>"+item.nombre+"</option>"

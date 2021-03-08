@@ -3,7 +3,7 @@ session_start();
 if(isset($_SESSION["nombre"])){
     require("../../Modelo/Conexion/conexion.php");
     require("../../Modelo/NoCSRF.php");
-    //header('Content-Type: application/json;');
+    header('Content-Type: application/json;');
     
     if(count($_POST)>0)
     {
@@ -23,7 +23,7 @@ if(isset($_SESSION["nombre"])){
                     $result=$conn->query($instruccion);
                 }//Fin de for
                 $conn->close();
-                var_dump($result);
+
                 if($result)
                     echo json_encode(1); //Guardo
                 else

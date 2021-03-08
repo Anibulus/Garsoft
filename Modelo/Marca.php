@@ -1,7 +1,7 @@
 <?php
 class Marca{
-    private $idMarca;
-    private $nombre;
+    public $idMarca;
+    public $nombre;
 
     public function __construct(){
         $idMarca=0;

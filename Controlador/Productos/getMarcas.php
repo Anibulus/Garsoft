@@ -1,5 +1,6 @@
 <?php
 require("../../Modelo/Conexion/conexion.php");
+require("../../Modelo/Marca.php");
 header('Content-Type: application/json;');
 
 session_start();
@@ -9,12 +10,15 @@ if(isset($_SESSION["nombre"])){
     $conn->close();
     unset($conn);
     if($result){
-        $arreglo='[';
+        $listado=array();
         for($i=0;$i<$result->num_rows;$i++){
-            $arreglo.=json_encode($result->fetch_assoc(),\JSON_UNESCAPED_UNICODE);
-            $arreglo.=$i==($result->num_rows-1)?"":",";
+            $row=$result->fetch_assoc();
+            $obj=new Marca();
+            $obj->idMarca=$row["idMarca"];
+            $obj->nombre=$row["nombre"];
+            array_push($listado,$obj);
         }
-        echo $arreglo."]";
+        echo json_encode($listado);
     }
     else
     {
