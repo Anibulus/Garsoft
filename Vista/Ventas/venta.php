@@ -58,18 +58,7 @@
 
             
         
-    </div>
-
- <label for="browser">Choose your browser from the list:</label>
-<input list="browsers" name="browser" id="browser">
-
-<datalist id="browsers">
-  <option value="Edge"> 
-  <option value="Firefox">
-  <option value="Chrome">
-  <option value="Opera">
-  <option value="Safari">
-</datalist>             
+    </div>          
 
     <div class="row">
             <!--<input type="button" class="btn btn-primary" id="btnGuardar" name="btnGuardar" value="Guardar"/>-->
@@ -96,7 +85,18 @@
 
             <div class="modal-body">
                 
-                
+                <div id="buscarCliente">
+                    <div class="form-group">   
+                    <label><span>Nombre:</span>
+                        <div class='input-group'>
+                            <div class="input-group-prepend"></div>
+                            <input autocomplete="off" list="nombreCliente" name="nomCliBusq" id="nomCliBusq" type="text" class='form-control' aria-label='Amount' />
+                            <datalist id="nombreCliente">
+                            </datalist>   
+                        </div>
+                    </label>
+                    </div>
+                </div>
                 <div id="nvoCliente"> <!--Div de ingreso de nvo cliente-->
                     <div class="form-group">   
 
@@ -141,11 +141,14 @@
                         </label>
                     </div>
 
-                    <input type="button" class="btn btn-primary" id="btnGuardarCli" name="btnGuardarCli" value="Guardar Cliente"/>
-                    <input type="button" class="btn btn-primary" id="btnBuscarCli" value="Seleccionar Cliente">
+                    
                     </div>
+                    
                 </div>
-
+                <div>
+                <input type="button" class="btn btn-primary" id="btnGuardarCli" name="btnGuardarCli" value="Guardar Cliente"/>
+                </div>
+                    <input type="button" class="btn btn-primary" id="btnBuscarCli" value="Seleccionar Cliente">
 
         <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -157,6 +160,79 @@
 
 
 <script>
+/*Llenado de informacion y consultas*/
+$("#buscarCliente").hide();
+$(document).ready(function(){
+    getMarcas(); 
+});
+
+function getMarcas(){
+    $.ajax({
+        cache:false,
+        method:"GET",
+        url:"../../Controlador/Productos/getMarcas",
+        error: function(response){}
+    }).done(function(data){ 
+        if(data.length>0){
+            let opciones="<option value='0' hidden selected> Seleccione...</option>";
+           $.each(data, function(i,item){
+                opciones+="<option value='"+item.idMarca+"'>"+item.nombre+"</option>"
+           });
+           $("#marcasv").html(opciones);
+           delete opciones;
+       }
+    });
+}//Fin de getMarcas  
+
+$("#nomCliBusq").on("keypress",function(){
+    $.ajax({
+        cache:false,
+        method:"POST",
+        url:"../../Controlador/Ventas/getNombreCliente",
+        data: {nombre: $("#nomCliBusq").val(),
+            csrf_token:"<?php echo $token;?>",
+        }, 
+        error: function(response){}
+    }).done(function(datos){
+        $("#nombreCliente").html("");
+        if(datos.length>0){
+            let opciones=""
+           $.each(datos, function(i,item){
+                //opciones+="<option value='"+item.nombre+"' data-id='"+item.idCliente+"'>";
+                opciones+="<option value='"+item.idCliente+"'>"+item.nombre+"</option>";
+           });//Fin de each
+           $("#nombreCliente").html(opciones);
+           delete opciones;
+        }
+    });//Fin de .done
+});//Fin de get nombre de persona
+
+$("#nomCliBusq").on("change",function(e){
+    //if($("#nomCliBusq").attr("data-idCliente"))
+        swal("¿Estás seguro de seleccionar este cliente?", {
+        buttons: {
+            cancel: "Ay no",
+            simon: "Jalo"             
+        },
+        })
+        .then((value) => {
+        switch (value) {        
+            case "simon":
+                $("#nomCliBusq").prop("disabled",true);
+                break;
+            default:
+                break;
+        }//Fin de switch
+    });//Fin de swal
+});//Fin de change
+
+
+$("#btnBuscarCli").on("click",function(){
+   $("#buscarCliente").slideDown();
+   $("#nvoCliente").slideUp();
+   $("#btnGuardarCli").closest("div").hide();
+});
+
 
 $("#btnGuardarCli").on("click",function(){
 
@@ -194,113 +270,6 @@ $("#btnGuardarCli").on("click",function(){
         swal("Aviso","Hubo error al guardar","error");
     }
 });
-
-
-
-
-/*$("#nvoCliente").hidden();
-
-//busquedaCli
-
-
-$("#b_cli").on("keypress",function()){
-
-}
-
-$("#b_cliap").on("keypress",function()){
-    
-}
-
-$("#b_cliam").on("keypress",function()){
-    
-}*/
-
-
-
-/*function getNombreCli(){
-
-    $.ajax({
-        cache:false,
-        method:"POST",
-        url:"",
-        data: {nombre: $("#b_cli").val(), apellidop: $("#b_cliap").val(), apellidom: $("#b_cliam")}
-        url: 
-        error: function(response){}
-    }).done(function(data){
-        if(data.length>0){
-            opciones="<option value='0' hidden selected> Seleccione...</option>";
-           $.each(data, function(i,item){
-                opciones+="<option value='"+item.idMarca+"'>"+item.nombre+"</option>"
-           });
-           $("#marcasv").html(opciones);
-       }else{
-        $("#b_cli")
-
-        $("#b_cliap")
-
-        $("#b_cliam")
-
-
-       }
-    });
-
-} */
-
-
-getMarcas();   
-
-
-function getMarcas(){
-    $.ajax({
-        cache:false,
-        method:"GET",
-        url:"../../Controlador/Productos/getMarcas",
-        error: function(response){}
-    }).done(function(data){
-        if(data.length>0){
-            opciones="<option value='0' hidden selected> Seleccione...</option>";
-           $.each(data, function(i,item){
-                opciones+="<option value='"+item.idMarca+"'>"+item.nombre+"</option>"
-           });
-           $("#marcasv").html(opciones);
-       }
-    });
-}//Fin de getMarcas
-
-$("#marcasv").on("change",function(){
-    alert("wacha!")
-})
-
-/*function guardarCliente(e, nombre, apepat, apemat, correo, tel){
-
-    if((nombre)!="" && (apepat)!="" && (apemat)!="")//Nombre y apellidos no pueden estar vacios.
-    {
-        $.ajax({
-            cache:false,
-            url:"../../Controlador/Ventas/nuevoCliente",
-            method:"POST",
-            data:{
-                csrf_token:"<?php echo $token;?>",
-                nombre:$("#nomCli").val(),
-                apepat:$("#apepCli").val(),
-                apemat:$("#apemCli").val(),
-                correo: $("#correo").val(),
-                tele: $("telef").val(),
-            
-            },
-            beforeSend:function(){$(e.currentTarget).prop("disabled",true)},
-            error:function(){}
-        }).done(function(data){
-            if(data==1){
-                             
-                swal("¡Éxito!", "Se ha guardado el cliente correctamete", "success"); 
-            }
-        })
-    }
-    else{
-        swal("Aviso","Hubo error al guardar","error");
-    }
-}//fin de guardar cliente*/
 
 </script>
 
