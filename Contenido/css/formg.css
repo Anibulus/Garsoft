@@ -1,0 +1,36 @@
+
+
+.form {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.form input {
+  height: 37px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  margin-top: 20px;
+}
+
+.form label {
+  display: inline-block;
+  width: 145px;
+  text-align: left;
+}
+
+.divl {
+  float: left;
+}
+
+.divr {
+  float: right;
+}
+
+.divc {
+  text-align: center;
+  clear:both;
+}

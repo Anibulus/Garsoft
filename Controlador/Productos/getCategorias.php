@@ -1,6 +1,7 @@
 <?php
 require("../../Modelo/Conexion/conexion.php");
-header('Content-Type: application/json;');
+require("../../Modelo/Categoria.php");
+header('Content-Type: application/json; charset=iso-8859-1 ');//utf-8
 
 session_start();
 if(isset($_SESSION["nombre"])){
@@ -9,12 +10,18 @@ if(isset($_SESSION["nombre"])){
     $conn->close();
     unset($conn);
     if($result){
-        $arreglo='[';
+        $listado=array();
+
         for($i=0;$i<$result->num_rows;$i++){
-            $arreglo.=json_encode($result->fetch_assoc(),\JSON_UNESCAPED_UNICODE);
-            $arreglo.=$i==($result->num_rows-1)?"":",";
+            $row=$result->fetch_assoc();
+            //Llenado del objeto
+            $categoria=new Categoria();
+            $categoria->setIdCategoria($row["idCategoria"]);
+            $categoria->setNombre($row["nombre"]);
+            array_push($listado,$categoria);
         }
-        echo $arreglo."]";
+        //var_dump($listado);
+        echo json_encode($listado);
     }else{
         echo json_encode(array());
     }
@@ -23,4 +30,5 @@ if(isset($_SESSION["nombre"])){
 else{
     echo json_encode(array());
 }
+exit();
 ?>

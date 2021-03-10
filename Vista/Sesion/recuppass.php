@@ -6,7 +6,7 @@ include("../Compartido/encabezado.php");
 ?>
 
 
-<link rel="stylesheet" href="/Garsoft/Contenido/css/login.css">
+<link rel="stylesheet" href="<?php echo $dominio?>Contenido/css/login.css">
 
 <form class="modal-content animate" id="recup" name="recup">
 
@@ -33,13 +33,16 @@ $("#btnAceptar").on("click",function(){
         cache:false,
         method:"Post",
         data: $("#recup").serialize(),//Utiliza la etiqueta "name"
-        url:"../../Controlador/Sesion/RecupPass"//.php
+        url:"../../Controlador/Sesion/RecupPass",//.php
+        beforeSend:function(){ $("#btnAceptar").prop("disabled",true);}
     }).done(function(data){
         console.log(data);
         if(data==1){
             swal("Aviso","Correo Enviado, Verifique", "success");
-        }else{
-            swal("Aviso","Ingrese su correo electronico", "error");
+        } if(data== 2){
+            swal("Error","Hubo un problema al enviar el correo electronico", "error");
+        } if(data== 0){
+            swal("Aviso","Ingrese un correo electronico valido", "error");
         }
     });
 });

@@ -21,7 +21,7 @@ if(isset($_SESSION["nombre"])){
         $menu="
         <nav class='navbar navbar-expand-lg navbar-light bg-light'>
         <div class='container'>
-             <a href='".$dominio."Vista/Inicio/Inicio'>Inicio</a>";
+             <a href='".$dominio."Vista/Inicio/inicio'>Inicio</a>";
         for($i=0;$i<$result->num_rows;$i++){
             $row=$result->fetch_assoc();
             $menu.="<a href='".$dominio.$row["direccion"]."'>".$row["nombre"]."</a>";
@@ -47,7 +47,7 @@ else{
 <nav class='navbar navbar-expand-lg navbar-light bg-light'>
         <div class='container'>
 
-    <a href='".$dominio."Vista/Inicio/Inicio'>Inicio</a>
+    <a href='".$dominio."Vista/Inicio/inicio'>Inicio</a>
     <a href='".$dominio."Vista/Sesion/IniciarSesion'>Iniciar Sesión</a>
    
 </div></nav>";
