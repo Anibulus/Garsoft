@@ -16,9 +16,12 @@ if(isset($_SESSION["nombre"])){
 
                 //Validar que el producto no exista ya
                 $instruccion="select * from producto
-                where idCategoria=".$_POST["categoria"].", idMarca=".$_POST["marca"].", idTipo=".$_POST["tipo"].";";
+                where idCategoria=".$_POST["categoria"]." and idMarca=".$_POST["marca"];
+                //Valida si agregar idtipo o no
+                $instruccion.=(intval($_POST["categoria"])<=3 && intval($_POST["categoria"])>=2 ? " and idTipo=".$_POST["tipo"].";":";");
                 $result=$conn->query($instruccion);
-                if($result){
+
+                if($result->num_rows>0){
                     $conn->close();
                     unset($conn);
                     unset($result);
@@ -33,36 +36,44 @@ if(isset($_SESSION["nombre"])){
                     values
                     (null,";
                     //Si categoria es bateria 2 o 3, se deja el tipo
-                    $instriccion.=($_POST["categoria"]!=1?$_POST["cantidad"]:"0").",
+                    $instruccion.=($_POST["categoria"]!=1?$_POST["cantidad"]:"0").",
                     ".$_POST["categoria"].",
                     ".$_POST["marca"].",
                     ".($_POST["categoria"]==2 || $_POST["categoria"]==3?$_POST["tipo"]:"null")."
                     ,1);";
 
                     $result=$conn->query($instruccion);
+                    $last_id=0;
                     $last_id = $conn->insert_id;
-                    //todo  for
-                    //Modificacion de precio
-                    for($i =0; $i<count($_POST["precios"]);$i++){
-                        $instruccion="insert into precios 
-                        (idPrecio, idProducto, precio, garantia, fecha, activo) 
-                        values 
-                        (null,".$last_id.",".$_POST["precios"][$i]["precio"].",".$_POST["precios"][$i]["tipoprecio"].",curdate(),1);";
 
-                        $result=$conn->query($instruccion);
-                    }
-                    
+                    if($last_id>0){
+                    //Se insertan todos los precios (max 2) que el usuario ingreso
+                        for($i =0; $i<count($_POST["precios"]);$i++){
+                            $instruccion="insert into precios 
+                            (idPrecio, idProducto, precio, garantia, fecha, activo) 
+                            values 
+                            (null,".$last_id.",".$_POST["precios"][$i]["precio"].",".$_POST["precios"][$i]["tipoprecio"].",curdate(),1);";
 
-                    $conn->close();
-                    unset($conn);        
-                    if($result)
-                    {
-                        echo json_encode(1);
-                    }
+                            $result=$conn->query($instruccion);
+                        }//Fin de for
+
+
+                        if($result)
+                        {
+                            echo json_encode(1);
+                        }
+                        else
+                        {//Si no hay result
+                            echo json_encode(3);
+                        }
+                    }//Si no inserto el nuevo producto
                     else
-                    {//Si no hay result
-                        echo json_encode(3);
+                    {
+                        echo json_encode(4);
                     }
+                    //Luego de terminar cualquier proceso, termina cerrando las conexiones
+                    $conn->close();
+                    unset($conn);
                     unset($result);
                     unset($instruccion);
                 }

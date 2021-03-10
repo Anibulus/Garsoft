@@ -253,6 +253,12 @@ function guardarProducto(precios){
             if(data==1){
                 swal("Éxito","Se ha guardado correctamente","success");
             }
+            else if(data==2){
+                swal("Aviso","El producto que deseas ingresar, ya existe","warning");
+            }
+            else{
+                swal("Aviso","No se ha logrado guardar el registro","warning");
+            }
         }).always(function(){
             $("#btnGuardar").prop("disabled",false);
         });
