@@ -1,6 +1,8 @@
+
 <?php 
 session_start();
-$dominio="http://localhost:8080/garsoft/";
+$dominio="http://localhost/garsoft/";
+
 include("../../Modelo/NoCSRF.php");
 ?>
 <!DOCTYPE HTML>
