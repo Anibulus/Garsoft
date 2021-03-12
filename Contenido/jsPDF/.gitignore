@@ -1,3 +1,6 @@
-.idea
 .DS_Store
-node_modules/
+.idea
+yarn.lock
+node_modules
+examples/local/*
+!examples/local/basic.html

@@ -1,6 +1,6 @@
 <?php
 //Si no tiene la sesion iniciada no se le permte volver a iniciar
-$titulo="Registrar Empleado";
+$titulo="Empleados";
 include("../Compartido/encabezado.php");
 
 ?>
@@ -8,38 +8,38 @@ include("../Compartido/encabezado.php");
 <link rel="stylesheet" href="<?php echo $dominio; ?>Contenido/css/formg.css">
 <link rel="stylesheet" href="<?php echo $dominio; ?>Contenido/css/botones.css">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <form class="form" name="nuevoe" id="nuevoe">
 	<h2>Nuevo Empleado</h2>
 	<div>
 		<label>Nombre:</label>
-		<input type="text" name="nombre" id="nombre">
+		<input type="text" name="nombre" id="nombre" tabindex="1">
+		<div class="divr">
+			<a href="">Ver Empleados</a>
+		</div>
 	</div>
 	<div class="divl">
 		<label>Apellido Paterno:</label>
-		<input type="text" name="apellidop" id="apellidop"><br>
+		<input type="text" name="apellidop" id="apellidop" tabindex="2"><br>
 		<label>E-mail:</label>
-		<input type="text" name="correo" id="correo"><br>
+		<input type="text" name="correo" id="correo" tabindex="4"><br>
 		<label>Nombre de Usuario:</label>
-		<input type="text" name="usuario" id="usuario"><br>
-		<label>Contraseña:</label></span>
-		<input type="password" name="pass" id="pass"><br>
+		<input type="text" name="usuario" id="usuario" tabindex="6"><br>
+		<label>Contraseña:</label>
+		<input type="password" name="pass" id="pass" tabindex="8"><br>
+		<span class="field-icon"></span>
 	</div>
 	<div class="divr">
 		<label>Apellido Materno:</label>
-		<input type="text" name="apellidom" id="apellidom"><br>
+		<input type="text" name="apellidom" id="apellidom" tabindex="3"><br>
 		<label>Telefono:</label>
-		<input type="number" name="telefono" id="telefono"><br>
+		<input type="text" name="telefono" id="telefono" maxlength="10" tabindex="5"><br>
 		<label>Tipo de Usuario:</label>
-		<input type="radio" id="adm" name="tipo" value="adm" checked="true">
-		<label for="adm">Administrador</label>
-		<input type="radio" id="emp" name="tipo" value="emp">
-		<label for="emp">Empleado</label><br> 			
+		<select name="tipo" id="tipo" tabindex="7">
+  			<option value="1">Administrador</option>
+  			<option selected="true" value="2">Empleado</option>
+  		</select><br> 			
 		<label>Repetir Contraseña:</label>
-		<input type="password" name="passr" id="passr"><br>
+		<input type="password" name="passr" id="passr" tabindex="9"><br>
 	</div>
 </form>
 <div class="divc">
@@ -51,33 +51,8 @@ include("../Compartido/encabezado.php");
 	<br>
 	<button name="insert" id="insert" class="botonA" disabled>Aceptar</button>
 </div>
-<div class="container">
-  <h2>Modal Example</h2>
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-</div>
+
 <?php
 include("../Compartido/piePagina.php");
 ?>
@@ -137,8 +112,7 @@ $(document).ready(function() {
 
 	$("#telefono").keyup(function() {
 		
-			
-		if($(this).val().length <=9 || $(this).val().length > 10) {
+		if($(this).val().length <=9) {
 			$("#insert").prop("disabled", true);
 			errorSpan4.innerHTML = "Ingrese un telefono valido";
 			tel=0
@@ -193,4 +167,29 @@ function checkCampos(obj) {
 		return true;
 	}
 }
+
+$("#insert").on("click",function(){
+    $.ajax({
+        cache:false,
+        method:"Post",
+        data: $("#nuevoe").serialize(),//Utiliza la etiqueta "name"
+        url:"../../Controlador/Empleados/NuevoEmpleado",//.php
+        beforeSend:function(){ $("#insert").prop("disabled",true);}
+    }).done(function(data){
+        console.log(data);
+        if(data==0){
+            swal("Aviso","Correo registrado anteriormente", "error");
+            $("#correo").val('');
+        }else if(data==1){
+            swal("Aviso","Usuario no disponible", "error");
+            $("#usuario").val('');
+        }else if(data==2){
+            $("#nuevoe")[0].reset();
+            swal("Aviso","Nuevo empleado registrado", "success");
+        }else if(data==3){
+            swal("Aviso","Ocurrio un error al registrar", "error");
+        }
+    });
+});
+</script>
 </script>

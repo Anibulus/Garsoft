@@ -44,6 +44,7 @@ $("#btnAceptar").on("click",function(){
         } if(data== 0){
             swal("Aviso","Ingrese un correo electronico valido", "error");
         }
+        $("#btnAceptar").prop("disabled",false);
     });
 });
 </script>
