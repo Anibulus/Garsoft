@@ -1,12 +1,21 @@
 
-
 .form {
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
   margin-top: 50px;
 }
 
 .form input {
+  height: 37px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  margin-top: 20px;
+}
+
+.form select {
   height: 37px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -33,4 +42,13 @@
 .divc {
   text-align: center;
   clear:both;
+}
+
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -30px;
+  position: absolute;
+  z-index: 2;
+  margin-left: 330px;
 }

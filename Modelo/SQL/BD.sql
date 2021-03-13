@@ -170,7 +170,7 @@ create TABLE formaPago(
 )   COLLATE utf8mb4_general_ci;
 
 create table venta (
-    idVenta bigint Auto_Increment, /*Reiniciar al empezar año*/
+    idVenta bigint Auto_Increment,
     anio int not null,
     fecha datetime,
     idModelo int null,
@@ -255,7 +255,7 @@ insert into marcaProducto values
 (null, 'AGM', 72),
 (null, 'Optima', 0),
 (null, 'Gallito', 0),
-(null, 'TOHR', 0);;
+(null, 'TOHR', 0);
 
 insert into cascos values 
 (null, 1, 255.20),
@@ -302,14 +302,11 @@ insert into tipo (idTipo, nombre, idCasco) values
 (null, '8D',6),
 (null, '99',1),
 (null, '94R',4),
-/*Se dejaron de fabricar y parecen ser grupo 2*/
 (null, 'GC2-122-6V', 2),
 (null, 'GC8-117-8V',2),
 (null, 'NS40',1),
 (null, 'NS40Z',1),
-(null, 'U1',1),/*Fin de los tipos para baterias de auto*/
-/*Aqui comienzan las baterias de moto y sin casco*/
-/*CONVENCIONAL*/
+(null, 'U1',1),
 (null, '12N5-3B', null),
 (null, '12N7-3B', null),
 (null, '12N7B-3A', null),
@@ -326,7 +323,6 @@ insert into tipo (idTipo, nombre, idCasco) values
 (null, 'CB12A-A', null),
 (null, 'CB14L-A2', null),
 (null, 'CB16CL-B', null),
-/*AGM LIBRE DE MANTENIMIENTO*/ 
 (null, 'CTX4L-BS', null),
 (null, 'CTX5L-BS', null),
 (null, 'CTX7A-BS', null),
@@ -357,7 +353,7 @@ insert into tipo (idTipo, nombre, idCasco) values
 (null,'OA7525',2),
 (null,'OA3478',3),
 (null,'OA34',3),
-(null,'34M',NULL),/*Es bateria de lancha asi que no les importa*/
+(null,'34M',NULL),
 (null,'OA35',3),
 (null,'OA31T',5),
 (null,'D34M',3),
@@ -365,7 +361,6 @@ insert into tipo (idTipo, nombre, idCasco) values
 (null,'D31M',5);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*Va LTH*/
 (null,0,2,1,1,1),
 (null,0,2,1,2,1),
 (null,0,2,1,3,1),
@@ -403,7 +398,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,1,40,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*LTH TAXI*/
 (null,0,2,2,1,1),
 (null,0,2,2,12,1),
 (null,0,2,2,14,1),
@@ -411,7 +405,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,2,30,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*LTH HITEC*/
 (null,0,2,3,1,1),
 (null,0,2,3,2,1),
 (null,0,2,3,3,1),
@@ -435,14 +428,12 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*LTH SUV*/
 (null,0,2,4,12,1),
 (null,0,2,4,14,1),
 (null,0,2,4,23,1),
 (null,0,2,4,30,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*Primero las de CRONOS*/
 (null,0,2,5,1,1),
 (null,0,2,5,2,1),
 (null,0,2,5,3,1),
@@ -464,7 +455,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,5,39,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*Va America*/
 (null,0,2,6,1,1),
 (null,0,2,6,2,1),
 (null,0,2,6,3,1),
@@ -500,7 +490,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,6,40,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*Especial*/
 (null,0,2,7,2,1),
 (null,0,2,7,3,1),
 (null,0,2,7,6,1),
@@ -512,7 +501,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,7,41,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*AGM*/
 (null,0,2,8,3,1),
 (null,0,2,8,10,1),
 (null,0,2,8,12,1),
@@ -523,7 +511,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,2,8,30,1),
 (null,0,2,8,36,1);
 
-/*Optima*/
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
 (null, 0, 2, 9, 78,1),
 (null, 0, 2, 9, 79,1),
@@ -542,7 +529,6 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null, 0, 2, 9, 92,1);
 
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
-/*Gallito*/
 (null,0,2,10,1,1),
 (null,0,2,10,2,1),
 (null,0,2,10,3,1),
@@ -600,7 +586,7 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null, 0, 2, 10, 91,1),
 (null, 0, 2, 10, 92,1);
 
-/*Baterias de moto*/
+
 insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
 (null,0,3,1,42,1),
 (null,0,3,1,43,1),
@@ -640,11 +626,16 @@ insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo
 (null,0,3,8,76,1),
 (null,0,3,8,77,1);
 
+
 /*Servicios*/
 /*insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+=======
+insert into producto (idProducto, cantidad, idCategoria, idMarca, idTipo, activo) values
+>>>>>>> Stashed changes
 (null,0, 1,11,78,1),
 (null,0, 1,11,79,1),
 (null,0, 1,11,80,1);*/
+
 
 /*De marca especifica*/
 /*select p.idProducto, t.nombre, t.idCasco, mp.nombre as marca 
@@ -669,7 +660,6 @@ join marcaProducto mp on p.idMarca = mp.idMarca;
 
 /*Listado de Precios*/ 
 insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) values 
-/*Primero baterias sin garantía*/
 (null,1,1600.00,0,curdate(),1),
 (null,2,1760.00,0,curdate(),1),
 (null,3,1920.00,0,curdate(),1),
@@ -705,13 +695,11 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,33,2400.00,0,curdate(),1),
 (null,34,1680.00,0,curdate(),1),
 (null,35,1680.00,0,curdate(),1),
-/*LTH TAXI*/
 (null,36,1760.00,0,curdate(),1),
 (null,37,2360.00,0,curdate(),1),
 (null,38,2184.00,0,curdate(),1),
 (null,39,2184.00,0,curdate(),1),
 (null,40,2440.00,0,curdate(),1),
-/*LTH HITEC*/
 (null,41,1848.00,0,curdate(),1),
 (null,42,2058.00,0,curdate(),1),
 (null,43,2226.00,0,curdate(),1),
@@ -732,12 +720,10 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,58,2436.00,0,curdate(),1),
 (null,59,1974.00,0,curdate(),1),
 (null,60,1848.00,0,curdate(),1),
-/*LTH SUV*/
 (null,61,2419.00,0,curdate(),1),
 (null,62,2238.60,0,curdate(),1),
 (null,63,2238.60,0,curdate(),1),
 (null,64,2501.00,0,curdate(),1),
-/*Cronos*/
 (null,65,1189.00,0,curdate(),1),
 (null,66,1271.00,0,curdate(),1),
 (null,67,1476.00,0,curdate(),1),
@@ -757,7 +743,6 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,81,3280.00,0,curdate(),1),
 (null,82,1189.00,0,curdate(),1),
 (null,83,1312.00,0,curdate(),1),
-/*AMERICANA*/
 (null,84,1353.00,0,curdate(),1),
 (null,85,1360.00,0,curdate(),1),
 (null,86,1600.00,0,curdate(),1),
@@ -791,7 +776,6 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,114,1960.00,0,curdate(),1),
 (null,115,1400.00,0,curdate(),1),
 (null,116,1400.00,0,curdate(),1),
-/*Escpecial*/
 (null,117,1681.00,0,curdate(),1),
 (null,118,1886.00,0,curdate(),1),
 (null,119,2050.00,0,curdate(),1),
@@ -801,7 +785,6 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,123,2665.00,0,curdate(),1),
 (null,124,2706.00,0,curdate(),1),
 (null,125,1148.00,0,curdate(),1),
-/*AGM*/
 (null,126,3280.00,0,curdate(),1),
 (null,127,4360.00,0,curdate(),1),
 (null,128,3520.00,0,curdate(),1),
@@ -811,7 +794,6 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,132,3960.00,0,curdate(),1),
 (null,133,3560.00,0,curdate(),1),
 (null,134,3880.00,0,curdate(),1),
-/*Precio oprima*/
 (null,135,3825.00,0,curdate(),1),
 (null,136,3655.00,0,curdate(),1),
 (null,137,4037.50,0,curdate(),1),
@@ -827,7 +809,6 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,147,4802.50,0,curdate(),1),
 (null,148,5737.50,0,curdate(),1),
 (null,149,6077.50,0,curdate(),1),
-/*Asigna precio de 500 a los gallitos*/
 (null,150,500.00,0,curdate(),1),
 (null,151,500.00,0,curdate(),1),
 (null,152,500.00,0,curdate(),1),
@@ -1127,6 +1108,7 @@ insert into precios (idPrecio, idProducto, precio, garantia, fecha, activo) valu
 (null,240,1720.00,1,curdate(),1),
 (null,241,2260.00,1,curdate(),1);
 
+
 /*Arroja los resultados cascos (mayoria de baterias)*/
 select p.idProducto, mp.nombre as marca, t.nombre as tipo,
 (select
@@ -1159,10 +1141,10 @@ insert into perfil VALUES
 (null,'Cliente');
 
 insert into usuario values 
-(1,'Gaby','123',CURDATE(),1,1),
-(2,'Ivon','123',CURDATE(),1,1),
-(3,'Jony','123',CURDATE(),2,1),
-(4,'Mario','123',CURDATE(),2,1);
+(1,'Gaby','123',current_timestamp(),1,1),
+(2,'Ivon','123',current_timestamp(),1,1),
+(3,'Jony','123',current_timestamp(),2,1),
+(4,'Mario','123',current_timestamp(),2,1);
 
 insert into empresa values 
 (null, 'LTH',''),
@@ -1826,18 +1808,38 @@ SELECT hello('world');
 */
 
 /*Consultas del programa*/
+/*inicio sesion*/
 DELIMITER ||
 CREATE Procedure InicioSesion (username VARCHAR(10), password_p VARCHAR(20))
-BEGIN
+BEGIN 
+	set @idp = 0;
+    set @idp = (SELECT idPersona FROM usuario WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND activo=1 limit 1);
+    set @est = 0;
+    set @est = (SELECT if(idPersona is Null, 'false', 'true') as esta FROM usuario WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND activo=1 limit 1);
     SELECT u.idPersona, u.idPerfil, p.nombre, p.apellido1 FROM usuario u
     join persona p on u.idPersona = p.idPersona
-    WHERE usuario = username AND contrasena = password_p AND u.activo=1 limit 1;
- 
+    WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND u.activo=1 limit 1;
+    if @est = 'true' then
+    update usuario set ultimoInicio = current_timestamp()
+    where idPersona = @idp;
+    end if;
 END
 ||
 DELIMITER ;
-call iniciosesion('gaby','123');
+/*nuevo empleado*/
+DELIMITER ||
+CREATE Procedure NuevoEmpleado (nombre VARCHAR(50), apellidop VARCHAR(50),apellidom VARCHAR(50),correo VARCHAR(50),telefono VARCHAR(50),usuario VARCHAR(50),
+	pass VARCHAR(50), tipo int)
+BEGIN
+	set @idpe = 0;
+    insert into persona values (null, nombre, apellidop, apellidom, correo, telefono);
+    set @idpe = (select MAX(idPersona) as idpe from persona); 
+    insert into usuario values (@idpe,usuario,pass,current_timestamp(),tipo,1);
+END
+||
+DELIMITER ;
 
+call iniciosesion('gaby','123');
 
 /*Get productos*/
 
@@ -1852,8 +1854,6 @@ select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categori
         join precios r on p.idProducto=r.idProducto
         where p.idCategoria=2 and mp.idMarca=3 and
         r.activo=1 and r.garantia=0;
-
-
         
 select p.idProducto, mp.nombre as marca, t.nombre as tipo, cp.nombre as categoria, p.cantidad, 
         r.precio, r.idPrecio, t.idCasco as casco,
