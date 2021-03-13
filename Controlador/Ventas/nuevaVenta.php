@@ -10,7 +10,7 @@ if(isset($_SESSION["nombre"])){
         if(intval($_POST["modelo"])>=0)
         {//Si contienen valores válidos
             try{//Validacion de sitios cruzados
-                NoCSRF::check( 'csrf_token', $_POST, true, 60*10, true );   
+                //NoCSRF::check( 'csrf_token', $_POST, true, 60*10, true );   
 
                 $conn=Conectar::conexion();
 

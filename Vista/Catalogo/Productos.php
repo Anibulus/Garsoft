@@ -9,7 +9,7 @@
     }else{
         header("location:../Inicio/Inicio");
     }
-
+    //echo "token insertado ".$token;
 ?>
 <div class="container">
     <article>
@@ -120,7 +120,7 @@ function cargarProductos(){
     }).done(function(data){
         if(data.length>0)
         {
-            tabla="<div class='table-responsive'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover '>"+
+            tabla="<div class='table-responsive'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>"+
             //"<caption>Seleccione un producto que desee modificar</caption>"+
             "<tbody><tr class='row'><th class='col align-items-center'>Marca</th><th class='col'>Categoría</th>";
             if($("#categoria").val()==2 || $("#categoria").val()==3){

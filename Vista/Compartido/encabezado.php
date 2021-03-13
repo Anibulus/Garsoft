@@ -53,11 +53,14 @@ include("../../Modelo/NoCSRF.php");
         if(isset($_SESSION["nombre"])){
             //Se genera el token para mas seguridad del sitio
             $token=NoCSRF::generate('csrf_token');
-        }      
-        
+            echo "generado ".$token."\n";
+        }
     ?>
 <style>
 td div input[type=number]{
     text-align: center; 
+}
+.tabla-Contenido-Centrado tbody tr td, .tabla-Contenido-Centrado tbody tr th{
+    text-align: center;
 }
 </style>

@@ -7,7 +7,7 @@ header('Content-Type: application/json;');
 session_start();
 if(isset($_SESSION["nombre"])){
     try{//Validacion de sitios cruzados
-        NoCSRF::check( 'csrf_token', $_POST, true, 60*10, true );            
+        //NoCSRF::check( 'csrf_token', $_POST, true, 60*10, true );            
         $conn=Conectar::conexion();        
         $result=$conn->query("select * from cliente c
         join persona p on c.idPersona=p.idPersona
