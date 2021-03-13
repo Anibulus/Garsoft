@@ -148,7 +148,7 @@
                 <div>
                 <input type="button" class="btn btn-primary" id="btnGuardarCli" name="btnGuardarCli" value="Guardar Cliente"/>
                 </div>
-                    <input type="button" class="btn btn-primary" id="btnBuscarCli" value="Seleccionar Cliente">
+                    <input type="button" class="btn btn-primary" id="selectCli" value="Seleccionar Cliente">
 
         <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -262,7 +262,7 @@ $("#btnGuardarCli").on("click",function(){
                              
                 swal("¡Éxito!", "Se ha guardado el cliente correctamete", "success"); 
             }else{
-                swal("Aviso", "Hubo un problema con su vida","error");
+                swal("Aviso", "Hubo un problema","error");
             }
         })
     }
@@ -270,6 +270,14 @@ $("#btnGuardarCli").on("click",function(){
         swal("Aviso","Hubo error al guardar","error");
     }
 });
+
+$("#selectCli").on("click",function(){
+
+    var nombreb = $("#nomCli").val();
+
+
+});
+
 
 </script>
 
