@@ -10,6 +10,7 @@ include("../Compartido/encabezado.php");
 
 <form class="form" name="nuevoe" id="nuevoe">
 	<h2>Nuevo Empleado</h2>
+	<hr/>
 	<div>
 		<label>Nombre:</label>
 		<input type="text" name="nombre" id="nombre" tabindex="1">
