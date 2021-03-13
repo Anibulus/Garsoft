@@ -14,7 +14,7 @@ include("../Compartido/encabezado.php");
 		<label>Nombre:</label>
 		<input type="text" name="nombre" id="nombre" tabindex="1">
 		<div class="divr">
-			<a href="">Ver Empleados</a>
+			<a href="<?php echo $dominio; ?>Vista/Empleado/manipularEmpleado">Ver Empleados</a>
 		</div>
 	</div>
 	<div class="divl">
