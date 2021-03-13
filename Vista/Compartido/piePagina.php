@@ -1,71 +1,39 @@
-<footer class="bg-light text-center text-lg-start">
-  <!-- Grid container -->
-  <div class="container p-4">
-    <!--Grid row-->
-    <div class="row">
-      <!--Grid column-->
-      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-        <h5 class="text-uppercase">Footer Content</h5>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-          voluptatem veniam, est atque cumque eum delectus sint!
-        </p>
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase">Links</h5>
-
-        <ul class="list-unstyled mb-0">
-          <li>
-            <a href="#!" class="text-dark">Link 1</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Link 2</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Link 3</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Link 4</a>
-          </li>
-        </ul>
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase mb-0">Links</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!" class="text-dark">Link 1</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Link 2</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Link 3</a>
-          </li>
-          <li>
-            <a href="#!" class="text-dark">Link 4</a>
-          </li>
-        </ul>
-      </div>
-      <!--Grid column-->
-    </div>
-    <!--Grid row-->
-  </div>
-  <!-- Grid container -->
-
-  <!-- Copyright -->
-  <div class="text-center p-3">
-    © <?php echo date("Y"); ?> Copyright:
-    <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-  </div>
+<!--footer section start -->
+<footer class="footer_section layout_padding">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="social_icon">
+					<ul>
+						<li><a href="https://www.facebook.com/Acumuladores-Garza-1105702469636789"><img src="<?php echo $dominio?>Img/fb-icon.png"></a></li>
+						<!--<li><a href="#"><img src="<?php echo $dominio?>Img/twitter-icon.png"></a></li>						
+						<li><a href="#"><img src="<?php echo $dominio?>Img/instagram-icon.png"></a></li>-->
+						<li><img src="<?php echo $dominio?>Img/call-icon.png"><span style="padding-left: 10px;"><a class=texto-mail href="#">33 3613 3199</a></span></li>
+						<li><img src="<?php echo $dominio?>Img/mail-icon.png"><span style="padding-left: 10px;"><a class="texto-mail" href="acumuladoresgarza@gmail.com">acumuladoresgarza@gmailcom</a></span></li>
+						
+					</ul>						
+				</div>    		
+			</div>
+		</div>
+		<div class="copyright_section">
+			<p class="copyright_text">  <?php echo date("Y"); ?> Realizado por ANJANATH</p>
+		</div>
+	</div>
 </footer>
+	<!--footer section end -->
+	<style>
+		.texto-mail{
+			color:white;
+		}
+		.texto-mail:hover{
+			color:#EDA854;
+		}
+	</style>
+	<!-- Javascript files-->
+	<script src="<?php echo $dominio?>Contenido/js/bootstrap.bundle.min.js"></script>
+	<script src="<?php echo $dominio?>Contenido/js/plugin.js"></script>
+	<!-- sidebar -->
+	<script src="<?php echo $dominio?>Contenido/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="<?php echo $dominio?>Contenido/js/custom.js"></script>
 </body>
-</html> 
+</html>

@@ -11,50 +11,46 @@
     }
 
 ?>
-<style>
-td div input[type=number]{
-    text-align: center; 
-}
-</style>
-
-<article>
-    <h2>Productos</h2>
-    <section>
-    <div class="row">
-        <div class="form-group">
-            <label><span>Marca de Producto</span>
-            <div class="input-group">
-                <select class='form-control' name="marcas" id="marcas">
-                </select>
+<div class="container">
+    <article>
+        <h2>Productos</h2>
+        <hr/>
+        <section>
+        <div class="row">
+            <div class="">
+                <label><span>Marca de Producto</span>
+                    <select class='form-select' name="marcas" id="marcas">
+                    </select>
+                </label>
             </div>
-            </label>
-        </div>
 
-        <div class="form-group">
-            <label><span>Categoría de Producto</span>
-                <div class="input-group">
-                    <select class='form-control' name="categoria" id="categoria">
-                    </select>
-                </div>
-            </label>
-        </div>
+            <div class="form-group">
+                <label><span>Categoría de Producto</span>
+                    <div class="input-group">
+                        <select class='form-control' name="categoria" id="categoria">
+                        </select>
+                    </div>
+                </label>
+            </div>
 
-        <div class="form-group">
-            <label><span>Precio</span>
-                <div class="input-group">
-                    <select class='form-control' name="precio" id="precio">
-                    <option value="0">Precio Al Público</option>
-                    <option value="1">Con Garantía</option>
-                    </select>
-                </div>
-            </label>
+            <div class="form-group">
+                <label><span>Precio</span>
+                    <div class="input-group">
+                        <select class='form-control' name="precio" id="precio">
+                        <option value="0">Precio Al Público</option>
+                        <option value="1">Con Garantía</option>
+                        </select>
+                    </div>
+                </label>
+            </div>
         </div>
-    </div>
-        <p>Seleccione un producto de la lista.</p>
-    </section>
-    <section id="listadoProductos" name="listadoProductos">
-    </section>
-</article>
+            <p>Seleccione un producto de la lista.</p>
+        </section>
+        <section id="listadoProductos" name="listadoProductos">
+        </section>
+    </article>
+</div>
+
 <?php
 include("../Compartido/piePagina.php");
 ?>
@@ -124,33 +120,34 @@ function cargarProductos(){
     }).done(function(data){
         if(data.length>0)
         {
-            tabla="<table data-categoria='"+$("#categoria").val()+"' class='tablaProducto'>"+
-            "<tbody class='container'><tr class='row tablaProducto__Encabezado'><th class='col-sm'>Marca</th><th class='col-sm'>Categoría</th>";
+            tabla="<div class='table-responsive'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover '>"+
+            //"<caption>Seleccione un producto que desee modificar</caption>"+
+            "<tbody><tr class='row'><th class='col align-items-center'>Marca</th><th class='col'>Categoría</th>";
             if($("#categoria").val()==2 || $("#categoria").val()==3){
-                tabla+="<th class='col-sm'>Tipo</th>"+
-                "<th class='col-sm'>Casco</th><th class='col-sm'>Precio Casco</th>";
+                tabla+="<th class='col'>Tipo</th>"+
+                "<th class='col'>Casco</th><th class='col'>Precio Casco</th>";
             }            
-            tabla+="<th class='col-sm'>Cantidad</th><th class='col-sm-2'>Precio</th><th class='col-sm'>Accion</th></tr>";
+            tabla+="<th class='col'>Cantidad</th><th class='col-2'>Precio</th><th class='col'>Accion</th></tr>";
 
             $.each(data,function(i,item){
                 tabla+="<tr data-idPrecio='"+item.idPrecio+"' data-idProducto='"+item.idProducto+"' class='row tablaProducto__item'>"+
                 //Contenido
-                "<td class='col-sm'>"+item.marca+"</td><td class='col-sm'>"+item.categoria+"</td>";
+                "<td class='col'>"+item.marca+"</td><td class='col'>"+item.categoria+"</td>";
                 //Si es batería se muestra
                 if($("#categoria").val()==2 || $("#categoria").val()==3){
-                    tabla+="<td class='col-sm'>"+item.tipo+"</td>"+
-                    "<td class='col-sm'>"+item.casco+"</td>"+
-                    "<td class='col-sm'>$"+item.precioCasco+"</td>";
+                    tabla+="<td class='col'>"+item.tipo+"</td>"+
+                    "<td class='col'>"+item.casco+"</td>"+
+                    "<td class='col'>$"+item.precioCasco+"</td>";
                 }
-                tabla+="<td class='col-sm' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
-                "<td class='col-sm-2' data-precio='"+item.precio+"'>$"+item.precio+"</td>"+
+                tabla+="<td class='col' data-cantidad='"+item.cantidad+"'>"+item.cantidad+"</td>"+
+                "<td class='col-2' data-precio='"+item.precio+"'>$"+item.precio+"</td>"+
                 //Boton
-                "<td class='col-sm' data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>";
+                "<td class='col' data-accion='0'><input type='button' class='btn btn-primary' value='Editar'/></td></tr>";
             });
-            tabla+="</tbody></table>";
+            tabla+="</tbody></table></div>";
         }else{
-            tabla="<table class='tablaProducto'><tbody><tr class='tablaProducto__Encabezado'><th>Marca</th><th>Categoría</th><th>Cantidad</th><th>Precio</th><th>Tipo</th><th>Casco</th><th>Precio Casco</th><th></th></tr>"+
-            "<tr class='tablaProducto__item'><td colspan='8'>No hay registros que mostrar</td></tr></tbody></table>";
+            tabla="<div class='table-responsive'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover '>"+
+            "<tr class='tablaProducto__item'><td colspan='8'>No hay registros que mostrar</td></tr></tbody></table></div>";
         }
         $("#listadoProductos").html(tabla);
     });
