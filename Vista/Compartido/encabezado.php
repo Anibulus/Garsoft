@@ -1,6 +1,6 @@
-
 <?php 
 session_start();
+
 $dominio="http://localhost:8080/garsoft/";
 include("../../Modelo/NoCSRF.php");
 ?>        
@@ -30,7 +30,7 @@ include("../../Modelo/NoCSRF.php");
 <!--SweetAlert-->
 <script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Tweaks for older IEs-->
-<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<script src="https://kit.fontawesome.com/f100cb247b.js" crossorigin="anonymous"></script>
 <!--Reportes con Js-->
 <script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.min.js"></script>
 <script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.plugin.autotable.min.js"></script>

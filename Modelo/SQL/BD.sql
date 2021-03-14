@@ -77,7 +77,7 @@ create table precios(
 )   COLLATE utf8mb4_general_ci;
 
 
-create table intermediaModeloAuto_Tipo(
+create table intermediamodeloauto_tipo(
     idTipo int not null,
     idModelo int not null,
     CONSTRAINT pkIntermediaModeloAutoProducto primary key (idTipo,idModelo),
