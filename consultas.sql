@@ -73,3 +73,7 @@ from producto p
 join categoriaproducto c on p.idCategoria = c.idCategoria
 join marcaproducto m on p.idMarca = m.idMarca
 join tipo t on p.idTipo = t.idTipo order by p.idProducto limit 10;
+
+select p.* from persona p 
+join usuario u on p.idPersona = u.idPersona
+where u.idPerfil != 3 and u.activo = 1 ;
