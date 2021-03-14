@@ -56,7 +56,9 @@ include("../../Modelo/NoCSRF.php");
             //Se genera el token para mas seguridad del sitio
             $token=NoCSRF::generate('csrf_token');
 
-        }      
+            //echo "generado ".$token."\n";
+        }
+
     ?>
 <style>
 td div input[type=number]{
