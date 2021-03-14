@@ -33,11 +33,13 @@ include("../../Modelo/NoCSRF.php");
 <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <!--Reportes con Js-->
 <script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.min.js"></script>
+<script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.plugin.autotable.min.js"></script>
 <!--JQuery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--Najar-->
 <link rel="stylesheet" type="text/css" href="<?php echo $dominio?>Contenido/css/formg.css">
 <link rel="stylesheet" type="text/css" href="<?php echo $dominio?>Contenido/css/login.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $dominio?>Contenido/css/botones.css">
 </head>
 <body>
 	

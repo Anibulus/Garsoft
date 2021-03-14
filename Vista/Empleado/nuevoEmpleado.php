@@ -5,17 +5,14 @@ include("../Compartido/encabezado.php");
 
 ?>
 
-<link rel="stylesheet" href="<?php echo $dominio; ?>Contenido/css/formg.css">
-<link rel="stylesheet" href="<?php echo $dominio; ?>Contenido/css/botones.css">
-
-<form class="form" name="nuevoe" id="nuevoe">
+<form class="formA" name="nuevoe" id="nuevoe">
 	<h2>Nuevo Empleado</h2>
 	<hr/>
 	<div>
-		<label>Nombre:</label>
-		<input type="text" name="nombre" id="nombre" tabindex="1">
+		<label>Nombre:</label><br>
+		<input type="text" name="nombre" id="nombre" tabindex="1" style="width: 48%">
 		<div class="divr">
-			<a href="">Ver Empleados</a>
+			<a class="botonA btn" href="<?php echo $dominio; ?>Vista/Empleado/manipularEmpleado">Ver Empleados</a>
 		</div>
 	</div>
 	<div class="divl">
@@ -35,10 +32,11 @@ include("../Compartido/encabezado.php");
 		<label>Telefono:</label>
 		<input type="text" name="telefono" id="telefono" maxlength="10" tabindex="5"><br>
 		<label>Tipo de Usuario:</label>
-		<select name="tipo" id="tipo" tabindex="7">
+		<select class="caja" name="tipo" id="tipo" tabindex="7">
   			<option value="1">Administrador</option>
   			<option selected="true" value="2">Empleado</option>
-  		</select><br> 			
+  		</select>
+  		<br> 			
 		<label>Repetir Contraseña:</label>
 		<input type="password" name="passr" id="passr" tabindex="9"><br>
 	</div>
@@ -50,7 +48,7 @@ include("../Compartido/encabezado.php");
 	<span id="formError3" style="color:#ad472c;font-weight:bold"></span>
 	<span id="formError4" style="color:#ad472c;font-weight:bold"></span>
 	<br>
-	<button name="insert" id="insert" class="botonA" disabled>Aceptar</button>
+	<button name="insert" id="insert" class="botonA btn" disabled>Aceptar</button>
 </div>
 
 

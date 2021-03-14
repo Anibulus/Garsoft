@@ -22,8 +22,8 @@ if ($result->num_rows>0) {
 	if ($result2->num_rows>0) {
 		echo json_encode(1);
 	}else {
-		$result3=$conn->query("call NuevoEmpleado('".$nombre."','".$apellidop."','".$apellidom."',".$correo."','".$telefono."','".$usuario."','".$pass."',".$tipo.");");
 
+		$result3=$conn->query("call NuevoEmpleado('".$nombre."','".$apellidop."','".$apellidom."','".$correo."','".$telefono."','".$usuario."','".$pass."',".$tipo.");");
 		if($result3){
 			echo json_encode(2);
 		}
