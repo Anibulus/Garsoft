@@ -11,36 +11,37 @@
     }
     //echo "token insertado ".$token;
 ?>
+<style>
+    select, select option{
+        color:#c6610f;
+    }
+    </style>
 <div class="container">
     <article>
         <h2>Productos</h2>
         <hr/>
         <section>
         <div class="row">
-            <div class="">
+            <div class="form">
                 <label><span>Marca de Producto</span>
                     <select class='form-select' name="marcas" id="marcas">
                     </select>
                 </label>
             </div>
 
-            <div class="form-group">
+            <div class="form">
                 <label><span>Categoría de Producto</span>
-                    <div class="input-group">
-                        <select class='form-control' name="categoria" id="categoria">
-                        </select>
-                    </div>
+                    <select class='form-select' name="categoria" id="categoria">
+                    </select>
                 </label>
             </div>
 
-            <div class="form-group">
+            <div class="form">
                 <label><span>Precio</span>
-                    <div class="input-group">
-                        <select class='form-control' name="precio" id="precio">
-                        <option value="0">Precio Al Público</option>
-                        <option value="1">Con Garantía</option>
-                        </select>
-                    </div>
+                    <select class='form-select' name="precio" id="precio">
+                    <option value="0">Precio Al Público</option>
+                    <option value="1">Con Garantía</option>
+                    </select>
                 </label>
             </div>
         </div>

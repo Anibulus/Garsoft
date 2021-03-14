@@ -125,8 +125,8 @@ include("../../Modelo/NoCSRF.php");
     <?php
         if(isset($_SESSION["nombre"])){
             //Se genera el token para mas seguridad del sitio
-            //$token=NoCSRF::generate('csrf_token');
-            echo "generado ".$token."\n";
+            $token=NoCSRF::generate('csrf_token');
+            //echo "generado ".$token."\n";
         }        
     ?>
 <style>

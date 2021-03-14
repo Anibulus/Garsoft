@@ -9,7 +9,7 @@
 						<!--<li><a href="#"><img src="<?php echo $dominio?>Img/twitter-icon.png"></a></li>						
 						<li><a href="#"><img src="<?php echo $dominio?>Img/instagram-icon.png"></a></li>-->
 						<li><img src="<?php echo $dominio?>Img/call-icon.png"><span style="padding-left: 10px;"><a class=texto-mail href="#">33 3613 3199</a></span></li>
-						<li><img src="<?php echo $dominio?>Img/mail-icon.png"><span style="padding-left: 10px;"><a class="texto-mail" href="acumuladoresgarza@gmail.com">acumuladoresgarza@gmailcom</a></span></li>
+						<li><img src="<?php echo $dominio?>Img/mail-icon.png"><span style="padding-left: 10px;"><a class="texto-mail" href="acumuladoresgarza@gmail.com">acumuladoresgarza@gmail.com</a></span></li>
 						
 					</ul>						
 				</div>    		
