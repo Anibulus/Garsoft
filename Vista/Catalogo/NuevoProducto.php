@@ -10,8 +10,9 @@
         header("location:../Inicio/Inicio");
     }
 ?>
-<article>
+<article class="container">
     <h2>Nuevo Producto</h2>
+    <hr/>
     <section>
     <div class="row">
         <div class="form-group">
@@ -73,9 +74,18 @@
     </div>
     
     <section id="listadoProductos" name="listadoProductos">
-    <table class='tablaProducto'><tbody id="tablaPrecio" name="tablaPrecio" ><tr><th></th><th>Precio $</th><th>Tipo</th><th>Acción</th></tr>
-
-    </tbody></table>
+        <div class="table-responsive" style="width:50%">
+            <table class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>
+                <tbody id="tablaPrecio" name="tablaPrecio" >
+                    <tr class="row">
+                        <th class='col-1'></th>
+                        <th class='col'>Precio $</th>
+                        <th class='col'>Tipo</th>
+                        <th class='col'>Acción</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
     
 </article>
@@ -163,7 +173,8 @@ $("#btnAgregar").on("click",function(){
     if($("#precio").val()!="" && parseInt($("#precio").val())>0 && $("#tipoprecio").val()!="")
     {
         //Generacion de tabla
-        tabla="<tr><td>$</td><td>"+$("#precio").val()+"</td><td data-tipoPrecio='"+$("#tipoprecio").val()+"' >"+$("#tipoprecio option:selected").text()+"</td><td><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
+        tabla="<tr class='row'><td style='text-align: right;' class='col-1'>$</td><td class='col'>"+$("#precio").val()+"</td><td class='col' data-tipoPrecio='"+$("#tipoprecio").val()+"' >"+$("#tipoprecio option:selected").text()+"</td><td class='col'><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
+        console.log(tabla);
         $("#tablaPrecio").append(tabla);
         //Esconde el texto del select y resetea el bvalor de precio
         $("#tipoprecio option:selected").attr("hidden",true);
@@ -290,7 +301,7 @@ $("#precio").on("keypress",function(e){
     }
 });//Fin de listener
 
-$('#listadoProductos').on("click", "table>tbody>tr>td>input[type='button']",function(e){
+$('#listadoProductos').on("click", "div>table>tbody>tr>td>input[type='button']",function(e){
     //Antes de remover, consigue el idTipo para regresarlo al select
     idT=$(e.currentTarget).closest("td").prev().attr("data-tipoprecio");
     $("#tipoprecio option[value='"+idT+"']").attr("hidden",false);
