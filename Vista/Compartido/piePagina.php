@@ -31,9 +31,7 @@
 	</style>
 	<!-- Javascript files-->
 	<script src="<?php echo $dominio?>Contenido/js/bootstrap.bundle.min.js"></script>
-	<script src="<?php echo $dominio?>Contenido/js/plugin.js"></script>
 	<!-- sidebar -->
 	<script src="<?php echo $dominio?>Contenido/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="<?php echo $dominio?>Contenido/js/custom.js"></script>
 </body>
 </html>

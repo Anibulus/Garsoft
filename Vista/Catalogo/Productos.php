@@ -11,36 +11,31 @@
     }
     //echo "token insertado ".$token;
 ?>
-<style>
-    select, select option{
-        color:#c6610f;
-    }
-    </style>
 <div class="container">
     <article>
         <h2>Productos</h2>
         <hr/>
         <section>
         <div class="row">
-            <div class="form">
+            <div class="col">
                 <label><span>Marca de Producto</span>
-                    <select class='form-select' name="marcas" id="marcas">
+                    <select class="input-group-text" name="marcas" id="marcas">
                     </select>
-                </label>
+                </label>           
             </div>
 
-            <div class="form">
+            <div class="col">
                 <label><span>Categoría de Producto</span>
-                    <select class='form-select' name="categoria" id="categoria">
+                    <select class="input-group-text" name="categoria" id="categoria">
                     </select>
                 </label>
             </div>
 
-            <div class="form">
+            <div class="col">
                 <label><span>Precio</span>
-                    <select class='form-select' name="precio" id="precio">
-                    <option value="0">Precio Al Público</option>
-                    <option value="1">Con Garantía</option>
+                    <select class="input-group-text" name="precio" id="precio">
+                        <option value="0">Precio Al Público</option>
+                        <option value="1">Con Garantía</option>
                     </select>
                 </label>
             </div>
@@ -121,7 +116,7 @@ function cargarProductos(){
     }).done(function(data){
         if(data.length>0)
         {
-            tabla="<div class='table-responsive'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>"+
+            tabla="<div class='table-responsive tablaContenido'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>"+
             //"<caption>Seleccione un producto que desee modificar</caption>"+
             "<tbody><tr class='row'><th class='col align-items-center'>Marca</th><th class='col'>Categoría</th>";
             if($("#categoria").val()==2 || $("#categoria").val()==3){

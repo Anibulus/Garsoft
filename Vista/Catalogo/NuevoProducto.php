@@ -14,80 +14,78 @@
     <h2>Nuevo Producto</h2>
     <hr/>
     <section>
-    <div class="row">
-        <div class="form-group">
-            <label><span>Marca de Producto</span>
-                <select class='form-control' name="marcas" id="marcas">
-                </select>
-            </label>
-        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <label><span>Marca de Producto</span>
+                    <select class='input-group-text' name="marcas" id="marcas">
+                    </select>
+                </label>
+            </div>
 
-        <div class="form-group">
-            <label><span>Categoría de Producto</span>
-                <select class='form-control' name="categoria" id="categoria">
-                </select>
-            </label>
+            <div class="col">
+                <label><span>Categoría de Producto</span>
+                    <select class='input-group-text' name="categoria" id="categoria">
+                    </select>
+                </label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div id="seccionCantidad" name="seccionCantidad" class="form-group">
-            <label><span>Cantidad</span>
-                <input class='form-control' name="cantidad" id="cantidad" value="" type="number"/>
-            </label>
+        <div class="row">
+            <div id="seccionCantidad" name="seccionCantidad" class="col">
+                <label><span>Cantidad</span>
+                    <input class='input-group-text' name="cantidad" id="cantidad" value="" type="number"/>
+                </label>
+            </div>
         </div>
-    </div>
-    <!--Separacion para agregar una batteria que requiera mas informacion-->
-    <div>
-        <div class="form-group" id="seccionTipo" name="seccionTipo" >
-            <label><span>Tipo</span>
-                <select class='form-control' name="tipo" id="tipo">
-                </select>
-            </label>
-        </div>
-    </div>
-    <!--TODO separar para agregar mas de un precio-->
-    <div class="row">
-        <div class="form-group">
-                <label><span>Tipo Precio</span>
-                <div class="input-group">
-                <select class='form-control' name="tipoprecio" id="tipoprecio">
-                    <option value="" hidden selected>Seleccione...</option>
-                    <option value="0">Precio Al Público</option>
-                    <option value="1">Con Garantía</option>
-                </select>
-                </div>
-            </label>
-        </div>
-        <div class="form-group">   
-                <label><span>Precio</span>
-                <div class='input-group'>
-                    <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                    <input name="precio" id="precio" type="text" class='form-control' aria-label='Amount' />
-                </div>
-            </label>
-        </div>
+        <!--Separacion para agregar una batteria que requiera mas informacion-->
         <div>
-            <input type="button" id="btnAgregar" name="btnAgregar" value="Añadir precio" class="btn btn-secondary" />
+            <div class="col" id="seccionTipo" name="seccionTipo" >
+                <label><span>Tipo</span>
+                    <select class='input-group-text' name="tipo" id="tipo">
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">   
+                <label><span>Precio $</span>
+                    <input name="precio" id="precio" type="text" class='input-group-text'/>
+                </label>
+            </div>
 
-            <input type="button" class="btn btn-primary" id="btnGuardar" name="btnGuardar" value="Guardar"/>
+            <div class="col">
+                    <label><span>Tipo Precio</span>
+                    <select class="input-group-text" name="tipoprecio" id="tipoprecio">
+                        <option value="" hidden selected>Seleccione...</option>
+                        <option value="0">Precio Al Público</option>
+                        <option value="1">Con Garantía</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <input type="button" id="btnAgregar" name="btnAgregar" value="Añadir precio" class="btn btn-secondary" />
         </div>
     </div>
-    
-    <section id="listadoProductos" name="listadoProductos">
-        <div class="table-responsive" style="width:50%">
-            <table class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>
-                <tbody id="tablaPrecio" name="tablaPrecio" >
-                    <tr class="row">
-                        <th class='col-1'></th>
-                        <th class='col'>Precio $</th>
-                        <th class='col'>Tipo</th>
-                        <th class='col'>Acción</th>
-                    </tr>
-                </tbody>
-            </table>
+        <section id="listadoProductos" name="listadoProductos">
+            <div class="table-responsive tablaContenido">
+                <table class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>
+                    <tbody id="tablaPrecio" name="tablaPrecio" >
+                        <tr class="row">
+                            <th class='col-1'></th>
+                            <th class='col'>Precio $</th>
+                            <th class='col'>Tipo</th>
+                            <th class='col'>Acción</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <input type="button" class="btn btn-primary" id="btnGuardar" name="btnGuardar" value="Guardar"/>
+            </div>    
         </div>
-    </section>
-    
 </article>
 <?php
 include("../Compartido/piePagina.php");

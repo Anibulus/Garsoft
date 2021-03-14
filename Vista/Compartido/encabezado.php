@@ -67,4 +67,14 @@ td div input[type=number]{
 .tabla-Contenido-Centrado tbody tr td, .tabla-Contenido-Centrado tbody tr th{
     text-align: center;
 }
+
+select, select option{
+    color:#c6610f;
+}
+.tablaContenido{
+    width:75%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
 </style>
