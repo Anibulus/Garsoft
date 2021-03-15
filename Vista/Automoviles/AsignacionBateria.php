@@ -49,11 +49,13 @@
         </table>
     </div>
     </section>
-    <div class="row">        
-        <div class="divc">       
-            <input type="button" class="btn btn-primary" id="btnGuardar" name="btnGuardar" value="Guardar"/>
+    <div class="container">
+        <div class="row">        
+            <div class="divc">       
+                <input type="button" class="btn btn-primary" id="btnGuardar" name="btnGuardar" value="Guardar"/>
+            </div>
         </div>
-    </div>
+        </div>
 </article>
 <?php
 include("../Compartido/piePagina.php");
@@ -107,7 +109,7 @@ function getTipo(idModelo){
         cache:false,
         method:"POST",
         data:{idModelo:idModelo},
-        url:"../../Controlador/automovil/getTiposDisponibles",
+        url:"../../Controlador/Automovil/getTiposDisponibles",
         error: function(response){}
     }).done(function(data){
         if(data.length>0){
