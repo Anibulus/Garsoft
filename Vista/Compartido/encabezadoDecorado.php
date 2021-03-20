@@ -69,7 +69,7 @@ include("../../Modelo/NoCSRF.php");
                                 <div class="col-md-7 col-sm-12">
                                     <div class="img-box">
                                         <figure>
-                                            <img src="<?php echo $dominio?>Img/bateria.png" style="max-width: 100%;"/>
+                                            <img src="<?php echo $dominio?>Img/Bateria.png" style="max-width: 100%;"/>
                                         </figure>
                                     </div>
                                 </div>
