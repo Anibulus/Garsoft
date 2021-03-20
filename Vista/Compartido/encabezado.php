@@ -1,6 +1,6 @@
-
 <?php 
 session_start();
+
 $dominio="http://localhost:8080/garsoft/";
 include("../../Modelo/NoCSRF.php");
 ?>        
@@ -30,14 +30,16 @@ include("../../Modelo/NoCSRF.php");
 <!--SweetAlert-->
 <script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Tweaks for older IEs-->
-<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<script src="https://kit.fontawesome.com/f100cb247b.js" crossorigin="anonymous"></script>
 <!--Reportes con Js-->
 <script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.min.js"></script>
+<script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.plugin.autotable.min.js"></script>
 <!--JQuery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--Najar-->
 <link rel="stylesheet" type="text/css" href="<?php echo $dominio?>Contenido/css/formg.css">
 <link rel="stylesheet" type="text/css" href="<?php echo $dominio?>Contenido/css/login.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $dominio?>Contenido/css/botones.css">
 </head>
 <body>
 	
@@ -53,11 +55,24 @@ include("../../Modelo/NoCSRF.php");
         if(isset($_SESSION["nombre"])){
             //Se genera el token para mas seguridad del sitio
             $token=NoCSRF::generate('csrf_token');
-        }      
-        
+            //echo "generado ".$token."\n";
+        }
     ?>
 <style>
 td div input[type=number]{
     text-align: center; 
 }
+.tabla-Contenido-Centrado tbody tr td, .tabla-Contenido-Centrado tbody tr th{
+    text-align: center;
+}
+
+select, select option{
+    color:#c6610f;
+}
+.tablaContenido{
+    width:75%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
 </style>

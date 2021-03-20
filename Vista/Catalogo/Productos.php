@@ -9,7 +9,7 @@
     }else{
         header("location:../Inicio/Inicio");
     }
-
+    //echo "token insertado ".$token;
 ?>
 <div class="container">
     <article>
@@ -17,30 +17,26 @@
         <hr/>
         <section>
         <div class="row">
-            <div class="">
+            <div class="col">
                 <label><span>Marca de Producto</span>
-                    <select class='form-select' name="marcas" id="marcas">
+                    <select class="input-group-text" name="marcas" id="marcas">
+                    </select>
+                </label>           
+            </div>
+
+            <div class="col">
+                <label><span>Categoría de Producto</span>
+                    <select class="input-group-text" name="categoria" id="categoria">
                     </select>
                 </label>
             </div>
 
-            <div class="form-group">
-                <label><span>Categoría de Producto</span>
-                    <div class="input-group">
-                        <select class='form-control' name="categoria" id="categoria">
-                        </select>
-                    </div>
-                </label>
-            </div>
-
-            <div class="form-group">
+            <div class="col">
                 <label><span>Precio</span>
-                    <div class="input-group">
-                        <select class='form-control' name="precio" id="precio">
+                    <select class="input-group-text" name="precio" id="precio">
                         <option value="0">Precio Al Público</option>
                         <option value="1">Con Garantía</option>
-                        </select>
-                    </div>
+                    </select>
                 </label>
             </div>
         </div>
@@ -120,7 +116,7 @@ function cargarProductos(){
     }).done(function(data){
         if(data.length>0)
         {
-            tabla="<div class='table-responsive'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover '>"+
+            tabla="<div class='table-responsive tablaContenido'><table data-categoria='"+$("#categoria").val()+"' class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>"+
             //"<caption>Seleccione un producto que desee modificar</caption>"+
             "<tbody><tr class='row'><th class='col align-items-center'>Marca</th><th class='col'>Categoría</th>";
             if($("#categoria").val()==2 || $("#categoria").val()==3){

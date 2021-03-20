@@ -1,5 +1,5 @@
 <?php
-    $titulo="Asignación Batería-Automovil";
+    $titulo="Asignación Batería-Automóvil";
     include("../Compartido/encabezado.php");
 
     if(isset($_SESSION["nombre"])){
@@ -10,45 +10,52 @@
         header("location:../Inicio/Inicio");
     }
 ?>
-<article>
-    <h2>Nuevo Producto</h2>
+<article class="container">
+    <h2>Enlace Batería-Modelo</h2>
+    <hr/>
     <section>
     <div class="row">
-        <div class="form-group">
-            <label><span>Marca de Automovil</span>
-                <select class='form-control' name="marcas" id="marcas">
+        <div class="col">
+            <label><span>Marca de Automóvil</span>
+                <select class='input-group-text' name="marcas" id="marcas">
                 </select>
             </label>
         </div>
 
-        <div class="form-group">
-            <label><span>Modelo  de automovil</span>
-                <select class='form-control' name="modelo" id="modelo">
+        <div class="col">
+            <label><span>Modelo  de automóvil</span>
+                <select class='input-group-text' name="modelo" id="modelo">
                 </select>
             </label>
         </div>
     </div>
     <div class="row">
-        <label><span>Tipo de Batería</span>
-                <select class='form-control' name="tipo" id="tipo">
+        <div class="col">
+            <label><span>Tipo de Batería</span>
+                <select class='input-group-text' name="tipo" id="tipo">
                 </select>
             </label>
-    </div>
-    <!--TODO separar para agregar mas de un precio-->
-    <div class="row">        
-        <div>
-            <input type="button" id="btnAgregar" name="btnAgregar" value="Añadir tipo" class="btn btn-secondary" />
-
-            <input type="button" class="btn btn-primary" id="btnGuardar" name="btnGuardar" value="Guardar"/>
         </div>
-    </div>
+        <div class="col">
+            <input type="button" id="btnAgregar" name="btnAgregar" value="Añadir tipo" class="btn btn-secondary" />
+        </div>
+    </div>  
     
     <section id="listadoProductos" name="listadoProductos">
-    <table class='tablaProducto'><tbody id="tablaBateria" name="tablaBateria" >
-
-    </tbody></table>
+    <div class='table-responsive tablaContenido'>
+        <table class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>
+            <tbody id="tablaBateria" name="tablaBateria" >
+            </tbody>
+        </table>
+    </div>
     </section>
-    
+    <div class="container">
+        <div class="row">        
+            <div class="divc">       
+                <input type="button" class="btn btn-primary" id="btnGuardar" name="btnGuardar" value="Guardar"/>
+            </div>
+        </div>
+        </div>
 </article>
 <?php
 include("../Compartido/piePagina.php");
@@ -102,7 +109,7 @@ function getTipo(idModelo){
         cache:false,
         method:"POST",
         data:{idModelo:idModelo},
-        url:"../../Controlador/automovil/getTiposDisponibles",
+        url:"../../Controlador/Automovil/getTiposDisponibles",
         error: function(response){}
     }).done(function(data){
         if(data.length>0){
@@ -117,12 +124,12 @@ function getTipo(idModelo){
 
 $("#marcas").on("change",function(){
     getModelo($("#marcas").val());
-    $("#tablaBateria").html("<tr><th>Tipo Batería</th><th>Modelo de Automovil</th><th>Marca de Automovil</th></tr>");
+    $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automoóvil</th><th class='col'>Marca de Automóvil</th><th class='col'></th></tr>");
 });
 
 $("#modelo").on("change",function(){
     getTipo($("#modelo").val());
-    $("#tablaBateria").html("<tr><th>Tipo Batería</th><th>Modelo de Automovil</th><th>Marca de Automovil</th></tr>");    
+    $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automóvil</th><th class='col'>Marca de Automóvil</th><th class='col'></th></tr>");
 });
 
 
@@ -132,10 +139,10 @@ $("#btnAgregar").on("click",function(){
     if(parseInt($("#modelo").val())>0 && parseInt($("#tipo").val())>0)
     {
         //Generacion de tabla
-        tabla="<tr><td data-idTipo='"+$("#tipo").val()+"'>"+$("#tipo option:selected").text()+"</td>"+
-        "<td data-idModelo='"+$("#modelo").val()+"' >"+$("#modelo option:selected").text()+"</td>"+
-        "<td data-idMarca='"+$("#marcas").val()+"' >"+$("#marcas option:selected").text()+"</td>"+
-        "<td><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
+        tabla="<tr class='row'><td class='col' data-idTipo='"+$("#tipo").val()+"'>"+$("#tipo option:selected").text()+"</td>"+
+        "<td class='col' data-idModelo='"+$("#modelo").val()+"' >"+$("#modelo option:selected").text()+"</td>"+
+        "<td class='col' data-idMarca='"+$("#marcas").val()+"' >"+$("#marcas option:selected").text()+"</td>"+
+        "<td class='col'><input class='btn btn-danger' type='button' value='Quitar' /></td></tr>";
         $("#tablaBateria").append(tabla);
         //Se oculta la opcion
         $("#tipo option:selected").attr("hidden",true);
@@ -149,7 +156,11 @@ $("#btnAgregar").on("click",function(){
 });
 
 
-
+/*
+*
+*
+*
+*/
 $("#btnGuardar").on("click",function(){
     var baterias=getProductosDeTabla();
     console.log(baterias);
@@ -166,7 +177,7 @@ $("#btnGuardar").on("click",function(){
     }
     else
     {
-        swal("Aviso","Debes seleccionar una marca de automovil","warning");
+        swal("Aviso","Debes seleccionar una marca de automóvil","warning");
     }
 });
 
@@ -201,7 +212,7 @@ function guardarProducto(baterias){
     }).done(function(data){
         if(data==1){
             swal("Éxito","Se ha guardado correctamente","success");
-            $("#tablaBateria").html("<tr><th>Tipo Batería</th><th>Modelo de Automovil</th><th>Marca de Automovil</th></tr>");
+            $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automóvil</th><th class='col'>Marca de Automóvil</th><th class='col'></th></tr>");
         }
         else{
             swal("Aviso","No se ha logrado guardar el registro","warning");
@@ -212,7 +223,7 @@ function guardarProducto(baterias){
     
 }
 
-$('#listadoProductos').on("click", "table>tbody>tr>td>input[type='button']",function(e){
+$('#listadoProductos').on("click", "div>table>tbody>tr>td>input[type='button']",function(e){
     //Antes de remover, consigue el idTipo para regresarlo al select
     idT=$(e.currentTarget).closest("td").prev().prev().prev().attr("data-idtipo");
     console.log(idT);

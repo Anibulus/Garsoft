@@ -60,7 +60,7 @@ if(isset($_SESSION["nombre"])){
         if(intval($_POST["marca"])>=0 && intval($_POST["categoria"])>=0)
         {//Si contienen valores válidos 
             try{//Validacion de sitios cruzados
-                NoCSRF::check( 'csrf_token', $_POST, true, 60*10, true );   
+                //NoCSRF::check( 'csrf_token', $_POST, true, 60*10, true );   
 
                 
 

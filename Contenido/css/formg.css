@@ -1,12 +1,12 @@
 
-.form {
-  width: 70%;
+.formA {
+  width: 60%;
   margin: 0 auto;
   margin-top: 50px;
 }
 
-.form input {
-  height: 37px;
+.formA input {
+  height: 40px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -15,7 +15,8 @@
   margin-top: 20px;
 }
 
-.form select {
+.formA select {
+  display: inline-block;
   height: 37px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -23,9 +24,14 @@
   font-size: 16px;
   background-repeat: no-repeat;
   margin-top: 20px;
+  
 }
-
-.form label {
+.caja {
+   height:0px;
+   overflow: hidden;
+   position:relative;
+}
+.formA label {
   display: inline-block;
   width: 145px;
   text-align: left;
@@ -44,11 +50,11 @@
   clear:both;
 }
 
-.field-icon {
+/*.field-icon {
   float: right;
   margin-left: -25px;
   margin-top: -30px;
   position: absolute;
   z-index: 2;
   margin-left: 330px;
-}
+}*/

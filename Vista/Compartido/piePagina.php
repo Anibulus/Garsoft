@@ -9,7 +9,8 @@
 						<!--<li><a href="#"><img src="<?php echo $dominio?>Img/twitter-icon.png"></a></li>						
 						<li><a href="#"><img src="<?php echo $dominio?>Img/instagram-icon.png"></a></li>-->
 						<li><img src="<?php echo $dominio?>Img/call-icon.png"><span style="padding-left: 10px;"><a class=texto-mail href="#">33 3613 3199</a></span></li>
-						<li><img src="<?php echo $dominio?>Img/mail-icon.png"><span style="padding-left: 10px;"><a class="texto-mail" href="acumuladoresgarza@gmail.com">acumuladoresgarza@gmailcom</a></span></li>
+						<li><img src="<?php echo $dominio?>Img/call-icon.png"><span style="padding-left: 10px;"><a class=texto-mail href="#">33 3120 8741</a></span></li>
+						<li><img src="<?php echo $dominio?>Img/mail-icon.png"><span style="padding-left: 10px;"><a class="texto-mail" href="acumuladoresgarza@gmail.com">acumuladoresgarza@gmail.com</a></span></li>
 						
 					</ul>						
 				</div>    		
@@ -31,9 +32,7 @@
 	</style>
 	<!-- Javascript files-->
 	<script src="<?php echo $dominio?>Contenido/js/bootstrap.bundle.min.js"></script>
-	<script src="<?php echo $dominio?>Contenido/js/plugin.js"></script>
 	<!-- sidebar -->
 	<script src="<?php echo $dominio?>Contenido/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="<?php echo $dominio?>Contenido/js/custom.js"></script>
 </body>
 </html>
