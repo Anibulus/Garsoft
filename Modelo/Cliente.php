@@ -1,11 +1,11 @@
 <?php
 require("Persona.php");
 class Cliente extends Persona{
-    private $idPersona;
-    private $nombre;
-    private $apellido1;
-    private $apellido2;
-    private $correo;
+    public $idPersona;
+    public $nombre;
+    public $apellido1;
+    public $apellido2;
+    public $correo;
 
     public function __construct (){
         $idPersona=0;

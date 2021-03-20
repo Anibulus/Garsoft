@@ -12,9 +12,9 @@ if(isset($_SESSION["nombre"])){
         $result=$conn->query("select * from cliente c
         join persona p on c.idPersona=p.idPersona
         where 
-        nombre like '%".$_POST["nombre"]."%' or
-        apellido1 like '%".$_POST["nombre"]."%' or
-        apellido2 like '%".$_POST["nombre"]."%';");
+        p.nombre like '%".$_POST["nombre"]."%' or
+        p.apellido1 like '%".$_POST["nombre"]."%' or
+        p.apellido2 like '%".$_POST["nombre"]."%';");
         $conn->close();
         unset($conn);
         if($result){

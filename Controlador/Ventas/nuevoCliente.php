@@ -30,7 +30,7 @@ if(isset($_SESSION["nombre"])){
 
                     $last_id = $conn->insert_id;
 
-                    var_dump($last_id);
+                    
 
 
 
