@@ -28,10 +28,19 @@ if(isset($_SESSION["nombre"])){
                     values
                     (null,'".$nombre."','".$apepat."','".$apemat."','".$correo."',".$tele.");");
 
+                    $last_id = $conn->insert_id;
+
+                    
+
+
+
+
                      
 
                     if($result)
                     {
+                        
+                        $result=$conn->query("insert into Cliente(idPersona) values (".$last_id.");");
                         echo json_encode(1);
                     }
 
