@@ -5,7 +5,7 @@ header('Content-Type: application/json;');
 session_start();
 if(isset($_SESSION["nombre"])){
     $conn=Conectar::conexion();
-    $result=$conn->query("select * from marcaAuto;");
+    $result=$conn->query("select * from marcaAuto order by nombre;");
     $conn->close();
     unset($conn);
     if($result){

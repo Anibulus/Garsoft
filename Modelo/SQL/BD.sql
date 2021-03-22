@@ -1173,7 +1173,9 @@ insert into menu values
 (null, 'Nuevo Producto', 'Vista/Catalogo/NuevoProducto'),
 (null, 'Nuevo Empleado', 'Vista/Empleado/nuevoEmpleado'),
 (null, 'Vender', 'Vista/Venta/venta'),
-(null, 'Automovil', 'Vista/Automoviles/nuevoAuto');
+(null, 'Batería-Automóvil', 'Vista/Automoviles/AsignacionBateria'),
+(null, 'Nuevo Automóvil', 'Vista/Automoviles/nuevaMarca'),
+(null, 'Batería de Auto', 'Vista/Automoviles/consultaBateria');
 
 insert into intermediaPerfilMenu (idPerfil, idMenu) values
 (1,1),
@@ -1181,7 +1183,10 @@ insert into intermediaPerfilMenu (idPerfil, idMenu) values
 (1,3),
 (1,4),
 (1,5),
-(2,3);
+(1,6),
+(1,7),
+(2,7),
+(2,4);
 
 /*Seccion Autos*/
 

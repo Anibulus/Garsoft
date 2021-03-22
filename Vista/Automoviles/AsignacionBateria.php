@@ -1,5 +1,5 @@
 <?php
-    $titulo="Asignación Batería-Automovil";
+    $titulo="Asignación Batería-Automóvil";
     include("../Compartido/encabezado.php");
 
     if(isset($_SESSION["nombre"])){
@@ -16,14 +16,14 @@
     <section>
     <div class="row">
         <div class="col">
-            <label><span>Marca de Automovil</span>
+            <label><span>Marca de Automóvil</span>
                 <select class='input-group-text' name="marcas" id="marcas">
                 </select>
             </label>
         </div>
 
         <div class="col">
-            <label><span>Modelo  de automovil</span>
+            <label><span>Modelo  de automóvil</span>
                 <select class='input-group-text' name="modelo" id="modelo">
                 </select>
             </label>
@@ -124,12 +124,12 @@ function getTipo(idModelo){
 
 $("#marcas").on("change",function(){
     getModelo($("#marcas").val());
-    $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automovil</th><th class='col'>Marca de Automovil</th><th class='col'></th></tr>");
+    $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automoóvil</th><th class='col'>Marca de Automóvil</th><th class='col'></th></tr>");
 });
 
 $("#modelo").on("change",function(){
     getTipo($("#modelo").val());
-    $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automovil</th><th class='col'>Marca de Automovil</th><th class='col'></th></tr>");
+    $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automóvil</th><th class='col'>Marca de Automóvil</th><th class='col'></th></tr>");
 });
 
 
@@ -156,7 +156,11 @@ $("#btnAgregar").on("click",function(){
 });
 
 
-
+/*
+*
+*
+*
+*/
 $("#btnGuardar").on("click",function(){
     var baterias=getProductosDeTabla();
     console.log(baterias);
@@ -173,7 +177,7 @@ $("#btnGuardar").on("click",function(){
     }
     else
     {
-        swal("Aviso","Debes seleccionar una marca de automovil","warning");
+        swal("Aviso","Debes seleccionar una marca de automóvil","warning");
     }
 });
 
@@ -208,7 +212,7 @@ function guardarProducto(baterias){
     }).done(function(data){
         if(data==1){
             swal("Éxito","Se ha guardado correctamente","success");
-            $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automovil</th><th class='col'>Marca de Automovil</th><th class='col'></th></tr>");
+            $("#tablaBateria").html("<tr class='row'><th class='col'>Tipo Batería</th><th class='col'>Modelo de Automóvil</th><th class='col'>Marca de Automóvil</th><th class='col'></th></tr>");
         }
         else{
             swal("Aviso","No se ha logrado guardar el registro","warning");
