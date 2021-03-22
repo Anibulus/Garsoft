@@ -16,73 +16,122 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <article>
-    <h2>Modulo de venta</h2>
+    <h2 style="text-align:center;">Modulo de venta</h2>
+    <hr/>
     <section>
     <div class="row">
-        <div class="form-group">
+        <div class="col">
             <label><span>Categoría de Producto</span>
-                <select class='form-control' name="categoriav" id="categoriav">
+                <select class='input-group-text' name="categoriav" id="categoriav">
                 </select>
             </label>
         </div>
 
+        <div class="col" id="seccionMarcav" name="seccionMarcav">
+            <label><span>Marca de Producto</span>
+                <select class='input-group-text' name="marcasv" id="marcasv">
+                </select>
+            </label>
+        </div>
+
+        <div class="col" id="seccionTipov" name="seccionTipov" >
+            <label><span>Tipo</span>
+                <select class='input-group-text' name="tipov" id="tipov">
+                </select>
+            </label>
+        </div>
+
+
+        <div class="col" id="seccionTipoPago" name="seccionTipoPago" >
+            <label><span>Tipo de pago: </span>
+                <select class='input-group-text' name="tipopago" id="tipopago">
+                </select>
+            </label>
+        </div>
+        
+        
+        <div class="col">
+
+
+            <input  id="mdlBtn" type="button" class="btn btn-secondary" value="Cliente" /> 
+
+            
+        </div>
         
 
     </div>
+    <hr/>
+
     <div class="row">
-        <div class="form-group" id="seccionMarcav" name="seccionMarcav">
-            <label><span>Marca de Producto</span>
-                <select class='form-control' name="marcasv" id="marcasv">
-                </select>
-            </label>
-        </div>
+        
 
         
 
-        <div class="form-group" id="seccionTipov" name="seccionTipov" >
-            <label><span>Tipo</span>
-                <select class='form-control' name="tipov" id="tipov">
-                </select>
-            </label>
-        </div>
+        
 
-        <div id="seccionPrecio" name="seccionPrecio" class="form-group">   
+        <div class="col" id="seccionPrecio" name="seccionPrecio" > 
+
+            <div class='input-group'>
+                    <div class="input-group-prepend"></div>
+                    <input name="idprod" id="idprod" type="hidden" class='input-group-text'  />
+            </div>
+
+            <div class='input-group'>
+                    <div class="input-group-prepend"></div>
+                    <input name="idcli" id="idcli" type="hidden" class='input-group-text'  />
+            </div>
             
-            <label><span>Precio</span>
+            <label><span>Precio $</span>
                 <div class='input-group'>
                     <div class="input-group-prepend"></div>
-                    <input name="preciov" id="preciov" type="text" class='form-control' aria-label='Amount' />
+                    <input name="preciov" id="preciov" type="text" class='input-group-text' aria-label='Amount' />
                 </div>
             </label>
         </div>
-        <div id="seccionPrecioC" name="seccionPrecioC" class="form-group" >
+        <div class="col" id="seccionPrecioC" name="seccionPrecioC">
             <label><span>Precio casco</span>
                 <div class='input-group'>
                     <div class="input-group-prepend"></div>
-                    <input name="preciocav" id="preciocav" type="text" class='form-control' aria-label='Amount' />
+                    <input name="preciocav" id="preciocav" type="text" class='input-group-text' aria-label='Amount' />
                 </div>
             </label>
         </div>
 
-        <div id="seccionSubTotal" name="seccionSubTotal" class="form-group" >
+        <div class="col" id="seccionSubTotal" name="seccionSubTotal">
             <label><span>Sub-total</span>
                 <div class='input-group'>
                     <div class="input-group-prepend"></div>
-                    <input name="subtotal" id="subtotal" type="text" class='form-control' aria-label='Amount' />
+                    <input name="subtotal" id="subtotal" type="text" class='input-group-text' aria-label='Amount' />
                 </div>
             </label>
+
+
+        </div>
+        <div class="col">
+            <input type="button" id="btnAgregarCar" name="btnAgregarCar" value="Añadir al carro" class="btn btn-secondary" />
         </div>
 
-
-        
-    
     </div>
+    <hr/>
 
     <section id="elCarrito" name="elCarrito">
-    <table class='tablaCarrito'><tbody id="tablaCarrito" name="tablaCarrito" ><tr><th>Categoria </th><th>Marca </th><th>Tipo </th><th></th>
-        <th>Precio </th><th>Sub-total </th><th>Cantidad </th> <th>Accion </th>  </tr>
-
-    </tbody></table>
+        <div class="table-responsive tablaContenido">
+            <table class='table caption-top table-dark table-striped table-hover tabla-Contenido-Centrado'>
+                <tbody id="tablaCarrito" name="tablaCarrito" >
+                    <tr>
+                        <th>Num. Prod</th>
+                        <th>Categoria </th>
+                        <th>Marca </th>
+                        <th>Tipo </th>
+                        <th>Precio $</th>
+                        <th>Sub-total </th>
+                        <th>Tipo de pago </th>
+                        <th>Cantidad </th>
+                        <th>Accion </th>  
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
    
@@ -90,20 +139,13 @@
 
             
     <div class="row" >
-
             <!--<label><span>Fecha</span>
                 <div class='input-group'>
                     <div class="input-group-addon"><span class="glyphicon glyphicon-th"></span></div>
                     <input name="fechaVent" id="fechaVent" type="date" class="form-control" aria-label='Amount'>
                 </div>
-            </label>-->
-
-            
-
-            
-
-            
-        
+            </label>-->       
+        <input type="button" id="btnGuardarCarrito" name="btnGuardarCarrito" value="Comprar" class="btn btn-primary" />
     </div>          
 
     <div class="row">
@@ -115,9 +157,9 @@
     </article>
 
     <div class="row">
-        <button  id="mdlBtn" type="button" class="btn btn-info btn-lg">Cliente</button>    
+           
     
-        <input type="button" id="btnAgregarCar" name="btnAgregarCar" value="Añadir al carro" class="btn btn-secondary" />
+        
     </div>
     
 
@@ -235,6 +277,7 @@ $(document).ready(function(){
     getMarcas(); 
     getCategorias();
     getTipo();
+    getTipoPago();
 });
 
 function getMarcas(){
@@ -287,7 +330,26 @@ function getTipo(){
            $("#tipov").html(opciones);
        }
     });
-}//Fin de getMarcas
+}//Fin de getTipo
+
+
+function getTipoPago(){
+    $.ajax({
+        cache:false,
+        method:"GET",
+        url:"../../Controlador/Ventas/getTipoPago",
+        error: function(response){}
+    }).done(function(data){
+        if(data.length>0){
+            opciones="<option value='0' hidden selected>Seleccione...</option>";
+           $.each(data, function(i,item){
+                opciones+="<option value='"+item.idFormaPago+"'>"+item.descripcion+"</option>"
+           });
+           $("#tipopago").html(opciones);
+       }
+    });
+}//Fin de getTipoPago
+
 
 //Aqui estan los select
 
@@ -356,7 +418,7 @@ $("#nomCliBusq").on("change",function(e){
         switch (value) {        
             case "simon":
                 $("#nomCliBusq").prop("disabled",true);
-
+                $("#idcli").val($("#nomCliBusq").val());
                 break;
             default:
                 break;
@@ -406,6 +468,7 @@ $("#marcav").on("change",function(e){
             
            $.each(data, function(i,item){
 
+                $("#idprod").val(item.idProd);
                 $("#preciov").val(item.precio);
                 $("#preciocav").val(item.preciocasc);
                 //opciones+="<option value='"+item.nombre+"' data-id='"+item.idCliente+"'>";
@@ -420,6 +483,8 @@ $("#marcav").on("change",function(e){
         }else{
                 $("#preciov").val("");
                 $("#preciocav").val("");
+                $("#idprod").val("");
+                $("#subtotal").val("");
         }
     });
 
@@ -455,6 +520,7 @@ $("#tipov").on("change",function(e){
             
            $.each(data, function(i,item){
 
+                $("#idprod").val(item.idProd);
                 $("#preciov").val(item.precio);
                 $("#preciocav").val(item.preciocasc);
                 //opciones+="<option value='"+item.nombre+"' data-id='"+item.idCliente+"'>";
@@ -470,7 +536,9 @@ $("#tipov").on("change",function(e){
         }else{
                 $("#preciov").val("");
                 $("#preciocav").val("");
-        }
+                $("#idprod").val("");
+                $("#subtotal").val("");        
+            }
 
         
     });
@@ -502,6 +570,48 @@ $("#tipov").on("change",function(e){
 
 // Aqui estan los botones
 
+$("#btnGuardarCarrito").on("click",function(){
+     
+    var productos=getInfoDeCarrito();
+    var idcli = $("#idcli").val();
+    var idpago = $("#tipopago").val();
+
+    if($("#idcli").val()!="" && $("idpago").val()!="")//Nombre y apellidos no pueden estar vacios.
+    {
+
+        guardarCarrito(productos);
+       
+        $.ajax({
+            cache:false,
+            url:"../../Controlador/Ventas/nuevaVenta",
+            method:"POST",
+            data:{
+                 "idcli":idcli,
+                 "idpago":idpago,
+                 "productos":productos
+            },
+            beforeSend:function(){$("#btnGuardarCarrito").prop("disabled",true)},
+            
+        }).done(function(data){
+            if(data==1){
+                             
+                swal("¡Éxito!", "Se ha guardado la venta correctamete", "success"); 
+            }else if(data==2){
+
+                swal("Aviso", "Hubo un problema","error");
+            }else{
+               swal("Aviso", "No se logró completar la acción","warning"); 
+            }
+        })//Aqui termina done del ajax
+    }
+    else{
+
+        swal("Aviso","Hubo error al guardar","error");
+    }
+
+});
+
+
 $("#btnAgregarCar").on("click",function(){
 
 
@@ -513,43 +623,54 @@ $("#btnAgregarCar").on("click",function(){
         
         if($("#categoriav").val() == 1 ){
 
-            tabla="<tr><td colspan='' data-idCategoria='"+$("#categoriav").val()+"'>"+$("#categoriav option:selected").text()+
-            "</td><td  value='N/A'>"+
-            "</td><td value='N/A'>"+
-            "</td><td>$</td><td>"+$("#preciov").val()+
-            "</td><td><input type='number' class='' value='"+$("#preciov").val()+"'></td>"+
-            "</td><td class=''><input type='number' class='' value='1'></td>"+
-            "</td><td data><input class='btn btn-danger' type='button' value='Quitar'/></td></tr>";
+            tabla="<tr><td>99"+
+            "<td data-idCategoria='"+$("#categoriav").val()+"'>"+$("#categoriav option:selected").text()+
+            "</td><td>N/A"+
+            "</td><td>N/A"+
+            "</td><td>"+$("#preciov").val()+
+            "</td><td><input class='form-control' aria-label='Amount' type='number' value='"+$("#subtotal").val()+"'/></td>"+
+            "</td><td data-idTipoPago='"+$("#tipopago").val()+"'>"+$("#tipopago option:selected").text()+
+            "</td><td><input class='form-control' aria-label='Amount' type='number' value='1'/></td>"+
+            "</td><td><input class='btn btn-danger' type='button' value='Quitar'/></td></tr>";
             $("#tablaCarrito").append(tabla);
 
         }else if($("#categoriav").val()==2){   
-        tabla="<tr><td colspan='' data-idCategoria='"+$("#categoriav").val()+"'>"+$("#categoriav option:selected").text()+   
+        tabla="<tr><td>"+$("#idprod").val()+
+        "<td colspan='' data-idCategoria='"+$("#categoriav").val()+"'>"+$("#categoriav option:selected").text()+   
         "</td><td data-marca='"+$("#marcasv").val()+"' >"+$("#marcasv option:selected").text()+
         "</td><td data-tipo='"+$("#tipov").val()+"' >"+$("#tipov option:selected").text()+
-        "</td><td>$</td><td>"+$("#preciov").val()+
-        "</td><td><input type='number' class='' value='"+$("#subtotal").val()+"'></td>"+
-        "</td><td class=''><input type='number' class='' value='1'></td>"+
+        "</td><td>"+$("#preciov").val()+
+        "</td><td><input type='number' class='form-control' aria-label='Amount' value='"+$("#subtotal").val()+"'></td>"+
+        "</td><td data-idTipoPago='"+$("#tipopago").val()+"'>"+$("#tipopago option:selected").text()+
+        "</td><td class=''><input type='number' class='form-control' aria-label='Amount' value='1'></td>"+
         "</td><td data><input class='btn btn-danger' type='button' value='Quitar'/></td></tr>";
         $("#tablaCarrito").append(tabla);
         }else{
 
-            tabla="<tr><td colspan='' data-idCategoria='"+$("#categoriav").val()+"'>"+$("#categoriav option:selected").text()+
+            tabla="<tr><td>98"+
+            "<td colspan='' data-idCategoria='"+$("#categoriav").val()+"'>"+$("#categoriav option:selected").text()+
             "</td><td data-marca='"+$("#marcasv").val()+"' >"+$("#marcasv option:selected").text()+
-            "</td><td value='N/A'>"+
-            "</td><td>$</td><td>"+$("#preciov").val()+
-            "</td><td><input type='number' class='' value='"+$("#preciov").val()+"'></td>"+
-            "</td><td class=''><input type='number' class='' value='1'></td>"+
+            "</td><td>N/A"+
+            "</td><td>"+$("#preciov").val()+
+            "</td><td><input type='number' class='form-control' aria-label='Amount' value='"+$("#subtotal").val()+"'></td>"+
+            "</td><td data-idTipoPago='"+$("#tipopago").val()+"'>"+$("#tipopago option:selected").text()+
+            "</td><td class=''><input type='number' class='form-control' aria-label='Amount' value='1'></td>"+
             "</td><td data><input class='btn btn-danger' type='button' value='Quitar'/></td></tr>";
             $("#tablaCarrito").append(tabla);
 
         }
 
         //Esconde el texto del select y resetea el bvalor de precio
-        $("#tipov option:selected").attr("hidden",true);
+        $("#categoriav").val("");
+        $("#marcasv").val("");
+        $("#tipov option:selected").attr("hide",true);
         $("#tipov").val("");
         $("#preciov").val("");
         $("#preciocav").val("");
         $("#subtotal").val("");
+        $("#idprod").val("");
+        $("#subtotal").val("");
+
         
     }
     else
@@ -614,6 +735,61 @@ $('#tablaCarrito').on("click", "tr>td>input[type='button']",function(e){
  
 });
 
+
+
+
+function getInfoDeCarrito(){
+        var tbl = $('#tablaCarrito tr:has(td)').map(function(i, v) {
+        var $td =  $('td', this);
+        
+        return {
+                 id: ++i,
+                 idProducto: $td.eq(0).text(),
+                 subtotal: $td.eq(5).children("input").val(),
+                 cantidad: $td.eq(7).children("input").val()
+
+                 //precio: $td.eq(1).text(),
+                 //desc: $td.eq(2).text(),
+                 //tipoprecio: $td.eq(2).attr("data-tipoprecio")             
+               }
+    }).get();
+
+    return tbl;
+}
+
+function guardarCarrito(productos){
+    if(productos.length>0){
+        $.ajax({
+            cache:false,
+            url:"<?php echo $dominio?>Controlador/Ventas/nuevaVenta",
+            data:{
+                idcli:$("#idcli").val(),
+                idpago:$("#tipopago").val(),
+                productos:productos
+            },
+            method:"POST",
+            beforeSend:function(){
+                $("#btnGuardarCarrito").prop("disabled",true);
+            }
+        }).done(function(data){
+            if(data==1){
+                swal("Éxito","Se ha guardado correctamente","success");
+            }
+            else if(data==2){
+                swal("Aviso","Sin existencias","warning");
+            }
+            else{
+                swal("Aviso","No se ha logrado guardar el registro","warning");
+            }
+        }).always(function(){
+            $("#btnGuardarCarrito").prop("disabled",false);
+        });
+    }
+    else
+    {
+        swal("Aviso","error","warning");
+    }
+}
 
 
 </script>
