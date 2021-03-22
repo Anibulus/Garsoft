@@ -27,7 +27,7 @@ if(isset($_SESSION["nombre"])){
 
         <input type="button" class="btn btn-primary" id="btnIniciar" value="Iniciar Sesión"/>
     </div>
-    <div class="container" style="background-color:#f1f1f1">
+    <div class="divc" style="background-color:#f1f1f1">
       <span class="password" align="center"><a href="recuppass">¿Olvido su contraseña?</a></span>
     </div>
 </form>

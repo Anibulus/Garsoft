@@ -6,13 +6,19 @@ class Producto{
     public $marca;
     public $tipo;
     public $stock;
+    public $precio;
+    public $preciog;
+    public $preciot;
 
     public function __construct(){
         $idProducto=0;
         $categoria="";
         $marca="";
         $tipo="";
-        $stock="";//Dis
+        $stock="";
+        $precio="";
+        $preciog="";
+        $preciot="";//Dis
     }
 
     public function setIdProducto($id){
@@ -29,6 +35,15 @@ class Producto{
     }
     public function setStock($stock){
         $this->stock=$stock;
+    }
+    public function setPrecio($precio){
+        $this->precio=$precio;
+    }
+    public function setPrecioGarantia($preciog){
+        $this->preciog=$preciog;
+    }
+    public function setPrecioTotal($preciot){
+        $this->preciot=$preciot;
     }
     
 }

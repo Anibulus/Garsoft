@@ -5,14 +5,16 @@ include("../Compartido/encabezado.php");
 
 ?>
 
-<form class="formA" name="nuevoe" id="nuevoe">
+<article class="container">
 	<h2>Nuevo Empleado</h2>
 	<hr/>
+</article>
+<form class="formA" name="nuevoe" id="nuevoe">
 	<div>
 		<label>Nombre:</label><br>
 		<input type="text" name="nombre" id="nombre" tabindex="1" style="width: 48%">
 		<div class="divr">
-			<a class="botonA btn" href="<?php echo $dominio; ?>Vista/Empleado/manipularEmpleado">Ver Empleados</a>
+			<a class="btn btn-secondary" href="<?php echo $dominio; ?>Vista/Empleado/manipularEmpleado">Ver Empleados</a>
 		</div>
 	</div>
 	<div class="divl">
@@ -31,12 +33,12 @@ include("../Compartido/encabezado.php");
 		<input type="text" name="apellidom" id="apellidom" tabindex="3"><br>
 		<label>Telefono:</label>
 		<input type="text" name="telefono" id="telefono" maxlength="10" tabindex="5"><br>
-		<label>Tipo de Usuario:</label>
-		<select class="caja" name="tipo" id="tipo" tabindex="7">
+		<label>Tipo de Usuario:</label><br>
+		<select name="tipo" id="tipo" tabindex="7" class="input-group-text">
   			<option value="1">Administrador</option>
   			<option selected="true" value="2">Empleado</option>
   		</select>
-  		<br> 			
+  		<br>	
 		<label>Repetir Contraseña:</label>
 		<input type="password" name="passr" id="passr" tabindex="9"><br>
 	</div>
@@ -50,7 +52,6 @@ include("../Compartido/encabezado.php");
 	<br>
 	<button name="insert" id="insert" class="botonA btn" disabled>Aceptar</button>
 </div>
-
 
 <?php
 include("../Compartido/piePagina.php");
@@ -177,10 +178,10 @@ $("#insert").on("click",function(){
     }).done(function(data){
         console.log(data);
         if(data==0){
-            swal("Aviso","Correo registrado anteriormente", "error");
+            swal("Aviso","Correo registrado anteriormente", "warning");
             $("#correo").val('');
         }else if(data==1){
-            swal("Aviso","Usuario no disponible", "error");
+            swal("Aviso","Usuario no disponible", "warning");
             $("#usuario").val('');
         }else if(data==2){
             $("#nuevoe")[0].reset();
