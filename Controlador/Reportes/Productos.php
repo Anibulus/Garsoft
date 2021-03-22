@@ -5,11 +5,18 @@ header('Content-Type: application/json');
 
 
 $conn=Conectar::conexion();
-$result=$conn->query("select p.idProducto, c.nombre as Categoria,m.nombre as Marca,t.nombre as Tipo,p.cantidad 
+
+$idc = $_POST["idc"];
+
+$result=$conn->query("select p.idProducto, c.nombre as Categoria,m.nombre as Marca,t.nombre as Tipo,p.cantidad,
+(select pr.precio from precios pr where pr.idProducto = p.idProducto and pr.garantia=0 limit 1) as precioPublico,
+(select pr2.precio from precios pr2 where pr2.idProducto = p.idProducto and pr2.garantia=1 limit 1) as precioGarantia
 from producto p 
 join categoriaproducto c on p.idCategoria = c.idCategoria
 join marcaproducto m on p.idMarca = m.idMarca
-join tipo t on p.idTipo = t.idTipo order by p.idProducto limit 100;");
+join tipo t on p.idTipo = t.idTipo
+where c.idCategoria = '".$idc."'
+order by p.idProducto");
 $conn->close();
 unset($conn);
 
@@ -25,6 +32,16 @@ if($result){
         $producto->setMarca($row["Marca"]);
         $producto->setTipo($row["Tipo"]);
         $producto->setStock($row["cantidad"]);
+        $producto->setPrecio($row["precioPublico"]);
+        $producto->setPrecioGarantia($row["precioGarantia"]);
+        $cant = $row["cantidad"];
+        if ($cant = 0) {
+            $producto->setPrecioTotal('0');
+        }else{
+            $cant = $row["cantidad"];
+            $precio = $row["precioPublico"];
+            $producto->setPrecioTotal($cant*$precio);
+        }
         array_push($listado,$producto);
     }
     //var_dump($listado);

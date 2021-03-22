@@ -5,9 +5,9 @@
 
 .botonA {
   position: relative;
-  background-color: #A4D8E8;
+  background-color: #EDA854;
   font-size: 15px;
-  color: black;
+  color: white;
   padding: 12px;
   text-align: center;
   transition-duration: 0.4s;
@@ -39,7 +39,6 @@
 }
 
 .botonE {
-  position: relative;
   background-color: #e58741;
   transition-duration: 0.4s;
   text-decoration: none;
@@ -52,8 +51,6 @@
   background: #226273;
   display: block;
   position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
   margin-left: -20px !important;
   margin-top: -120%;
   opacity: 0;
