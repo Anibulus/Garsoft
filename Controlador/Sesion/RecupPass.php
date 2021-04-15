@@ -53,7 +53,7 @@ if($result ->num_rows > 0){
 	    */
     	//Content
     	$mail->isHTML(true);                                  //Set email format to HTML
-    	$mail->Subject = 'Recuperar Contrase&ntilde;a';
+    	$mail->Subject = 'Datos de acceso';
     	$mail->Body    = 'Ha solicitado la consulta de su clave de acceso <br/>
     	                  la cual es la siguiente: '.$pass.' Elimine este correo para mayor seguridad';
     	//$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

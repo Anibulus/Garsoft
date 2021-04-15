@@ -6,14 +6,13 @@ header('Content-Type: application/json');
 $conn=Conectar::conexion();
 
 $result=$conn->query("select v.idVenta, pr.idProducto, c.nombre as Categoria,m.nombre as Marca,t.nombre as Tipo,
-count(i.idproducto) AS Vendido
+SUM(i.cantidad) Vendido
 FROM venta v 
-join intermediaventaproductosalida i on v.idVenta = i.idVenta
+join intermediaVentaProductoSalida i on v.idVenta = i.idVenta
 join producto pr on pr.idProducto = i.idProducto
-join categoriaproducto c on pr.idCategoria = c.idCategoria
-join marcaproducto m on pr.idMarca = m.idMarca
-join tipo t on pr.idTipo = t.idTipo
-GROUP BY v.idModelo ORDER BY Vendido desc limit 50");
+join categoriaProducto c on pr.idCategoria = c.idCategoria
+join marcaProducto m on pr.idMarca = m.idMarca
+join tipo t on pr.idTipo = t.idTipo GROUP by t.idTipo ORDER BY Vendido desc limit 50");
 $conn->close();
 unset($conn);
 

@@ -17,10 +17,10 @@ if(isset($_SESSION["nombre"])){
             $intruccion="select t.nombre as tipo, ma.nombre as modelo, ma.anioInicio, ma.anioFin, maa.nombre as marca, mp.nombre as marcaProducto, p.cantidad, mp.mesesGarantia
             from tipo t
             join intermediamodeloauto_tipo imt on imt.idTipo = t.idTipo
-            join modeloauto ma on imt.idModelo=ma.idModelo
-            join marcaauto maa on ma.idMarca=maa.idMarca
+            join modeloAuto ma on imt.idModelo=ma.idModelo
+            join marcaAuto maa on ma.idMarca=maa.idMarca
             join producto p on t.idTipo=p.idTipo
-            join marcaproducto mp on p.idMarca=mp.idMarca
+            join marcaProducto mp on p.idMarca=mp.idMarca
             where ma.idModelo=".$_POST["idModelo"]."
             order by maa.idMarca, ma.idModelo;";
             $result=$conn->query($intruccion);

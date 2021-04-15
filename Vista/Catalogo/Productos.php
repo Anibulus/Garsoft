@@ -161,8 +161,8 @@ $('#listadoProductos').on("click", " table tbody tr td input[type='button']",fun
     {
         swal("¿Estás seguro de guardar los nuevos cambios?", {
         buttons: {
-            cancel: "Ay no",
-            simon: "Jalo"             
+            cancel: "Cancelar",
+            simon: "Confirmar"             
         },
         })
         .then((value) => {
@@ -211,7 +211,7 @@ function hacerEditable(e)
 
 //En el segundo click y con permiso va y guarda los valores
 function guardarProducto(e, cantidad, precio, idProducto, idPrecio){
-    if(parseInt(cantidad)>0)//La cantidad no puede ser menor a 0
+    if(parseInt(cantidad)>=0)//La cantidad no puede ser menor a 0
     {
         $.ajax({
             cache:false,

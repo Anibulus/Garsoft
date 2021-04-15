@@ -42,12 +42,12 @@ DELIMITER ||
 CREATE Procedure InicioSesion (username VARCHAR(10), password_p VARCHAR(20))
 BEGIN 
 	set @idp = 0;
-    set @idp = (SELECT idPersona FROM usuario WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND activo=1 limit 1);
+    set @idp = (SELECT idPersona FROM usuario WHERE usuario = username AND contrasena = password_p AND activo=1 limit 1);
     set @est = 0;
-    set @est = (SELECT if(idPersona is Null, 'false', 'true') as esta FROM usuario WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND activo=1 limit 1);
+    set @est = (SELECT if(idPersona is Null, 'false', 'true') as esta FROM usuario WHERE usuario = username  AND contrasena = password_p AND activo=1 limit 1);
     SELECT u.idPersona, u.idPerfil, p.nombre, p.apellido1 FROM usuario u
     join persona p on u.idPersona = p.idPersona
-    WHERE usuario = username COLLATE utf8mb4_general_ci AND contrasena = password_p COLLATE utf8mb4_general_ci AND u.activo=1 limit 1;
+    WHERE usuario = username AND contrasena = password_p AND u.activo=1 limit 1;
     if @est = 'true' then
     update usuario set ultimoInicio = current_timestamp()
     where idPersona = @idp;

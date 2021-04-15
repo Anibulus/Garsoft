@@ -40,7 +40,7 @@ if(isset($_SESSION["nombre"])){
                     if($result)
                     {
                         
-                        $result=$conn->query("insert into Cliente(idPersona) values (".$last_id.");");
+                        $result=$conn->query("insert into cliente(idPersona) values (".$last_id.");");
                         echo json_encode(1);
                     }
 

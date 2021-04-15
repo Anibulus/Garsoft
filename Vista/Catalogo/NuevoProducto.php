@@ -245,7 +245,7 @@ function guardarProducto(precios){
     if(precios.length>0){
         $.ajax({
             cache:false,
-            url:"<?php echo $dominio?>Controlador/productos/nuevoProducto",
+            url:"<?php echo $dominio?>Controlador/Productos/nuevoProducto",
             data:{
                 csrf_token:"<?php echo $token;?>",
                 marca:$("#marcas").val(),

@@ -15,7 +15,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<article>
+<article class="container">
     <h2 style="text-align:center;">Modulo de venta</h2>
     <hr/>
     <section>
@@ -580,7 +580,7 @@ $("#btnGuardarCarrito").on("click",function(){
     {
 
         guardarCarrito(productos);
-       
+       /*
         $.ajax({
             cache:false,
             url:"../../Controlador/Ventas/nuevaVenta",
@@ -602,7 +602,7 @@ $("#btnGuardarCarrito").on("click",function(){
             }else{
                swal("Aviso", "No se logró completar la acción","warning"); 
             }
-        })//Aqui termina done del ajax
+        })//Aqui termina done del ajax*/
     }
     else{
 

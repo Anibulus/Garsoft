@@ -15,8 +15,7 @@ if(isset($_SESSION["nombre"])){
                 $conn=Conectar::conexion();
 
                 //Validar que el producto no exista ya
-                $instruccion="select * from producto
-                where idCategoria=".$_POST["categoria"]." and idMarca=".$_POST["marca"];
+                $instruccion="select * from producto where idCategoria=".$_POST["categoria"]." and idMarca=".$_POST["marca"];
                 //Valida si agregar idtipo o no
                 $instruccion.=(intval($_POST["categoria"])<=3 && intval($_POST["categoria"])>=2 ? " and idTipo=".$_POST["tipo"].";":";");
                 $result=$conn->query($instruccion);
@@ -78,7 +77,7 @@ if(isset($_SESSION["nombre"])){
                     unset($instruccion);
                 }
             }catch(Exception $ex){
-                echo $ex->getMessage();
+                //echo $ex->getMessage();
             }
         }
         else

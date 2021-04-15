@@ -12,9 +12,9 @@ $result=$conn->query("select p.idProducto, c.nombre as Categoria,m.nombre as Mar
 (select pr.precio from precios pr where pr.idProducto = p.idProducto and pr.garantia=0 limit 1) as precioPublico,
 (select pr2.precio from precios pr2 where pr2.idProducto = p.idProducto and pr2.garantia=1 limit 1) as precioGarantia
 from producto p 
-join categoriaproducto c on p.idCategoria = c.idCategoria
-join marcaproducto m on p.idMarca = m.idMarca
-join tipo t on p.idTipo = t.idTipo
+join categoriaProducto c on p.idCategoria = c.idCategoria
+join marcaProducto m on p.idMarca = m.idMarca
+left join tipo t on p.idTipo = t.idTipo
 where c.idCategoria = '".$idc."'
 order by p.idProducto");
 $conn->close();

@@ -17,7 +17,8 @@ if(isset($_SESSION["nombre"])){
         "join marcaProducto mp on p.idMarca = mp.idMarca
         join precios r on p.idProducto=r.idProducto
         where p.idCategoria=".$_POST["categoria"]." and mp.idMarca=".$_POST["marca"]."
-        and r.activo=1 and r.garantia=".$_POST["garantia"].";";//TODO agregar idPrecio
+        and r.activo=1 and r.garantia=".$_POST["garantia"]."
+        order by ".($_POST["categoria"]==2 || $_POST["categoria"]==3? "tipo asc, " :"")." p.cantidad ;";//TODO agregar idPrecio
 
         $result=$conn->query($instruccion);
 

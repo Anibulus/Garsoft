@@ -5,7 +5,7 @@ header('Content-Type: application/json;');
 session_start();
 if(isset($_SESSION["nombre"])){
     $conn=Conectar::conexion();
-    $result=$conn->query("select * from Cliente;");
+    $result=$conn->query("select * from cliente;");
     $conn->close();
     unset($conn);
     if($result){

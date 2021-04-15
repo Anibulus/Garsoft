@@ -1,4 +1,3 @@
-
 <?php
 $titulo="Reportes";
 include("../Compartido/encabezado.php");
@@ -13,6 +12,7 @@ unset($conn);
 
 date_default_timezone_set('America/Mexico_City');
 ?>
+<!--Reportes con Js-->
 
 <article class="container">
     <h2>Reportes</h2>
@@ -64,6 +64,7 @@ date_default_timezone_set('America/Mexico_City');
 </form>
 <br><br><br><br><br><br><br><br>
 <form class="formA">
+    <!--
     <div class="divl">
         <h3>Autos para los que más compran</h3>    
         <div class="">
@@ -73,25 +74,26 @@ date_default_timezone_set('America/Mexico_City');
                     <th class='col'>Marca</th>
                     <th class='col'>Compras</th>
                 </tr>
-            <?php
+            ?php
                 $conn=Conectar::conexion();
             
-                $result=$conn->query("select v.idModelo, mo.nombre as Modelo_Auto, (select distinct ma.nombre   from marcaauto ma join modeloauto mm on ma.idMarca = mm.idMarca ) as Marca_Auto, count(   v.idModelo) AS Total_Compras FROM venta v join modeloauto mo on v.idModelo = mo.idModelo   GROUP BY v.idModelo ORDER BY Total_Compras desc limit 5;");
+                $result=$conn->query("select v.idModelo, mo.nombre as Modelo_Auto, (select distinct ma.nombre from marcaAuto ma join modeloAuto mm on ma.idMarca = mm.idMarca) as Marca_Auto, count(v.idModelo) AS Total_Compras FROM venta v join modeloAuto mo on v.idModelo = mo.idModelo GROUP BY v.idModelo ORDER BY Total_Compras desc limit 5;");
                 while($row = mysqli_fetch_object($result)){
                 ?>
                 <tr class="row">
-                    <td class='col'><?php echo $row->Modelo_Auto;?></td>
-                    <td class='col'><?php echo $row->Marca_Auto;?></td>
-                    <td class='col'><?php echo $row->Total_Compras;?></td>
+                    <td class='col'>?php echo $row->Modelo_Auto;?></td>
+                    <td class='col'>?php echo $row->Marca_Auto;?></td>
+                    <td class='col'>?php echo $row->Total_Compras;?></td>
                 </tr>
-                <?php 
+                ?php 
                 ;} 
                 ?>
             </table>
             <input type="button" name="reportAV" class="btn btn-secondary" onclick="getAutosM()" value="Obtener PDF"></input>
         </div>
     </div>
-    <div class="divr">
+    -->
+    <div class="divc">
         <h3>Productos que mas se venden</h3>
         <div class="">
             <table class='table caption-top table-striped table-hover tabla-Contenido-Centrado'>
@@ -102,16 +104,15 @@ date_default_timezone_set('America/Mexico_City');
                     <th class='col'>Vendidos</th>
                 </tr>
             <?php
-           
-                $resultv=$conn->query("select v.idVenta, pr.idProducto, c.nombre as Categoria,m.nombre as    Marca,t.nombre as Tipo,
-                    count(i.idproducto) AS Vendido
-                    FROM venta v 
-                    join intermediaventaproductosalida i on v.idVenta = i.idVenta
-                    join producto pr on pr.idProducto = i.idProducto
-                    join categoriaproducto c on pr.idCategoria = c.idCategoria
-                    join marcaproducto m on pr.idMarca = m.idMarca
-                    join tipo t on pr.idTipo = t.idTipo
-                    GROUP BY v.idModelo ORDER BY Vendido desc limit 5;");
+                $conn=Conectar::conexion();
+                $resultv=$conn->query("select v.idVenta, pr.idProducto, c.nombre as Categoria,m.nombre as Marca,t.nombre as Tipo,
+                SUM(i.cantidad) Vendido
+                FROM venta v 
+                join intermediaVentaProductoSalida i on v.idVenta = i.idVenta
+                join producto pr on pr.idProducto = i.idProducto
+                join categoriaProducto c on pr.idCategoria = c.idCategoria
+                join marcaProducto m on pr.idMarca = m.idMarca
+                join tipo t on pr.idTipo = t.idTipo GROUP by t.idTipo ORDER BY Vendido desc limit 5;");
                 while($row = mysqli_fetch_object($resultv)){
                 ?>
                 <tr class="row">
@@ -240,26 +241,21 @@ function getVentas(){
 
             logo.onload = function(){
                 $.each(data, function(i,item){
-                    var fruits = [];    
-                    var fruits2 = [];
+                    var fruits = [];
 
-                    fruits.push([item.fecha, item.Cliente,item.Modelo_Auto,item.Marca_Auto])
-                    fruits2.push([item.Pago,item.Vendio,item.Categoria,item.Marca,item.Tipo])
+                    //fruits.push([item.fecha, item.Cliente/*,item.Modelo_Auto,item.Marca_Auto*/])
+                    fruits.push([item.fecha, item.Cliente,item.Pago,item.Vendio,item.Categoria,item.Marca,item.Tipo]/*,item.Modelo_Auto,item.Marca_Auto*/)
+                    //fruits2.push([item.Pago,item.Vendio,item.Categoria,item.Marca,item.Tipo])
                     doc.autoTable({
                         didDrawPage: function (data) {
                             doc.addImage(logo, 'JPEG', 65, 0,81,40)
                         },
                         margin: { top: 50 },
-                        head: [['Fecha','Cliente','Modelo Auto','Marca Auto']],
+                        head: [['Fecha','Cliente','Pago', 'Vendio','Categoria Producto','Marca Producto','Tipo  Producto'/*,'Modelo Auto','Marca Auto'*/]],
                         body: fruits,
                     })
-                    doc.autoTable({
-                        margin: { top: 50 },
-                        head: [['Pago', 'Vendio','Categoria Producto','Marca Producto','Tipo  Producto']],
-                        body: fruits2,
-                    })
-                    var fruits = [];
-                    var fruits2 = [];   
+                   
+                    var fruits = [];   
                 });                
                 doc.save('Ventas-AC.pdf');
             };      

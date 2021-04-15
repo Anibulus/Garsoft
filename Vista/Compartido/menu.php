@@ -35,15 +35,11 @@ if(isset($_SESSION["nombre"])){
             $menu.="<li class='nav-item' href='#'><a class='nav-link' href='".$dominio.$row["direccion"]."'>".$row["nombre"]."</a></li>";
         }
 
-        $menu.="</ul>
+        $menu.="<li class='nav-item'><a style='color:white;'  href='".$dominio."/Controlador/CerrarSesion'>Cerrar Sesión</a></li>
+        </ul>
         </div>
      </nav>
   </div>
-</div>
-<div class='col-sm-4'>
-  <ul class='top_button_section'>
-     <li><a class='login-bt active' href='".$dominio."/Controlador/CerrarSesion'>Cerrar Sesión</a></li>     
-  </ul>
 </div>
 </div>";
         echo $menu;

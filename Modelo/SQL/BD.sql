@@ -1172,7 +1172,7 @@ insert into menu values
 (null, 'Editar Productos', 'Vista/Catalogo/Productos'),
 (null, 'Nuevo Producto', 'Vista/Catalogo/NuevoProducto'),
 (null, 'Nuevo Empleado', 'Vista/Empleado/nuevoEmpleado'),
-(null, 'Vender', 'Vista/Venta/venta'),
+(null, 'Vender', 'Vista/Ventas/venta'),
 (null, 'Batería-Automóvil', 'Vista/Automoviles/AsignacionBateria'),
 (null, 'Nuevo Automóvil', 'Vista/Automoviles/nuevaMarca'),
 (null, 'Batería de Auto', 'Vista/Automoviles/consultaBateria');

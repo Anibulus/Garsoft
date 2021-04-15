@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-$dominio="http://localhost:8080/garsoft/";
+$dominio="https://acumuladoresgarza.com/";
 include("../../Modelo/NoCSRF.php");
 ?>        
 <!DOCTYPE html>
@@ -32,8 +32,8 @@ include("../../Modelo/NoCSRF.php");
 <!-- Tweaks for older IEs-->
 <script src="https://kit.fontawesome.com/f100cb247b.js" crossorigin="anonymous"></script>
 <!--Reportes con Js-->
-<script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.min.js"></script>
-<script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jspdf/dist/jspdf.plugin.autotable.min.js"></script>
+<script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jsPDF/dist/jspdf.min.js"></script>
+<script type="text/javascript" src="<?php echo $dominio; ?>Contenido/jsPDF/dist/jspdf.plugin.autotable.min.js"></script>
 <!--JQuery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--Najar-->
